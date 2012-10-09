@@ -157,11 +157,11 @@ public class HashTextTest {
             </ul>
             <br>
             <h4>Criando o cliente <small>new Customer()</small></h4>
-            <p>O assinatura necessecita de um cliente para criar um cliente bastar instanciar o objeto <code>Customer()</code> conforme exemplo. O cliente possui suas informações pessoais (nome, e-mail, código do cliente, cpf, data de nascimento, etc), o endereço <code>new Address()</code>(rua, numero, bairro, etc) e o os dados de cobraça <code>new BillingInfo()</code>(cartão de crédito).</p>
+            <p>O assinatura necessita de um cliente, para criar um cliente bastar instanciar o objeto <code>new Customer()</code> conforme <a href="#build_customer">exemplo</a>. O cliente possui suas informações pessoais (nome, e-mail, código do cliente, cpf, data de nascimento, etc), o endereço <code>new Address()</code>(rua, numero, bairro, etc) e o os dados de cobraça <code>new BillingInfo()</code>(cartão de crédito).</p>
             <br>
             <h4>Criando a assinatura <small>new MoipAssinaturas()</small></h4>
             <p>O primeiro passo para a utilização do moip-assinaturas.js é instanciar o objeto <code>new MoipAssinaturas()</code> essa classe javascript é responsável por realiazar a integração com o Moip Assinaturas. Em seu construtor ela recebe dois parâmetros um é o Hash de Autorização e o outro é o Salt (palavra chave utilizada para gerar o Hash de Autorização)</p>
-            <p>O metódo <code>MoipAssinaturas.subscribe</code> é responsavel por criar uma nova assinatura com um novo cliente. Ele recebe como parâmetro um objeto <code>new Subscription()</code> onde recebe como parâmetros o código da assinatura, o novo cliente e o código do plano.</p>
+            <p>O metódo <code>MoipAssinaturas.subscribe</code> é responsavel por criar uma nova assinatura com um novo cliente. Ele recebe como parâmetro um objeto <code>new Subscription()</code> onde tem como parâmetros o código da assinatura, o novo cliente(criado atráves do objeto Customer) e o código do plano.</p>
 
             <p>Abaixo há um exemplo de um <code>HTML</code> e seu respectivo javascript para gerar uma assinatura.</p>
             <h5>Exemplo:</h5>
@@ -358,6 +358,7 @@ moip.subscribe(
     }
     alert("Assinatura criado com sucesso")
 });</pre>
+                <a name="build_customer"></a>
                 <h5>Criando o cliente a partir do formulário:</h5>
                 <pre class="prettyprint linenums">
 var build_customer = function() {
@@ -508,7 +509,28 @@ $("#update_billinginfo").click(function(){
           </section>
 
           <section id="callback">
-            <h3>Callback</h3>
+            <h3>Callback <small>personalizando o retorno do moip</small></h3>
+
+            <h4>Passando um método de callback</h4>
+            <p>Assim que o Moip Assinaturas conclui o sua requisição o metódo de <strong>callback</strong> é executado. Isto é útil para você dar sequência no seu checkout ou mesmo exibir mensagens de erros do cliente ao preencher o checkou.</p>
+
+            <p>Para que possamos chamar seu metódo do de callback é necessário que você passe o bloco de função para o metódo callback. O Exemplo abaixo </p>
+            <pre class="prettyprint linenums">
+var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
+moip.callback(function(response){
+  // aqui você adiciona os seus comportamentos esperados
+});</pre>
+            <h4>Processando a resposta</h4>
+            <p>O Moip Assinaturas irá chamar seu callback passando como parâmetro um objeto <code>Response()</code>, ele contem uma lista de possíveis erros ou por informações erradas preenchidas pelo seu usuário ou na integração. O Response também possui um lista de alertas, esses alertas auxiliam você na sua integração.</p>
+
+            <p>Para verificar se há erros ou alertas na resposta do Moip Assinaturas basta chamar o metódos <code>has_errors()</code> ou <code>has_alerts()</code>. Veja o exemplo abaixo:</p>
+
+            <pre class="prettyprint linenums">
+var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
+moip.callback(function(response){
+  alert(response.has_errors());
+  alert(response.has_alerts());
+});</pre>
           </section>
 
         </div>
