@@ -408,10 +408,12 @@ var build_address = function() {
 
           <section id="customer">
             <h3>Criar um cliente com dados de cartão</h3>
+            <p>Para criar um cliente com dados de cartão, porém não vinculado a nenhuma assinatura, o processo é semehando ao de assinatura. Onde você cria um <code>new Customer()</code>. E instacia o objeto <code>new MoipAssinaturas()</code> porém você vai chamar o método <code>MoipAssinaturas.create_customer()</code>.</p>
             <div class="row-fluid">
               <div class="span5">
               </div>
               <div class="span7">
+                <h5>Exemplo</h5>
                 <pre class="prettyprint linenums">
 var customer = build_customer();
 moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
@@ -512,7 +514,7 @@ $("#update_billinginfo").click(function(){
             <h3>Callback <small>personalizando o retorno do moip</small></h3>
 
             <h4>Passando um método de callback</h4>
-            <p>Assim que o Moip Assinaturas conclui o sua requisição o metódo de <strong>callback</strong> é executado. Isto é útil para você dar sequência no seu checkout ou mesmo exibir mensagens de erros do cliente ao preencher o checkout.</p>
+            <p>Assim que o Moip Assinaturas concluir a sua requisição o metódo de <strong>callback</strong> é executado. Isto é útil para você dar sequência no seu checkout ou mesmo exibir mensagens de erros do cliente ao preencher o checkout.</p>
 
             <p>Para que possamos chamar seu metódo de callback é necessário que você passe o bloco de função para o metódo callback.</p>
             <h5>Exemplo:</h5>
@@ -522,9 +524,9 @@ moip.callback(function(response){
   // aqui você adiciona os seus comportamentos esperados
 });</pre>
             <h4>Processando a resposta</h4>
-            <p>O Moip Assinaturas irá chamar seu callback passando como parâmetro um objeto <code>Response()</code>, ele contem uma lista de possíveis erros ou por informações erradas preenchidas pelo seu usuário ou na integração. O Response também possui um lista de alertas, esses alertas auxiliam você na sua integração.</p>
+            <p>O Moip Assinaturas irá chamar seu callback passando como parâmetro um objeto Response(). Ele contém uma lista de possíveis erros da integração ou de informações preenchidas pelo seu cliente na integração. O Response também possui uma lista de alertas que auxiliam você na sua integração.</p>
 
-            <p>Para verificar se há erros ou alertas na resposta do Moip Assinaturas basta chamar o metódos <code>has_errors()</code> ou <code>has_alerts()</code>.</p>
+            <p>Para verificar se há erros ou alertas na resposta do Moip Assinaturas, basta chamar o metódos <code>has_errors()</code> ou <code>has_alerts()</code>.</p>
             <h5>Exemplo:</h5>
             <pre class="prettyprint linenums">
 var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
@@ -542,7 +544,7 @@ moip.callback(function(response){
       <a class="pull-right" href="http://site.moip.com.br/assinaturas">Moip Assinaturas</a>
     </footer>
 
-    <div class="modal hide fade" id="modal" tabindex="-1" role="dialog" data-remote="content/objetos.html#customer">
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" data-remote="content/objetos.html#customer">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Detalhes</h3>
