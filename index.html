@@ -359,7 +359,7 @@ moip.subscribe(
     alert("Assinatura criado com sucesso")
 });</pre>
                 <a name="build_customer"></a>
-                <h5>Criando o cliente a partir do formulário:</h5>
+                <h5>Criando o cliente a partir do formulário: <a data-toggle="modal" data-target="#modal" href="content/objetos.html#customer">Detalhes do cliente</a></h5>
                 <pre class="prettyprint linenums">
 var build_customer = function() {
   var customer_params = {
@@ -541,8 +541,18 @@ moip.callback(function(response){
     <footer>
       <a class="pull-right" href="http://site.moip.com.br/assinaturas">Moip Assinaturas</a>
     </footer>
+
+    <div class="modal hide fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Detalhes</h3>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
     <script src="javascript/jquery.js"></script>
     <script src="javascript/bootstrap.min.js"></script>
+    <script src="javascript/bootstrap-modal.js"></script>
     <script src="javascript/prettify.js"></script>
     <script src="javascript/main.js"></script>
 
