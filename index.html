@@ -59,7 +59,7 @@
           <div class="hero-unit">
             <h1>moip-assinaturas.js</h1>
             <br>
-            <p>O moip-assinaturas.js é uma biblioteca JavaScript destinada a você customizar seu site. E por conta que o o número de cartão de credito é enviado diretamente para o Moip o seu escopo PCI diminui.</p>
+            <p>O moip-assinaturas.js é uma biblioteca JavaScript feita para facilitar  a integração do Moip Assinaturas com o seu site para a contratação de planos. Além de possuir uma estrutura e validações pré-definidas, utilizando essa biblioteca você também reduz o seu escopo para o PCI, uma vez que os dados de cartão de crédito vão direto do navegador do seu cliente para o Moip.</p>
           </div>
            
           <section id="config">
@@ -155,9 +155,14 @@ public class HashTextTest {
               <li>Ter importado o javascript moip-assinaturas.js. <a href="#config">Saiba mais</a></li>
               <li>Ter gerado o Hash de Autorização. <a href="#identification">Saiba mais</a></li>
             </ul>
-
+            <br>
             <h4>Criando o cliente <small>new Customer()</small></h4>
-            <p>O assinatura necessecita de um cliente para criar um cliente bastar instanciar o objeto <code>Customer()</code> conforme exemplo. O cliente possui suas informações pessoais (nome, e-mail, código do cliente, cpf, data de nascimento, etc), o endereço(rua, numero, bairro, etc) e o os dados de cobraça (cartão de crédito).</p>
+            <p>O assinatura necessecita de um cliente para criar um cliente bastar instanciar o objeto <code>Customer()</code> conforme exemplo. O cliente possui suas informações pessoais (nome, e-mail, código do cliente, cpf, data de nascimento, etc), o endereço <code>new Address()</code>(rua, numero, bairro, etc) e o os dados de cobraça <code>new BillingInfo()</code>(cartão de crédito).</p>
+            <br>
+            <h4>Criando a assinatura <small>new MoipAssinaturas()</small></h4>
+            <p>O primeiro passo para a utilização do moip-assinaturas.js é instanciar o objeto <code>new MoipAssinaturas()</code> essa classe java</p>
+
+            <p>Abaixo há um exemplo de um <code>HTML</code> e seu respectivo javascript para gerar uma assinatura.</p>
             <h5>Exemplo:</h5>
             <div class="row-fluid">
               <div class="span5">
