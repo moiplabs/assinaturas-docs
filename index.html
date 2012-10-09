@@ -59,7 +59,7 @@
           <div class="hero-unit">
             <h1>moip-assinaturas.js</h1>
             <br>
-            <p>O moip-assinaturas.js é uma biblioteca JavaScript feita para facilitar  a integração do Moip Assinaturas com o seu site para a contratação de planos. Além de possuir uma estrutura e validações pré-definidas, utilizando essa biblioteca você também reduz o seu escopo para o PCI, uma vez que os dados de cartão de crédito vão direto do navegador do seu cliente para o Moip.</p>
+            <p>O moip-assinaturas.js é uma biblioteca JavaScript feita para facilitar a integração do Moip Assinaturas com o seu site, permitindo o desenvolvimento do seu próprio fluxo de contratação e que seu cliente consiga assinar um plano sem sair do seu site, assim como funciona o CheckOut Transparente do Moip. Além de possuir uma estrutura e validações pré-definidas, utilizando essa biblioteca você também reduz o seu escopo para o PCI, uma vez que os dados de cartão de crédito vão direto do navegador do seu cliente para o Moip.</p>
           </div>
            
           <section id="config">
@@ -160,7 +160,8 @@ public class HashTextTest {
             <p>O assinatura necessecita de um cliente para criar um cliente bastar instanciar o objeto <code>Customer()</code> conforme exemplo. O cliente possui suas informações pessoais (nome, e-mail, código do cliente, cpf, data de nascimento, etc), o endereço <code>new Address()</code>(rua, numero, bairro, etc) e o os dados de cobraça <code>new BillingInfo()</code>(cartão de crédito).</p>
             <br>
             <h4>Criando a assinatura <small>new MoipAssinaturas()</small></h4>
-            <p>O primeiro passo para a utilização do moip-assinaturas.js é instanciar o objeto <code>new MoipAssinaturas()</code> essa classe java</p>
+            <p>O primeiro passo para a utilização do moip-assinaturas.js é instanciar o objeto <code>new MoipAssinaturas()</code> essa classe javascript é responsável por realiazar a integração com o Moip Assinaturas. Em seu construtor ela recebe dois parâmetros um é o Hash de Autorização e o outro é o Salt (palavra chave utilizada para gerar o Hash de Autorização)</p>
+            <p>O metódo <code>MoipAssinaturas.subscribe</code> é responsavel por criar uma nova assinatura com um novo cliente. Ele recebe como parâmetro um objeto <code>new Subscription()</code> </p>
 
             <p>Abaixo há um exemplo de um <code>HTML</code> e seu respectivo javascript para gerar uma assinatura.</p>
             <h5>Exemplo:</h5>
@@ -338,26 +339,24 @@ public class HashTextTest {
               <div class="span7">
                 <h5>Criando a assinatura no Moip Assinaturas:</h5>
                 <pre class="prettyprint linenums">
-$("#assinar").click(function(){
-  var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
-  var customer = build_customer();
-  var plan_code = $("#plan_code").val();
-  
-  moip.subscribe(
-      new Subscription()
-          .with_code(new Date().getTime())
-          .with_new_customer(customer)
-          .with_plan_code(plan_code);
-  ).callback(function(response){
-      if (response.has_errors()) {
-          for (i = 0; i < response.errors.length; i++) {
-            var erro = response.errors[i].description;
-            $("#erros").append(erro);
-          }
-          return;
-      }
-      alert("Assinatura criado com sucesso")
-  });
+var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
+var customer = build_customer();
+var plan_code = $("#plan_code").val();
+
+moip.subscribe(
+    new Subscription()
+        .with_code(new Date().getTime())
+        .with_new_customer(customer)
+        .with_plan_code(plan_code);
+).callback(function(response){
+    if (response.has_errors()) {
+        for (i = 0; i < response.errors.length; i++) {
+          var erro = response.errors[i].description;
+          $("#erros").append(erro);
+        }
+        return;
+    }
+    alert("Assinatura criado com sucesso")
 });</pre>
                 <h5>Criando o cliente a partir do formulário:</h5>
                 <pre class="prettyprint linenums">
