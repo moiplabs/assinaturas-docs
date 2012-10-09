@@ -47,10 +47,11 @@
         <div class="span2">
           <ul class="nav nav-list bs-docs-sidenav affix">
               <li class="active"><a href="#config"><i class="icon-chevron-right"></i> Configurando</a></li>
-              <li><a href="#subscribe"><i class="icon-chevron-right"></i> Criar Assinatura</a></li>
               <li><a href="#identification"><i class="icon-chevron-right"></i> Identificação</a></li>
+              <li><a href="#subscribe"><i class="icon-chevron-right"></i> Criar Assinatura</a></li>
               <li><a href="#customer"><i class="icon-chevron-right"></i> Criar cliente com Cartão</a></li>
               <li><a href="#update"><i class="icon-chevron-right"></i> Atualizar cartão</a></li>
+              <li><a href="#callback"><i class="icon-chevron-right"></i> Callback</a></li>
           </ul>
         </div>
         <div class="span10 demo-content">
@@ -60,15 +61,10 @@
             <br>
             <p>O moip-assinaturas.js é uma biblioteca JavaScript destinada a você customizar seu site. E por conta que o o número de cartão de credito é enviado diretamente para o Moip o seu escopo PCI diminui.</p>
           </div>
-
-
-          <!-- <div class="page-header">
-            <h1>moip-assinaturas.js</h1>
-          </div> -->
            
           <section id="config">
             <h3>Configurando <small>Obrigatório</small></h3>
-            <p>Para utilizar o javascript do assinaturas basta colocar a tag <code>script</code> importando o JavaScript  a partir da segunte URL.</p>
+            <p>Para utilizar o javascript do assinaturas basta colocar a tag <code>script</code> importando o JavaScript  a partir da segunte URL. Coloque o exemplo abaixo no corpo da tag <code>&lt;head&gt;</code>.</p>
             <h5>Exemplo:</h5>
             <pre class="prettyprint linenums">&lt;script src="https://api.moip.com.br/moip-assinaturas.js" type="text/javascript"&gt;&lt;/script&gt;</pre> 
           </section>
@@ -500,12 +496,16 @@ $("#update_billinginfo").click(function(){
             </div>
           </section>
 
+          <section id="callback">
+            <h3>Callback</h3>
+          </section>
+
         </div>
       </div>
     </div>
 
     <footer>
-      <a href="http://site.moip.com.br/assinaturas">Moip Assinaturas</a>
+      <a class="pull-right" href="http://site.moip.com.br/assinaturas">Moip Assinaturas</a>
     </footer>
     <script src="javascript/jquery.js"></script>
     <script src="javascript/bootstrap.min.js"></script>
