@@ -74,8 +74,8 @@
           </section>
 
           <section id="identification">
-            <h3>Identificação <small>Obrigatório</small></h3>
-            <p>Todas as APIs do Moip Assinaturas utilizam de Token e Key, para autenticação no Moip Assinaturas basta gerar um <strong>SHA-1</strong> do TOKEN e KEY mais uma palavra-chave de sua escolha.</p>
+            <h3>Identificação <small>Obrigatório para todos os serviços do moip-assinaturas.js</small></h3>
+            <p>Todas as APIs do Moip Assinaturas utilizam de Token e Key, para autenticação e autorização no Moip Assinaturas basta gerar um <strong>SHA-1</strong> do TOKEN e KEY mais uma palavra-chave de sua escolha.</p>
             <p>Abaixo há algumas implementações como exemplo.</p>
             <div class="alert">
               <strong>Não recomendamos</strong> gerar esse hash de autorização via JavaScript. Pois tratam-se de informações sigilosas de seu interesse.
@@ -424,6 +424,7 @@ moip.create_customer(customer)
 
           <section id="update">
             <h3>Atualizar dados de cartão</h3>
+            <p>Para atualizar os dados de cartão do um cliente é necessário construir um objeto <code>new Customer()</code> onde obrigatóriamente deve conter o código do cliente que você deseja atualizar os dados de cartão. E também obrigatóriamente deve conter a nova <code>new BillingInfo()</code> com os novos dados de cobrança.</p>
             <div class="row-fluid">
               <div class="span5">
 
@@ -483,15 +484,14 @@ moip.create_customer(customer)
 
               </div>
               <div class="span7">
+                <h5>Atualizando um Cartão de credito</h5>
                 <pre class="prettyprint linenums">
 $("#update_billinginfo").click(function(){
-  var hash = $('#hash').val();
-  var login_moip = $('#merchant').val();
-  moip = new MoipAssinaturas(hash, login_moip);
+  moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
   var customer = build_customer();
   moip.update_credit_card(customer).callback(function(data){
     if(data.has_errors()) {
-        alert("Ops.... houveram erros");
+      alert("Ops.... houveram erros");
     }
     alert("O cartão de credito foi atualizado")
   });
