@@ -149,7 +149,15 @@ public class HashTextTest {
 
           <section id="subscribe">
             <h3>Criar uma assinatura</h3>
-            <p>Para criar uma assinatura utilizando o moip-assinaturas.js é necessário que você tenha criado previamente o planos e ter acesso. <a href="#">Para criar  um plano clique aqui</a></p>
+            <h4>Pré-requisitos</h4>
+            <ul>
+              <li>Criação prévia de um plano. <a href="#">Saiba como criar um plano</a></li>
+              <li>Ter importado o javascript moip-assinaturas.js. <a href="#config">Saiba mais</a></li>
+              <li>Ter gerado o Hash de Autorização. <a href="#identification">Saiba mais</a></li>
+            </ul>
+
+            <h4>Criando o cliente <small>new Customer()</small></h4>
+            <p>O assinatura necessecita de um cliente para criar um cliente bastar instanciar o objeto <code>Customer()</code> conforme exemplo. O cliente possui suas informações pessoais (nome, e-mail, código do cliente, cpf, data de nascimento, etc), o endereço(rua, numero, bairro, etc) e o os dados de cobraça (cartão de crédito).</p>
             <h5>Exemplo:</h5>
             <div class="row-fluid">
               <div class="span5">
@@ -353,7 +361,6 @@ var build_customer = function() {
       fullname: $("#fullname").val(),
       email: $("#email").val(),
       code: $("#fullname").val().toLowerCase()),
-      fullname : $("#fullname").val(),
       cpf : $("#cpf").val(),
       birthdate_day : $("#birthdate_day").val(),
       birthdate_month: $("#birthdate_month").val(),
