@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Assinaturas Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Exemplo de utilização do Javascript assinaturas.js">
+    <meta name="author" content="Moip Assinaturas">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">moip-assinaturas.js</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">moip-assinaturas.js</a></li>
+              <li><a href="http://assinaturas.moip.com.br">Assinaturas</a></li>
+              <li><a href="#contact">Documentação</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <ul class="nav nav-list bs-docs-sidenav affix">
+              <li class="active"><a href="#config"><i class="icon-chevron-right"></i> Configurando</a></li>
+              <li><a href="#subscribe"><i class="icon-chevron-right"></i> Criar Assinatura</a></li>
+              <li><a href="#identification"><i class="icon-chevron-right"></i> Identificação</a></li>
+              <li><a href="#customer"><i class="icon-chevron-right"></i> Criar cliente com Cartão</a></li>
+              <li><a href="#update"><i class="icon-chevron-right"></i> Atualizar cartão</a></li>
+          </ul>
+        </div>
+        <div class="span10 demo-content">
+
+          <div class="hero-unit">
+            <h1>moip-assinaturas.js</h1>
+            <br>
+            <p>O moip-assinaturas.js é uma biblioteca JavaScript destinada a você customizar seu site. E por conta que o o número de cartão de credito é enviado diretamente para o Moip o seu escopo PCI diminui.</p>
+          </div>
+
+
+          <!-- <div class="page-header">
+            <h1>moip-assinaturas.js</h1>
+          </div> -->
+           
+          <section id="config">
+            <h3>Configurando <small>Obrigatório</small></h3>
+            <p>Para utilizar o javascript do assinaturas basta colocar a tag <code>script</code> importando o JavaScript  a partir da segunte URL.</p>
+            <h5>Exemplo:</h5>
+            <pre class="prettyprint linenums">&lt;script src="https://api.moip.com.br/moip-assinaturas.js" type="text/javascript"&gt;&lt;/script&gt;</pre> 
+          </section>
+
+          <section id="identification">
+            <h3>Identificação <small>Obrigatório</small></h3>
+            <p>Todas as APIs do Moip Assinaturas utilizam de Token e Key, para autenticação no Moip Assinaturas basta gerar um <strong>SHA-1</strong> do TOKEN e KEY mais uma palavra-chave de sua escolha.</p>
+            <p>Abaixo há algumas implementações como exemplo.</p>
+            <div class="alert">
+              <strong>Não recomendamos</strong> gerar esse hash de autorização via JavaScript. Pois tratam-se de informações sigilosas de seu interesse.
+            </div>
+            <p><strong>Exemplo:</strong></p>
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active"><a href="#php" data-toggle="tab">PHP</a></li>
+              <li class=""><a href="#ruby" data-toggle="tab">Ruby</a></li>
+              <li class=""><a href="#java" data-toggle="tab">Java</a></li>
+              <li><a href="#python" data-toggle="tab">Python</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="php">
+                <pre class="prettyprint linenums">
+&lt;?php
+  $token = '01010101010101010101010101010101';
+  $key = 'ABABABABABABABABABABABABABABABABABABABAB';
+  $salt = time();
+  $to_hash = $token.$key.$salt;
+  sha1($to_hash);
+?&gt;</pre>
+
+              </div>
+              <div class="tab-pane fade" id="ruby">
+                <pre class="prettyprint linenums">
+require 'digest/sha1'
+
+token = '01010101010101010101010101010101'
+key = 'ABABABABABABABABABABABABABABABABABABABAB'
+salt = Time.now.to_i
+Digest::SHA1.hexdigest(token << key << salt)</pre>
+              </div>
+              <div class="tab-pane fade" id="java">
+                <pre class="prettyprint linenums">
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class HashTextTest {
+ 
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        String token = "01010101010101010101010101010101";
+        String key = "ABABABABABABABABABABABABABABABABABABABAB";
+        String salt = new Date();
+
+        System.out.println(sha1(token + key + salt));
+    }
+     
+    public static String sha1(String input) throws NoSuchAlgorithmException {
+        MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+        byte[] result = mDigest.digest(input.getBytes());
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < result.length; i++) {
+            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        return sb.toString();
+    }
+}</pre>
+              </div>
+
+
+              <div class="tab-pane fade" id="python">
+                  <pre class="prettyprint linenums">
+  import hashlib
+  import time
+
+  token = "01010101010101010101010101010101"
+  key = "ABABABABABABABABABABABABABABABABABABABAB"
+  salt = time.localtime()
+  m = hashlib.sha1()
+  m.update(token + key + str(salt))
+  print(m.hexdigest())</pre>
+              </div>
+            </div>
+          </section>
+
+          <section id="subscribe">
+            <h3>Criar uma assinatura</h3>
+            <p>Para criar uma assinatura utilizando o moip-assinaturas.js é necessário que você tenha criado previamente o planos e ter acesso. <a href="#">Para criar  um plano clique aqui</a></p>
+            <h5>Exemplo:</h5>
+            <div class="row-fluid">
+              <div class="span5">
+                <form class="form-horizontal" method="post">
+                  <legend>Dados do assinante</legend>
+                  <div class="control-group">
+                    <label class="control-label" for="fullname">Nome</label>
+                    <div class="controls">
+                      <input id="fullname" maxlength="150" name="fullname" placeholder="Seu nome completo" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="email">E-mail</label>
+                    <div class="controls">
+                      <input id="email" maxlength="65" name="email" placeholder="Seu e-mail" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="cpf">CPF</label>
+                    <div class="controls">
+                      <input id="cpf" maxlength="11" name="cpf" placeholder="Somente números" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="phone">DDD / Telefone</label>
+                    <div class="controls">
+                      <input class="input-mini" id="ddd" maxlength="2" name="ddd" placeholder="00" type="text" />
+                      <input class="input-small" id="phone" maxlength="9" name="phone" placeholder="00000000" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="birthdate">Nascimento</label>
+                    <div class="controls">
+                      <input class="input-mini" id="birthdate_day" maxlength="2" name="birthdate_day" placeholder="DD" type="text" />
+                        <input class="input-mini" id="birthdate_month" maxlength="2" name="birthdate_month" placeholder="MM" type="text" />
+                        <input class="input-mini" id="birthdate_year" maxlength="4" name="birthdate_year" placeholder="AAAA" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="rua">Rua</label>
+                    <div class="controls">
+                      <input id="rua" maxlength="45" name="rua" placeholder="Rua, Avenida, Praça..." type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="numero">Número</label>
+                    <div class="controls">
+                      <input class="input-mini" id="numero" maxlength="20" name="numero" placeholder="Número" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="complemento">Complemento</label>
+                    <div class="controls">
+                      <input class="input-mini" id="complemento" maxlength="45" name="complemento" placeholder="Complemento" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="bairro">Bairro</label>
+                    <div class="controls">
+                      <input id="bairro" maxlength="45" name="bairro" placeholder="Bairro" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="cep">CEP</label>
+                    <div class="controls">
+                      <input class="input-small" id="cep" maxlength="9" name="cep" placeholder="00000-000" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="estado">Estado</label>
+                    <div class="controls">
+                      <select name="estado" id="estado">
+                        <option selected="" value="">Selecione o Estado (UF)</option>
+                        <option value="Acre">Acre</option>
+                        <option value="Alagoas">Alagoas</option>
+                        <option value="Amapá">Amapá</option>
+                        <option value="Amazonas">Amazonas</option>
+                        <option value="Bahia">Bahia</option>
+                        <option value="Ceará">Ceará</option>
+                        <option value="Distrito Federal">Distrito Federal</option>
+                        <option value="Espírito Santo">Espírito Santo</option>
+                        <option value="Goiás">Goiás</option>
+                        <option value="Maranhão">Maranhão</option>
+                        <option value="Mato Grosso">Mato Grosso</option>
+                        <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                        <option value="Minas Gerais">Minas Gerais</option>
+                        <option value="Pará">Pará</option>
+                        <option value="Paraíba">Paraíba</option>
+                        <option value="Paraná">Paraná</option>
+                        <option value="Pernambuco">Pernambuco</option>
+                        <option value="Piauí">Piauí</option>
+                        <option value="Rio de Janeiro">Rio de Janeiro</option>
+                        <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                        <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                        <option value="Rondônia">Rondônia</option>
+                        <option value="Roraima">Roraima</option>
+                        <option value="Santa Catarina">Santa Catarina</option>
+                        <option value="São Paulo" selected="selected">São Paulo</option>
+                        <option value="Sergipe">Sergipe</option>
+                        <option value="Tocantins">Tocantins</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="cidade">Cidade</label>
+                    <div class="controls">
+                      <input id="cidade" maxlength="32" name="cidade" placeholder="Cidade" type="text" />
+                    </div>
+                  </div>
+
+                  <legend>Informações de Cobrança</legend>
+
+                  <div class="control-group">
+                    <label class="control-label" for="holder_name">Nome do Portador</label>
+                    <div class="controls">
+                      <input id="holder_name" maxlength="45" name="holder_name" placeholder="Nome escrito no cartão" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="credit_card">Número Cartão de Credito</label>
+                    <div class="controls">
+                      <input id="credit_card" maxlength="16" name="credit_card" placeholder="XXXXXXXXXXXX1234" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="credit_card">Data de Expiração</label>
+                    <div class="controls">
+                        <select name="expiration_month" id="expiration_month" class="input-mini">
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12" selected="selected">12</option>
+                        </select> / <select name="expiration_year" id="expiration_year" class="input-small">
+                            <option value="12">2012</option>
+                            <option value="13">2013</option>
+                            <option value="14">2014</option>
+                            <option value="15">2015</option>
+                            <option value="16">2016</option>
+                            <option value="17">2017</option>
+                            <option value="18">2018</option>
+                            <option value="19">2019</option>
+                            <option value="20" selected="selected">2020</option>
+                        </select>
+                    </div>
+                  </div>
+
+                  <div class="form-actions">
+                    <a href="#" class="btn btn-large btn-primary" id="assinar">Assinar</a>
+                  </div>
+                </form>
+              </div><!-- Fim do Formulario de subscription -->
+              <div class="span7">
+                <h5>Criando a assinatura no Moip Assinaturas:</h5>
+                <pre class="prettyprint linenums">
+$("#assinar").click(function(){
+  var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
+  var customer = build_customer();
+  var plan_code = $("#plan_code").val();
+  
+  moip.subscribe(
+      new Subscription()
+          .with_code(new Date().getTime())
+          .with_new_customer(customer)
+          .with_plan_code(plan_code);
+  ).callback(function(response){
+      if (response.has_errors()) {
+          for (i = 0; i < response.errors.length; i++) {
+            var erro = response.errors[i].description;
+            $("#erros").append(erro);
+          }
+          return;
+      }
+      alert("Assinatura criado com sucesso")
+  });
+});</pre>
+                <h5>Criando o cliente a partir do formulário:</h5>
+                <pre class="prettyprint linenums">
+var build_customer = function() {
+  var customer_params = {
+      fullname: $("#fullname").val(),
+      email: $("#email").val(),
+      code: $("#fullname").val().toLowerCase()),
+      fullname : $("#fullname").val(),
+      cpf : $("#cpf").val(),
+      birthdate_day : $("#birthdate_day").val(),
+      birthdate_month: $("#birthdate_month").val(),
+      birthdate_year: $("#birthdate_year").val(),
+      phone_area_code: $("#ddd").val(),
+      phone_number: $("#phone").val(),
+      billing_info: build_billing_info(),
+      address: build_address()
+  }
+  return new Customer(customer_params);
+};
+
+var build_billing_info = function() {
+  var billing_info_params = {
+      fullname : $("#holder_name").val(), 
+      expiration_month: $("#expiration_month").val(),
+      expiration_year: $("#expiration_year").val(),
+      credit_card_number: $("#credit_card").val()
+  };
+  return new BillingInfo(billing_info_params);
+};
+
+var build_address = function() {
+  var address_params = {
+      street: $("#rua").val(),
+      number: $("#numero").val(),
+      complement: $("#complemento").val(),
+      district: $("#bairro").val(),
+      zipcode: $("#cep").val(),
+      city: $("#cidade").val(),
+      state: $("#estado").val(),
+      country: "BRA"
+  };
+  return new Address(address_params);
+};</pre>
+
+              </div>
+            </div>
+          </section>
+
+          <section id="customer">
+            <h3>Criar um cliente com dados de cartão</h3>
+            <div class="row-fluid">
+              <div class="span5">
+              </div>
+              <div class="span7">
+                <pre class="prettyprint linenums">
+var customer = build_customer();
+moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
+moip.create_customer(customer)
+    .callback(function(response){
+      if (response.has_errors()) {
+        for (i = 0; i < response.errors.length; i++) {
+          var erro = response.errors[i].description;
+          $("#erros").append(erro);
+        }
+        return;
+      } 
+      alert("Cliente criado com sucesso");
+});</pre>
+              </div>
+            </div>
+          </section>
+
+          <section id="update">
+            <h3>Atualizar dados de cartão</h3>
+            <div class="row-fluid">
+              <div class="span5">
+
+                <form class="form-horizontal">
+        <input type="hidden" value="<%= session[:login_moip] %>" id="merchant">
+        <input type="hidden" value="<%= @customer['code']%>" id="code">
+        <input type="hidden" value="<%= @hash %>" id="hash">
+
+        <div class="control-group">
+            <label class="control-label" for="credit_card">Número</label>
+            <div class="controls">
+              <input type="text" id="credit_card" placeholder="XXXXXXXXXXXX1234">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="holder_name">Nome do portador</label>
+            <div class="controls">
+              <input type="text" id="holder_name" placeholder="Como está escrito no cartão">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="expiration_month">Data de Expiração</label>
+            <div class="controls">
+                <select name="expiration_month" id="expiration_month" class="span3" style="display: inline">
+                    <option value="">Mês</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+                /
+                <select name="expiration_year" id="expiration_year" class="span3" style="display: inline">
+                    <option value="">Ano</option>
+                    <option value="12">2012</option>
+                    <option value="13">2013</option>
+                    <option value="14">2014</option>
+                    <option value="15">2015</option>
+                    <option value="16">2016</option>
+                    <option value="17">2017</option>
+                    <option value="18">2018</option>
+                    <option value="19">2019</option>
+                    <option value="20">2020</option>
+                    <option value="21">2021</option>
+                    <option value="22">2022</option>
+                </select>
+            </div>
+        </div>
+    </form>
+
+              </div>
+              <div class="span7">
+                <pre class="prettyprint linenums">
+$("#update_billinginfo").click(function(){
+  var hash = $('#hash').val();
+  var login_moip = $('#merchant').val();
+  moip = new MoipAssinaturas(hash, login_moip);
+  var customer = build_customer();
+  moip.update_credit_card(customer).callback(function(data){
+    if(data.has_errors()) {
+        alert("Ops.... houveram erros");
+    }
+    alert("O cartão de credito foi atualizado")
+  });
+});</pre>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <a href="http://site.moip.com.br/assinaturas">Moip Assinaturas</a>
+    </footer>
+    <script src="javascript/jquery.js"></script>
+    <script src="javascript/bootstrap.min.js"></script>
+    <script src="javascript/prettify.js"></script>
+    <script src="javascript/main.js"></script>
+
+  </body>
+</html>
