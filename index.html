@@ -71,12 +71,12 @@
 
           <section id="identification">
             <h3>Identificação <small>Obrigatório para todos os serviços do moip-assinaturas.js</small></h3>
-            <p>Todas as APIs do Moip Assinaturas utilizam de Token e Key, para autenticação e autorização no Moip Assinaturas basta gerar um <strong>SHA-1</strong> do TOKEN e KEY mais uma palavra-chave de sua escolha.</p>
-            <p>Abaixo há algumas implementações como exemplo.</p>
+            <p>Todas as APIs do Moip Assinaturas utilizam de Token e Key, portanto a partir desses dados é necessário criar um Hash de Autorização. Este Hash deve ser gerado a partir da concatenação de seu TOKEN, KEY e uma variavel (SALT) e então criptografar esse dados em <strong>SHA-1</strong></p>
             <div class="alert">
               <strong>Não recomendamos</strong> gerar esse hash de autorização via JavaScript. Pois tratam-se de informações sigilosas de seu interesse.
             </div>
-            <p><strong>Exemplo:</strong></p>
+            <p>Abaixo há algumas implementações de como gerar um hash de autorização para a utilização dos serviços.</p>
+            <p><strong>Exemplos:</strong></p>
             <ul id="myTab" class="nav nav-tabs">
               <li class="active"><a href="#php" data-toggle="tab">PHP</a></li>
               <li class=""><a href="#ruby" data-toggle="tab">Ruby</a></li>
