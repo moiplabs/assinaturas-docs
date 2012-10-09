@@ -512,9 +512,10 @@ $("#update_billinginfo").click(function(){
             <h3>Callback <small>personalizando o retorno do moip</small></h3>
 
             <h4>Passando um método de callback</h4>
-            <p>Assim que o Moip Assinaturas conclui o sua requisição o metódo de <strong>callback</strong> é executado. Isto é útil para você dar sequência no seu checkout ou mesmo exibir mensagens de erros do cliente ao preencher o checkou.</p>
+            <p>Assim que o Moip Assinaturas conclui o sua requisição o metódo de <strong>callback</strong> é executado. Isto é útil para você dar sequência no seu checkout ou mesmo exibir mensagens de erros do cliente ao preencher o checkout.</p>
 
-            <p>Para que possamos chamar seu metódo do de callback é necessário que você passe o bloco de função para o metódo callback. O Exemplo abaixo </p>
+            <p>Para que possamos chamar seu metódo de callback é necessário que você passe o bloco de função para o metódo callback.</p>
+            <h5>Exemplo:</h5>
             <pre class="prettyprint linenums">
 var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
 moip.callback(function(response){
@@ -523,8 +524,8 @@ moip.callback(function(response){
             <h4>Processando a resposta</h4>
             <p>O Moip Assinaturas irá chamar seu callback passando como parâmetro um objeto <code>Response()</code>, ele contem uma lista de possíveis erros ou por informações erradas preenchidas pelo seu usuário ou na integração. O Response também possui um lista de alertas, esses alertas auxiliam você na sua integração.</p>
 
-            <p>Para verificar se há erros ou alertas na resposta do Moip Assinaturas basta chamar o metódos <code>has_errors()</code> ou <code>has_alerts()</code>. Veja o exemplo abaixo:</p>
-
+            <p>Para verificar se há erros ou alertas na resposta do Moip Assinaturas basta chamar o metódos <code>has_errors()</code> ou <code>has_alerts()</code>.</p>
+            <h5>Exemplo:</h5>
             <pre class="prettyprint linenums">
 var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
 moip.callback(function(response){
