@@ -411,7 +411,7 @@ var build_address = function() {
             <p>Para criar um cliente com dados de cartão, porém não vinculado a nenhuma assinatura, o processo é semehando ao de assinatura. Onde você cria um <code>new Customer()</code>. E instacia o objeto <code>new MoipAssinaturas()</code> porém você vai chamar o método <code>MoipAssinaturas.create_customer()</code>.</p>
             <h5>Exemplo</h5>
             <pre class="prettyprint linenums">
-var customer = new Customer();
+var customer = new Customer(); // Você precisa settar todos os attribunos necessários
 moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
 moip.create_customer(customer)
 .callback(function(response){
