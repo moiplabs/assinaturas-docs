@@ -26,10 +26,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">moip-assinaturas.js</a>
+          <a class="brand" href="#">moip-assinaturas.min.js</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">moip-assinaturas.js</a></li>
+              <li class="active"><a href="#">moip-assinaturas.min.js</a></li>
               <li><a href="http://assinaturas.moip.com.br">Assinaturas</a></li>
               <li><a href="#contact">Documentação</a></li>
             </ul>
@@ -53,20 +53,20 @@
         <div class="span10 demo-content">
 
           <div class="hero-unit">
-            <h1>moip-assinaturas.js</h1>
+            <h1>moip-assinaturas.min.js</h1>
             <br>
-            <p>O moip-assinaturas.js é uma biblioteca JavaScript feita para facilitar a integração do Moip Assinaturas com o seu site, permitindo o desenvolvimento do seu próprio fluxo de contratação e que seu cliente consiga assinar um plano sem sair do seu site, assim como funciona o CheckOut Transparente do Moip. Além de possuir uma estrutura e validações pré-definidas, utilizando essa biblioteca você também reduz o seu escopo para o PCI, uma vez que os dados de cartão de crédito vão direto do navegador do seu cliente para o Moip.</p>
+            <p>O moip-assinaturas.min.js é uma biblioteca JavaScript feita para facilitar a integração do Moip Assinaturas com o seu site, permitindo o desenvolvimento do seu próprio fluxo de contratação e que seu cliente consiga assinar um plano sem sair do seu site, assim como funciona o CheckOut Transparente do Moip. Além de possuir uma estrutura e validações pré-definidas, utilizando essa biblioteca você também reduz o seu escopo para o PCI, uma vez que os dados de cartão de crédito vão direto do navegador do seu cliente para o Moip.</p>
           </div>
            
           <section id="config">
             <h3>Configurando <small>Obrigatório</small></h3>
-            <p>O primeiro passo é incluir a tag script abaixo logo após o <code>&lt;head&gt;</code> para chamar o moip-assinaturas.js.</p>
+            <p>O primeiro passo é incluir a tag script abaixo logo após o <code>&lt;head&gt;</code> para chamar o moip-assinaturas.min.js.</p>
             <h5>Exemplo:</h5>
-            <pre class="prettyprint linenums">&lt;script src="https://api.moip.com.br/moip-assinaturas.js" type="text/javascript"&gt;&lt;/script&gt;</pre> 
+            <pre class="prettyprint linenums">&lt;script src="https://api.moip.com.br/moip-assinaturas.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre> 
           </section>
 
           <section id="identification">
-            <h3>Identificação <small>Obrigatório para todos os serviços do moip-assinaturas.js</small></h3>
+            <h3>Identificação <small>Obrigatório para todos os serviços do moip-assinaturas.min.js</small></h3>
             <p>Para autenticar-se nas APIs do Moip Assinaturas é necessário informar seu token e key. Para a sua segurança, esses dados devem ser obrigatoriamente enviados por um Hash de Autorização. Este Hash deve gerado a partir da concatenação do token, key e de uma variável (salt) e, depois, encriptografado em <strong>SHA-1</strong>.</p>
             <div class="alert">
               <strong>Importante:</strong> por segurança, também não recomendamos gerar o hash de autorização via JavaScript.
@@ -148,7 +148,7 @@ public class HashTextTest {
             <h4>Pré-requisitos</h4>
             <ul>
               <li>Criação prévia de um plano. <a href="#">Saiba como criar um plano</a></li>
-              <li>Ter importado o javascript moip-assinaturas.js. <a href="#config">Saiba mais</a></li>
+              <li>Ter importado o javascript moip-assinaturas.min.js. <a href="#config">Saiba mais</a></li>
               <li>Ter gerado o Hash de Autorização. <a href="#identification">Saiba mais</a></li>
             </ul>
             <br>
@@ -156,7 +156,7 @@ public class HashTextTest {
             <p>O assinatura necessita de um cliente, para criar um cliente bastar instanciar o objeto <code>new Customer()</code> conforme <a href="#build_customer">exemplo</a>. O cliente possui suas informações pessoais (nome, e-mail, código do cliente, cpf, data de nascimento, etc), o endereço <code>new Address()</code>(rua, numero, bairro, etc) e o os dados de cobraça <code>new BillingInfo()</code>(cartão de crédito).</p>
             <br>
             <h4>Criando a assinatura <small>new MoipAssinaturas()</small></h4>
-            <p>O primeiro passo para a utilização do moip-assinaturas.js é instanciar o objeto <code>new MoipAssinaturas()</code> essa classe javascript é responsável por realiazar a integração com o Moip Assinaturas. Em seu construtor ela recebe dois parâmetros um é o Hash de Autorização e o outro é o Salt (palavra chave utilizada para gerar o Hash de Autorização)</p>
+            <p>O primeiro passo para a utilização do moip-assinaturas.min.js é instanciar o objeto <code>new MoipAssinaturas()</code> essa classe javascript é responsável por realiazar a integração com o Moip Assinaturas. Em seu construtor ela recebe dois parâmetros um é o Hash de Autorização e o outro é o Salt (palavra chave utilizada para gerar o Hash de Autorização)</p>
             <p>O metódo <code>MoipAssinaturas.subscribe</code> é responsavel por criar uma nova assinatura com um novo cliente. Ele recebe como parâmetro um objeto <code>new Subscription()</code> onde tem como parâmetros o código da assinatura, o novo cliente(criado atráves do objeto Customer) e o código do plano.</p>
 
             <p>Abaixo há um exemplo de um <code>HTML</code> e seu respectivo javascript para gerar uma assinatura.</p>
