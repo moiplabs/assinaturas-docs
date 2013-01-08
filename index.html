@@ -106,12 +106,13 @@ require 'digest/sha1'
 token = '01010101010101010101010101010101'
 key = 'ABABABABABABABABABABABABABABABABABABABAB'
 salt = Time.now.to_i
-Digest::SHA1.hexdigest(token << key << salt)</pre>
+Digest::SHA1.hexdigest("#{token}#{key}#{salt}")</pre>
               </div>
               <div class="tab-pane fade" id="java">
                 <pre class="prettyprint linenums">
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 public class HashTextTest {
  
@@ -356,7 +357,7 @@ var build_customer = function() {
   var customer_params = {
       fullname: $("#fullname").val(),
       email: $("#email").val(),
-      code: $("#fullname").val().toLowerCase()),
+      code: $("#fullname").val().toLowerCase(),
       fullname : $("#fullname").val(),
       cpf : $("#cpf").val(),
       birthdate_day : $("#birthdate_day").val(),
