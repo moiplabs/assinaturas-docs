@@ -61,87 +61,18 @@
           <section id="config">
             <h3>Configurando <small>Obrigatório</small></h3>
             <p>O primeiro passo é incluir a tag script abaixo logo após o <code>&lt;head&gt;</code> para chamar o moip-assinaturas.min.js.</p>
+            <h6>jQuery</h6>
+            <p>Também é necessário a incluir a biblioteca <a href="http://jquery.com">jQuery</a> no <code>&lt;head&gt;</code>. Observação é importante importar o jQuery antes no moip-assinaturas.min.js conforme exemplo abaixo:</p>
             <h5>Exemplo:</h5>
-            <pre class="prettyprint linenums">&lt;script src="https://api.moip.com.br/moip-assinaturas.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre> 
+            <pre class="prettyprint linenums">&lt;script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="https://api.moip.com.br/moip-assinaturas.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre> 
           </section>
 
           <section id="identification">
             <h3>Identificação <small>Obrigatório para todos os serviços do moip-assinaturas.min.js</small></h3>
-            <p>Para autenticar-se nas APIs do Moip Assinaturas é necessário informar seu token e key. Para a sua segurança, esses dados devem ser obrigatoriamente enviados por um Hash de Autorização. Este Hash deve gerado a partir da concatenação do token, key e de uma variável (salt) e, depois, encriptografado em <strong>SHA-1</strong>.</p>
-            <div class="alert">
-              <strong>Importante:</strong> por segurança, também não recomendamos gerar o hash de autorização via JavaScript.
-            </div>
-            <p>Abaixo, algumas implementações de como gerar um hash de autorização para a utilização dos serviços.</p>
-            <p><strong>Exemplos:</strong></p>
-            <ul id="myTab" class="nav nav-tabs">
-              <li class="active"><a href="#php" data-toggle="tab">PHP</a></li>
-              <li class=""><a href="#ruby" data-toggle="tab">Ruby</a></li>
-              <li class=""><a href="#java" data-toggle="tab">Java</a></li>
-              <li><a href="#python" data-toggle="tab">Python</a></li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-              <div class="tab-pane fade active in" id="php">
-                <pre class="prettyprint linenums">
-&lt;?php
-  $token = '01010101010101010101010101010101';
-  $key = 'ABABABABABABABABABABABABABABABABABABABAB';
-  $salt = time();
-  $to_hash = $token.$key.$salt;
-  sha1($to_hash);
-?&gt;</pre>
-
-              </div>
-              <div class="tab-pane fade" id="ruby">
-                <pre class="prettyprint linenums">
-require 'digest/sha1'
-
-token = '01010101010101010101010101010101'
-key = 'ABABABABABABABABABABABABABABABABABABABAB'
-salt = Time.now.to_i
-Digest::SHA1.hexdigest("#{token}#{key}#{salt}")</pre>
-              </div>
-              <div class="tab-pane fade" id="java">
-                <pre class="prettyprint linenums">
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Date;
-
-public class HashTextTest {
- 
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        String token = "01010101010101010101010101010101";
-        String key = "ABABABABABABABABABABABABABABABABABABABAB";
-        String salt = new Date();
-
-        System.out.println(sha1(token + key + salt));
-    }
-     
-    public static String sha1(String input) throws NoSuchAlgorithmException {
-        MessageDigest mDigest = MessageDigest.getInstance("SHA1");
-        byte[] result = mDigest.digest(input.getBytes());
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < result.length; i++) {
-            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-        }
-        return sb.toString();
-    }
-}</pre>
-              </div>
-
-
-              <div class="tab-pane fade" id="python">
-                  <pre class="prettyprint linenums">
-  import hashlib
-  import time
-
-  token = "01010101010101010101010101010101"
-  key = "ABABABABABABABABABABABABABABABABABABABAB"
-  salt = time.localtime()
-  m = hashlib.sha1()
-  m.update(token + key + str(salt))
-  print(m.hexdigest())</pre>
-              </div>
-            </div>
+            <p>Utilizando o moip-assinaturas.min.js é necessário você identificar sua aplicação para se comunicar com o Moip. Sua chave pública é seu <strong>Token</strong> Moip.</p>
+            <p><strong>Exemplo:</strong></p>
+            <pre class="prettyprint linenums">var moip = new MoipAssinaturas("SEU_TOKEN");</pre>
           </section>
 
           <section id="subscribe">
@@ -336,7 +267,7 @@ public class HashTextTest {
               <div class="span7">
                 <h5>Criando a assinatura no Moip Assinaturas:</h5>
                 <pre class="prettyprint linenums">
-var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
+var moip = new MoipAssinaturas("SEU_TOKEN");
 var customer = build_customer();
 var plan_code = $("#plan_code").val();
 
@@ -410,7 +341,7 @@ var build_address = function() {
             <h5>Exemplo</h5>
             <pre class="prettyprint linenums">
 var customer = new Customer(); // Você precisa settar todos os attribunos necessários
-moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
+moip = new MoipAssinaturas("SEU_TOKEN");
 moip.create_customer(customer)
 .callback(function(response){
   if (response.has_errors()) {
@@ -430,7 +361,7 @@ moip.create_customer(customer)
             <h5>Atualizando um Cartão de credito</h5>
             <pre class="prettyprint linenums">
 $("#update_billinginfo").click(function(){
-moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
+moip = new MoipAssinaturas("SEU_TOKEN");
 var customer = new Customer();
 customer.code("codigo-01");
 customer.billingInfo(new BillingInfo()); // Aqui você setta um novo cartão para fazer a cobrança
@@ -452,7 +383,7 @@ alert("O cartão de credito foi atualizado")
             <p>Para que possamos chamar seu metódo de callback é necessário que você passe o bloco de função para o metódo callback.</p>
             <h5>Exemplo:</h5>
             <pre class="prettyprint linenums">
-var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
+var moip = new MoipAssinaturas("SEU_TOKEN");
 moip.callback(function(response){
   // aqui você adiciona os seus comportamentos esperados
 });</pre>
@@ -462,7 +393,7 @@ moip.callback(function(response){
             <p>Para verificar se há erros ou alertas na resposta do Moip Assinaturas, basta chamar o metódos <code>has_errors()</code> ou <code>has_alerts()</code>.</p>
             <h5>Exemplo:</h5>
             <pre class="prettyprint linenums">
-var moip = new MoipAssinaturas("IDENTIFICAÇÃO", "SEU_SALT");
+var moip = new MoipAssinaturas("SEU_TOKEN");
 moip.callback(function(response){
   alert(response.has_errors());
   alert(response.has_alerts());
