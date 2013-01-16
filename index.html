@@ -48,6 +48,7 @@
               <li><a href="#customer"><i class="icon-chevron-right"></i> Criar cliente com Cartão</a></li>
               <li><a href="#update"><i class="icon-chevron-right"></i> Atualizar cartão</a></li>
               <li><a href="#callback"><i class="icon-chevron-right"></i> Callback</a></li>
+              <li><a href="http://moiplabs.github.com/assinaturas-js-demo/"><i class="icon-chevron-right"></i> Exemplo para Download</a></li>
           </ul>
         </div>
         <div class="span10 demo-content">
@@ -62,10 +63,16 @@
             <h3>Configurando <small>Obrigatório</small></h3>
             <p>O primeiro passo é incluir a tag script abaixo logo após o <code>&lt;head&gt;</code> para chamar o moip-assinaturas.min.js.</p>
             <h6>jQuery</h6>
+            <p>Disponibilizamos de dois ambientes um SANDBOX e um PRODUÇÃO, com isso temos um javascript para cada ambiente.</p>
+            <p>Utilize as seguintes URLs para importar de acordo com o ambiente desejado. </p>
+            <ul>
+              <li><strong>SANDBOX:</strong> <code>https://sandbox.moip.com.br/moip-assinaturas.min.js</code></li>
+              <li><strong>PRODUÇÃO:</strong> <code>https://api.moip.com.br/moip-assinaturas.min.js</code></li>
+            </ul>
             <p>Também é necessário a incluir a biblioteca <a href="http://jquery.com">jQuery</a> no <code>&lt;head&gt;</code>. Observação é importante importar o jQuery antes no moip-assinaturas.min.js conforme exemplo abaixo:</p>
             <h5>Exemplo:</h5>
             <pre class="prettyprint linenums">&lt;script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"&gt;&lt;/script&gt;
-&lt;script src="https://api.moip.com.br/moip-assinaturas.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre> 
+&lt;script src="https://[sandbox ou api].moip.com.br/moip-assinaturas.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre> 
           </section>
 
           <section id="identification">
@@ -73,6 +80,16 @@
             <p>Utilizando o moip-assinaturas.min.js é necessário você identificar sua aplicação para se comunicar com o Moip. Sua chave pública é seu <strong>Token</strong> Moip.</p>
             <p><strong>Exemplo:</strong></p>
             <pre class="prettyprint linenums">var moip = new MoipAssinaturas("SEU_TOKEN");</pre>
+
+            <h4>Como conseguir o Token e Key</h4>
+            <p>O Moip assinaturas utiliza os mesmo token e key disponíveis em sua Conta Moip. Assim, não só estamos unificando as chaves, como estamos mantendo integradas as contas do Moip e do Moip Assinaturas.</p>
+            <p>Para obter seu token e key, siga os procedimentos abaixo:</p>
+            <ul>
+              <li>Acesse o moip.com.br</li>
+              <li>Clique na opção “Ferramentas” no Menu</li>
+              <li>Selecione a opção “API Moip” e depois “Chaves de Acesso”.</li>
+              <li>Seu TOKEN será exibido na página seguinte, a KEY estará oculta, mas basta clicar no link e ela será exibida na mesma página.</li>
+            </ul>
           </section>
 
           <section id="subscribe">
@@ -293,8 +310,7 @@ var build_customer = function() {
   var customer_params = {
       fullname: $("#fullname").val(),
       email: $("#email").val(),
-      code: $("#fullname").val().toLowerCase(),
-      fullname : $("#fullname").val(),
+      code: new Date().getTime(),
       cpf : $("#cpf").val(),
       birthdate_day : $("#birthdate_day").val(),
       birthdate_month: $("#birthdate_month").val(),
