@@ -1,0 +1,1994 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Moip Assinaturas - Documentação online</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Exemplo de utilização do Javascript assinaturas.js">
+        <meta name="author" content="Moip Assinaturas">
+
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/demo.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="css/prettify.css" rel="stylesheet">
+
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <style>
+            section {
+                padding-top: 30px;
+            }          
+        </style>
+    </head>
+
+    <body data-spy="scroll" data-target="#navbar" data-offset="10">
+        <div class="navbar navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand active" href="index.html">Assinaturas Docs</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav" role="navigation">
+                            <li><a href="index.html">Apresentação</a></li>                           
+                            <li><a href="comece.html">Comece a integrar</a></li>                           
+                            <li class="dropdown active">
+                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="api.html">
+                                    Documentação
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="active"><a href="api.html">API</a></li>
+                                    <li><a href="js.html">moip-assinaturas.js</a></li>              
+                                    <li class="divider"></li>
+                                    <li class="nav-header">Adicionais</li>
+                                    <li><a href="webhooks.html">Webhooks</a></li>
+                                    <li><a href="erros_alertas.html">Erros e Alertas</a></li>              
+                                </ul>
+                            </li>   
+                            <li><a href="producao.html">Colocando em produção</a></li>              
+                            <li><a href="ajuda.html">Ajuda</a></li>              
+                            <li><a href="english_version.html">English version</a></li>
+                        </ul>
+                        <a href="http://assinaturas.moip.com.br" class="btn pull-right">Login</a>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <!-- Docs nav
+            ================================================== -->
+            <div class="row">
+                <div class="span3 bs-docs-sidebar" id="navbar">
+                    <ul class="nav nav-list bs-docs-sidenav affix">
+                        <li><a href="#planos"><i class="icon-chevron-right"></i>Planos</a></li>
+                        <li><a href="#clientes"><i class="icon-chevron-right"></i>Clientes</a></li>
+                        <li><a href="#assinaturas"><i class="icon-chevron-right"></i>Assinaturas</a></li>
+                        <li><a href="#faturas"><i class="icon-chevron-right"></i>Faturas</a></li>
+                        <li><a href="#pagamentos"><i class="icon-chevron-right"></i>Pagamentos</a></li>
+                    </ul>
+                </div>
+                <div class="span9" style="margin-top: -40px;">
+
+                    <!-- Planos
+                    ================================================== -->
+                    <div id="planos"></div>
+                    <section>
+                        <div class="page-header">
+                            <h1>Planos</h1>
+                        </div>
+                        <div>
+                            <p>
+                                O plano é semelhante a um produto para o modelo de assinaturas. Um plano
+                                contém as configurações que uma assinatura vai seguir, como valor e
+                                intervalo de cobrança. Crie os planos que deseja oferecer para os seus
+                                clientes assinarem.
+                            </p>
+                            <div>
+                                <p>Com a API de planos você pode:</p>
+                                <ul>
+                                    <li><a href="#criar_plano">Criar um plano</a></li>
+                                    <li><a href="#listar_plano">Listar todos os planos</a></li>
+                                    <li><a href="#consultar_plano">Consultar detalhes de um plano</a></li>
+                                    <li><a href="#ativar_desativar_plano">Ativar ou desativar um plano</a></li>
+                                    <li><a href="#alterar_plano">Alterar um plano</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div id="criar_plano"></div>
+                            <section>
+                                <h2>Criar um plano</h2>
+                                <h4>Requisição <small>exemplo completo</small> </h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">POST</span> <input class="span5"
+                                                                            id="prependedInput" type="text"
+                                                                            value="https://sandbox.moip.com.br/assinaturas/v1/plans" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: POST 
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <pre class="prettyprint linenums">
+{
+    "code": "plano01",
+    "name": "Plano Especial",
+    "description": "Descrição do Plano Especial",
+    "amount": 990, //em centavos
+    "setup_fee": 500, //em centavos
+    "max_qty": 1,
+    "interval": {
+        "length": 1,
+        "unit": "MONTH"
+        },
+    "billing_cycles": 12
+}</pre>
+                                <h4>Atributos</h4>
+                                <table class="table table-bordered table-striped table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="span1">Atributo</th>
+                                            <th class="span2">Formato esperado</th>
+                                            <th class="span4">Descrição</th>
+                                            <th class="span1">Obrigatoriadade</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4"><strong>identificação</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>code</code></td>
+                                            <td>"qw123"</td>
+                                            <td>identificador do plano na sua aplicação. Até 65
+                                                caracteres.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>name</code></td>
+                                            <td>"Plano Especial"</td>
+                                            <td>nome do plano na sua aplicação. Até 65 caracteres.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>description</code></td>
+                                            <td>"plano com desconto para clientes novos"</td>
+                                            <td>descrição do plano na sua aplicação. Até 255
+                                                caracteres.</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><strong>valores</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>amount</code></td>
+                                            <td>10010</td>
+                                            <td>valor do plano a ser cobrado em centavos de Real.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>setup_fee</code></td>
+                                            <td>1010</td>
+                                            <td>taxa de contratação a ser cobrada na assinatura em
+                                                centavos de Real.</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><strong>intervalo</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>interval</code></td>
+                                            <td></td>
+                                            <td>node do intervalo do plano, contendo <code>unit</code> e <code>length</code>
+                                            </td>
+                                            <td class="warning"><span class="label label-invert">condicional</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>unit</code></td>
+                                            <td><code>MONTH</code></td>
+                                            <td>a unidade de medida do intervalo de cobrança, o default
+                                                é <code>MONTH</code>. Opções: <code>DAY</code>, <code>MONTH</code>,
+                                                <code>YEAR</code>
+                                            </td>
+                                            <td class="warning"><span class="label label-invert">condicional</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>length</code></td>
+                                    <td>1</td>
+                                    <td>a duração do intervalo de cobrança, default é 1</td>
+                                    <td><span class="label label-invert">condicional</span></td>
+                                    </tr>
+                                    <tr>
+                                    <tr>
+                                        <td><code>billing_cycles</code></td>
+                                        <td>12</td>
+                                        <td>quantidade de ciclos (faturas) que a assinatura terá até expirar
+                                            (se não informar, não haverá expiração).</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"><strong>Configurações</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>status</code></td>
+                                        <td><code>ACTIVE</code></td>
+                                        <td>status do plano. Pode ser <code>ACTIVE</code> ou <code>INACTIVE</code>.
+                                            O padrão é <code>ACTIVE</code>.
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>max_qty</code></td>
+                                        <td>12</td>
+                                        <td>quantidade máxima de assinaturas do plano (não há
+                                            limite se não informar)</td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <h4>Resposta</h4>  
+                                <h5>Sucesso</h5>
+                                <pre class="prettyprint">Status: 201 CREATED
+URI: https://sandbox.moip.com.br/assinaturas/v1/plans/:code</pre>
+                                <pre class="prettyprint linenums">
+{
+    "code": "plano01",
+    "name": "Plano Especial",
+    "description": "Descrição do Plano Especial",
+    "amount": 990, //em centavos
+    "setup_fee": 500, //em centavos
+    "max_qty": 1,
+    "interval": {
+        "length": 1,
+        "unit": "MONTH"
+        }
+}</pre>
+                                <h5>Erro</h5>
+                                <pre class="prettyprint">Status: 400 BAD REQUEST</pre>
+                                <pre class="prettyprint linenums">
+{
+    message: "Erro na requisição",
+    Errors: [
+    {code: "MA1", description: "Código já utilizado. Informe outro código."}
+    ]
+}</pre>
+                            </section>	
+
+                            <div id="listar_plano"></div>
+                            <section>
+                                <h2>Listar todos os planos</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">GET</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: GET
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Resposta</h4>
+                                <h5>Sucesso</h5>
+                                <pre class="prettyprint">Status: 200 OK</pre>
+                                <pre class="prettyprint linenums">
+{
+    "plans": [
+        {
+            "code": "plano1",
+            "name": "Plano Exemplo",
+            "description": "Descrição exemplo do Plano",
+            "status": "ACTIVE",
+            "amount": 2990,
+            "max_qty": 50,
+            "setup_fee": 1000,
+            "interval": {
+                "length": 1,
+                "unit": "MONTH"
+            },
+            "billing_cycles": 1
+        }
+    ]
+}</pre>
+                            </section>
+
+                            <div id="consultar_plano"></div>
+                            <section>
+                                <h2>Consultar detalhes de um plano</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">GET</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans/:code" />                            </div>
+                                <pre class="prettyprint">
+Request Method: GET
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Resposta</h4>
+                                <h5>Sucesso</h5>
+                                <pre class="prettyprint">
+Status: 200 OK</pre>
+                                <pre class="prettyprint linenums">
+{
+    "code": "plano1",
+    "name": "Plano Ouro Ilimitado",
+    "description": "Plano com todas as vantagens",
+    "status": "ACTIVE",
+    "amount": 2990,
+    "max_qty": 50,
+    "setup_fee": 1000,
+    "interval": {
+        "length": 1,
+        "unit": "MONTH"
+    },
+    "billing_cycles": 1
+}</pre>
+                            </section>
+                            
+                            <div id="ativar_desativar_plano"></div>
+                            <section>
+                                <h2>Ativar ou desativar um plano</h2>
+                                <h4>Requisição</h4>
+                                <p>
+                                <h5>Ativar</h5>
+                                <div class="input-prepend">
+                                    <span class="add-on">PUT</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans:code/activate" />
+                                </div>
+                                <p>
+                                <h5>Desativar</h5>
+                                <div class="input-prepend">
+                                    <span class="add-on">PUT</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans:code/inactivate" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: PUT
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                            </section>
+
+                            <div id="alterar_plano"></div>
+                            <section>
+                                <h2>Alterar um plano</h2>
+                                <p>É possível alterar os dados de um plano criado por meio da
+                                    API e pela área logada. Contudo, se o plano já possuir
+                                    assinaturas, algumas informações sensíveis (como valor e
+                                    intervalo) não poderão ser alteradas para não afetar as
+                                    assinaturas criadas.</p>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">PUT</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans:code" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: PUT
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <pre class="prettyprint linenums">
+{
+    "code": "plano1",
+    "name": "Nome do Plano",
+    "description": "Descrição do Plano",
+    "amount": 1010,
+    "setup_fee": 10010,
+    "max_qty": "1",
+    "interval": {
+        "length": "1",
+        "unit": "MONTH"
+    }
+}</pre>
+                                <h5>Atributos que podem ser alterados</h5>
+                                <table class="table table-bordered table-striped table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="span1">Atributo</th>
+                                            <th class="span4">alteração</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>name</code></td>
+                                            <td>sempre</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>description</code></td>
+                                            <td>sempre</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>amount</code></td>
+                                            <td><span class="label label-important">Apenas se não
+                                                    houver assinaturas</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>setup_fee</code></td>
+                                            <td>sempre</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>interval</code></td>
+                                            <td><span class="label label-important">Apenas se não
+                                                    houver assinaturas</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>unit</code></td>
+                                            <td><span class="label label-important">Apenas se não
+                                                    houver assinaturas</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>length</code></td>
+                                            <td><span class="label label-important">Apenas se não
+                                                    houver assinaturas</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>billing_cycles</code></td>
+                                            <td><span class="label label-important">Apenas se não
+                                                    houver assinaturas</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>status</code></td>
+                                            <td>sempre</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>max_qtd</code></td>
+                                            <td>sempre</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                        </div>
+                    </section>
+
+
+                    <!-- Clientes
+                    ================================================== -->
+                    <div id="clientes"></div>
+                    <section>
+                        <div class="page-header">
+                            <h1>Clientes e dados de pagamento</h1>
+                        </div>
+                        <div>
+                            <p>Para criar uma assinatura, você precisa cadastrar um cliente com os dados de pagamento. 
+                                Isso pode ser feito por meio desta API ou no ato de criação da assinatura. É altamente 
+                                recomendado a utilização do moip-assinaturas.js para reduzir o escopo PCI da sua aplicação.</p>
+                            <div>
+                                <p>Com a API de cliente você pode:</p>
+                                <ul>
+                                    <li><a href="#criar_cliente">Criar um cliente</a></li>
+                                    <li><a href="#listar_clientes">Listar todos os clientes </a></li>
+                                    <li><a href="#consultar_cliente">Consultar detalhes de um cliente </a></li>
+                                    <li><a href="#alterar_cliente">Alterar um cliente </a></li>
+                                </ul>
+                            </div>
+                            
+                            <div id="criar_cliente"></div>
+                            <section>
+                                <h2>Criar um cliente</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">POST</span> <input class="span8"
+                                                                            id="prependedInput" type="text"
+                                                                            value="https://sandbox.moip.com.br/assinaturas/v1/customers?new_vault=[true/false]" />
+                                </div>
+                                <p>
+                                    Se <code>new_valt=true</code>, o envio do node <code>"credit_card"{}</code> é obrigatório.
+                                    Utilize isto para criar um cliente com dados de cartão e gerar um
+                                    cofre para guardar os dados de pagamento com segurança no Moip. <br />
+                                <pre class="prettyprint">
+Request Method: POST
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <pre class="prettyprint linenums">
+{
+    "code": "18",
+    "email": "nome@exemplo.com.br",
+    "fullname": "Nome Sobrenome",
+    "cpf": "22222222222",
+    "phone_area_code": "11",
+    "phone_number": "34343434",
+    "birthdate_day": "26",
+    "birthdate_month": "04",
+    "birthdate_year": "1980",
+    "address": {
+        "street": "Rua Nome da Rua",
+        "number": "100",
+        "complement": "Casa",
+        "district": "Nome do Bairro",
+        "city": "São Paulo",
+        "state": "SP",
+        "country": "BRA",
+        "zipcode": "05015010"
+    },
+    "billing_info": {
+        "credit_card": {
+            "holder_name": "Nome Completo",
+            "number": "4111111111111111",
+            "expiration_month": "04",
+            "expiration_year": "15"
+        }
+    }
+}</pre>
+                                <br />
+                                <h4>Atributos</h4>
+                                <table class="table table-bordered table-striped table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="span3">Atributo</th>
+                                            <th class="span2">Formato esperado</th>
+                                            <th class="span3">Descrição</th>
+                                            <th class="span1">Obrigatoriedade</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>code</code></td>
+                                            <td>"aa001"</td>
+                                            <td>identificador do cliente na sua aplicação. Até 65
+                                                caracteres.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>fullname</code></td>
+                                            <td>"Nome Sobrenome"</td>
+                                            <td>nome completo do cliente. Até 150 caracteres.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>email</code></td>
+                                            <td>"nome@email.com"</td>
+                                            <td>email do cliente.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>cpf</code></td>
+                                            <td>16412725297</td>
+                                            <td>CPF do cliente. Apenas dígitos numéricos.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>phone_area_code</code></td>
+                                            <td>"11"</td>
+                                            <td>código de área do telefone do titular (DDD). 2
+                                                carateres sem máscara.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>phone_number</code></td>
+                                            <td>"990903454"</td>
+                                            <td>telefone do titular, 8 ou 9 caracteres sem máscara.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>birthdate_day</code></td>
+                                            <td>"01"</td>
+                                            <td>dia do nascimento. Válido 1 a 31.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>birthdate_month</code></td>
+                                            <td>"01"</td>
+                                            <td>mês do nascimento. Válido 1 a 12.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>birthdate_year</code></td>
+                                            <td>"1999"</td>
+                                            <td>ano do nascimento. 4 dígitos.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>address</code></td>
+                                            <td> </td>
+                                            <td>node com os atributos do endereço.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>street</code></td>
+                                            <td>"Rua dos Valentes"</td>
+                                            <td>logradouro do endereço.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr> 
+                                            <td><code class="muted">├──</code> <code>state</code></td>
+                                            <td>"SP"</td>
+                                            <td>Estado.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>country</code></td>
+                                            <td>"BRA"</td>
+                                            <td>país.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>zip_code</code></td>
+                                            <td>"00000000"</td>
+                                            <td>CEP do endereço. Sem máscara.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>billing_info</code></td>
+                                            <td></td>
+                                            <td>dados de pagamento desse cliente.</td>
+                                            <td><span class="label label-invert">condicional</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>credit_card</code></td>
+                                            <td></td>
+                                            <td>dados de cartão de crédito.</td>
+                                            <td><span class="label label-invert">condicional</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">│   ├──</code> <code>holder_name</code></td>
+                                            <td>"Nome completo"</td>
+                                            <td>nome do portador.</td>
+                                            <td><span class="label label-invert">condicional</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">│   ├──</code> <code>number</code></td>
+                                            <td>"4111111111111111"</td>
+                                            <td>número do cartão de crédito.</td>
+                                            <td><span class="label label-invert">condicional</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">│   ├──</code> <code>expiration_month</code></td>
+                                            <td>"03"</td>
+                                            <td>mês de expiração do cartão.</td>
+                                            <td><span class="label label-invert">condicional</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">│   ├──</code> <code>expiration_year</code></td>
+                                            <td>"16"</td>
+                                            <td>ano de expiração do cartão.</td>
+                                            <td><span class="label label-invert">condicional</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└─└──</code> <code>vault</code></td>
+                                            <td>"e3er4-t1td3-rf4f4f-r4t4"</td>
+                                            <td>cofre de um cartão de crédito, se já foi cadastrado para este mesmo cliente anteriormente. Caso informe o cofre, os demais dados do cartão não precisam ser informados.</td>
+                                            <td><span class="label label-invert">condicional</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h4>Resposta</h4>
+                                <h5>Sucesso</h5>
+                                <pre class="prettyprint">
+Status: 201 CREATED
+URI: https://sandbox.moip.com.br/assinaturas/v1/customers/:code</pre>
+                                <pre class="prettyprint linenums">
+{
+    "message": "Cliente criado com Sucesso"
+}</pre>
+                                <h5>Erro</h5>
+                                <pre class="prettyprint">
+Status: 400 BAD REQUEST</pre>
+                                <pre class="prettyprint linenums">
+{
+    message: "Erro na requisição",
+    errors: [
+        {code: 1, description: "code existente. Informe outro code"}
+    ]
+}
+                                </pre>
+                            </section>
+
+                            <div id="listar_clientes"></div>
+                            <section>
+                                <h2>Listar todos os clientes</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">GET</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/customers" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: GET
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Resposta</h4>
+                                <h5>Sucesso</h5>
+                                <pre class="prettyprint">
+Status 200: OK</pre>
+                                <pre class="prettyprint linenums">
+{
+    "customers": [
+        {
+            "code": "cliente1",
+            "fullname": "Nome Sobrenome",
+            "email": "nome@exemplo.com",
+            "cpf": "22222222222",
+            "phone_area_code": "11",
+            "phone_number": "990909090",
+            "birthdate_day": "29",
+            "birthdate_month": "04",
+            "birthdate_year": "1980"
+        }
+    ]
+}</pre>
+                            </section>
+
+                            <div id="consultar_cliente"></div>
+                            <section>
+                                <h2>Consultar detalhes de um cliente</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">GET</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/customers:code" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: GET
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Resposta</h4>
+                                <h5>Sucesso</h5>
+                                <pre class="prettyprint">
+Status 200: OK</pre>
+                                <pre class="prettyprint linenums">
+{
+    "code": "cliente1",
+    "fullname": "Nome Sobrenome",
+    "email": "nome@exemplo.com",
+    "cpf": "22222222222",
+    "phone_area_code": "11",
+    "phone_number": "990909090",
+    "birthdate_day": 29,
+    "birthdate_month": 03,
+    "birthdate_year": 1980,
+    "address": {
+        "street": "Rua Nome da Rua",
+        "number": "1000",
+        "complement": "Apto 4 - bloco A",
+        "district": "Bairro",
+        "city": "São Paulo",
+        "state": "SP",
+        "country": "BRA",
+        "zipcode": "00000000"
+    },
+    "billing_info": {
+        "credit_cards": [
+            {
+                "vault": "00b21555-296a-4e70-94cd-3e96fef62e5b",
+                "brand": "VISA",
+                "first_six_digits": "411111",
+                "last_four_digits": "1111",
+                "expiration_month": "04",
+                "expiration_year": "15",
+                "holder_name": "Nome Sobrenome"
+            }
+        ]
+    }
+}</pre>
+                            </section>
+
+                            <div id="alterar_cliente"></div>
+                            <section>
+                                <h2>Alterar um cliente</h2>
+                                <p>Requisição para alterar os dados de um cliente, exceto o seu código. Para
+                                    alterar os dados de pagamento do cliente, utilize o
+                                    moip-assinaturas.js.</p>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">PUT</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/customers/:code" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: PUT
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <pre class="prettyprint linenums">
+{
+    "code": "cliente1",
+    "email": "nome@exemplo.com.br",
+    "fullname": "Nome Sobrenome",
+    "cpf": "22222222222",
+    "phone_number": "55223366",
+    "phone_area_code": "11",
+    "birthdate_day": "26",
+    "birthdate_month": "04",
+    "birthdate_year": "1986",
+    "address": {
+        "street": "Rua nome da Rua",
+        "number": "170",
+        "complement": "Casa",
+        "district": "Bairro",
+        "city": "São Paulo",
+        "state": "SP",
+        "country": "BRA",
+        "zipcode": "00000-000"
+    }
+}</pre>    
+                            </section>
+                        </div>
+                    </section>
+
+
+                    <!-- Assinaturas
+                    ================================================== -->
+                    <div id="assinaturas"></div>
+                    <section>
+                        <div class="page-header">
+                            <h1>Assinaturas</h1>
+                        </div>
+                        <div>
+                            <p>Uma assinatura permite a cobrança recorrente de um cliente
+                                de forma automática e simples. Para criar uma nova assinatura,
+                                basta informar o plano, o cliente da assinatura e um identificador
+                                para ela. Se quiser, é possível criar o cliente e seus dados de
+                                pagamento junto com a assinatura. Para isso, recomendamos utilizar
+                                o moip-assinaturas.js.</p>
+                            <div>
+                                <p>Com a API de assinaturas você pode:</p>
+                                <ul>
+                                    <li><a href="#criar_assinatura">Criar Assinaturas</a></li>
+                                    <li><a href="#listar_assinaturas">Listar todas assinaturas</a></li>
+                                    <li><a href="#consultar_assinatura">Consultar detalhes de uma assinatura</a></li>
+                                    <li><a href="#suspender_reativar_assinatura">Suspender ou reativar a cobrança de uma assinatura</a></li>
+                                    <li><a href="#alterar_assinatura">Alterar uma assinatura</a></li>
+                                    <li><a href="#status_assinatura">Status de uma assinatura </a></li>
+                                </ul>
+                            </div>
+
+                            <div id="criar_assinatura"></div>
+                            <section>
+                                <h2>Criar Assinaturas</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">POST</span> <input class="span8"
+                                                                            id="prependedInput" type="text"
+                                                                            value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: POST
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Exemplo mínimo</h4>
+                                <p>Criando uma assinatura com um cliente já cadastrad</p>
+                                <pre class="prettyprint linenums">
+{
+    "code": "assinatura1",
+    "amount": "100",
+    "plan" : {
+        "code" : "plano1"
+    },
+    "customer" : {
+    "code" : "cliente1"
+    }
+}</pre>
+                                <h4>Exemplo completo</h4>
+                                <p>Criando uma assinatura com dados de um novo cliente</p>
+                                <pre class="prettyprint linenums">
+{
+    "code": "assinatura1",
+    "amount": "100",
+    "plan": {
+        "code": "plano1"
+    },
+    "customer": {
+        "code": "cliente1",
+        "email": "nome@exemplo.com.br",
+        "fullname": "Nome Sobrenome",
+        "cpf": "22222222222",
+        "phone_number": "55223366",
+        "phone_area_code": "11",
+        "birthdate_day": "26",
+        "birthdate_month": "04",
+        "birthdate_year": "1986",
+        "address": {
+            "street": "Rua nome da Rua",
+            "number": "170",
+            "complement": "Casa",
+            "district": "Bairro",
+            "city": "São Paulo",
+            "state": "SP",
+            "country": "BRA",
+            "zipcode": "00000000"
+        },
+        "billing_info": {
+            "credit_card": {
+                "holder_name": "Nome Completo",
+                "number": "4111111111111111",
+                "expiration_month": "04",
+                "expiration_year": "15"
+            }
+        }
+    }
+}</pre>
+                                <h4>Atributos</h4>
+                                <table class="table table-bordered table-striped table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="span2">Atributo</th>
+                                            <th class="span2">Formato esperado</th>
+                                            <th class="span4">Descrição</th>
+                                            <th class="span1">Obrigatoriedade</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>code</code></td>
+                                            <td>"assinatura01"</td>
+                                            <td>identificador da assinatura na sua aplicação. Até 65
+                                                caracteres.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>amount</code></td>
+                                            <td>"100"</td>
+                                            <td>valor da assinatura (sobrescreve o valor do plano
+                                                contratado) <strong>atenção: o cliente deve estar ciente e de acordo em ser cobrado um valor diferente do plano escolhido.</strong></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>plan</code></td>
+                                            <td></td>
+                                            <td><i>node</i> de informações do plano que será usado na
+                                                assinatura</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>code</code></td>
+                                            <td>"plano01"</td>
+                                            <td>identificador do plano previamente criado e que será
+                                                usado na assinatura</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>customer</code></td>
+                                            <td></td>
+                                            <td><i>node</i> de informações do cliente que será o
+                                                assinante</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>code</code></td>
+                                            <td>"cliente01"</td>
+                                            <td>identificador do cliente previamente criado e que será
+                                                usado na assinatura. importante: se o cliente ainda não tiver
+                                                sido criado, todos os parâmetros do clientes devem ser
+                                                enviados, consulte a documentação de Clientes.</td>
+                                            <td><span class="label label-important">obrigatório</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h4>Resposta</h4>
+                                <p> O Moip Assinaturas deve
+                                    responder praticamente em tempo real. Contudo, como a cobrança
+                                    depende de comunicação com as operadoras de cartões de crédito,
+                                    em raras exceções pode haver um intervalo maior para resposta.
+                                    Assim, recomendamos configurar o time-out de requisição da sua
+                                    aplicação para 40 segundos.
+                                </p>
+                                <h4>Sucesso</h4>
+                                <pre class="prettyprint">
+Status: 201 CREATED
+URI: https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code</pre>
+                                <pre class="prettyprint linenums">
+{
+    "code": "ass_homolog_72",
+    "amount": "100",
+    "next_invoice_date": {
+        "day": "05",
+        "month": "01",
+        "year": "2013"
+    },
+    "status": "ACTIVE",
+    "plan": {
+        "name": "Plano de homologação",
+        "code": "homolog1"
+    },
+    "customer": {
+        "email": "fulano@homolog.com",
+        "code": "homolog2",
+        "fullname": "Fulano Homologador"
+    },
+    "invoice": { //dados da primeira cobrança (se houver)
+    "id": 134,
+    "moip_id": "14000000",
+    "amount": 110,
+    "status": {
+        "description": "Em análise",
+        "code": 2
+        }
+    },
+    "message": "Assinatura criada com Sucesso",
+    "Errors": [],
+    "alerts": [
+        {code: "MA90", description: "O nome do portador do cartão deve ter no máximo 45
+        caracteres. Os demais caracteres foram ignorados"}
+    ]
+}</pre>
+                                <h4>Erro</h4>
+                                <pre class="prettyprint">
+Status: 400 BAD REQUEST</pre>
+                                <pre class="prettyprint linenums">
+{
+    message: "Erro na requisição",
+    Errors: [
+        {code: "MA92", description: "Código da assinatura já utilizado. Escolha outro código"}
+    ]
+}</pre>
+                            </section>
+                            
+                            <div id="listar_assinaturas"></div>
+                            <section>
+                                <h2>Listar todas assinaturas</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">GET</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: GET
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Resposta</h4>
+                                <h4>Sucesso</h4>
+                                <pre class="prettyprint">
+Status: 200 OK</pre>
+                                <pre class="prettyprint linenums">
+{
+    "subscriptions": [
+        {
+            "code": "assinatura1",
+            "amount": "100",
+            "status": "ACTIVE",
+            "creation_date": {
+                "day": "20",
+                "month": "10",
+                "year": "2012",
+                "hour": "20",
+                "minute": "00",
+                "second": "00"
+            },
+            "next_invoice_date": {
+                "day": "20",
+                "month": "11",
+                "year": "2012"
+            },
+            "expiration_date": {
+                "day": "20",
+                "month": "10",
+                "year": "2013"
+            },
+            "plan": {
+                "name": "Plano Ouro Ilimitado",
+                "code": "plano1"
+            },
+            "customer": {
+            "code": "cliente1",
+            "fullname": "Nome e sobrenome"
+            }
+        }
+    ]
+}</pre>
+                            </section>
+
+                            <div id="consultar_assinatura"></div>
+                            <section>
+                                <h2>Consultar detalhes de uma assinatura</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">GET</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: GET
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Resposta</h4>
+                                <h4>Sucesso</h4>
+                                <pre class="prettyprint">
+Status: 200 OK</pre>
+                                <pre class="prettyprint linenums">
+{
+    "code": "assinatura1",
+    "amount": "100",
+    "status": "ACTIVE",
+    "creation_date": {
+        "day": "20",
+        "month": "10",
+        "year": "2012",
+        "hour": "20",
+        "minute": "00",
+        "second": "00"
+    },
+    "next_invoice_date": {
+        "day": "20",
+        "month": "11",
+        "year": "2012"
+    },
+    "expiration_date": {
+        "day": "20",
+        "month": "10",
+        "year": "2013"
+    },
+    "plan": {
+        "name": "Plano Ouro Ilimitado",
+        "code": "plano1"
+    },
+    "customer": {
+        "code": "cliente1",
+        "fullname": "Nome e Sobrenome",
+        "email": "assinaturas@moip.com.br"
+    }
+}</pre>
+                            </section>
+
+                            <div id="suspender_reativar_assinatura"></div>
+                            <section>
+                                <h2>Suspender ou reativar a cobrança de uma assinatura</h2>
+                                <p>É possível suspender as cobranças de uma assinatura e
+                                    reativá-las quando for preciso. Uma vez suspensa, a assinatura
+                                    não será cobrada no final do intervalo atual. Ao reativá-la, a
+                                    próxima cobrança será feita de acordo com a data de contratação
+                                    da assinatura.</p>
+                                <h4>Requisição</h4>
+                                <p>
+                                <h4>Suspender</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">PUT</span>
+                                    <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code/suspend" />
+                                </div>
+                                <p>
+                                <h4>Reativar</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">PUT</span> 
+                                    <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code/activate" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: PUT
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                            </section>
+
+                            <div id="alterar_assinatura"></div>
+                            <section>
+                                <h2>Alterar uma assinatura</h2>
+                                <p>É possível alterar dados de uma assinatura já criada, tais
+                                    como o plano, o valor e a data da próxima cobrança.</p>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">PUT</span> 
+                                    <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: PUT
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <pre class="prettyprint linenums">
+{
+    "plan": {
+        "code": "codigo_do_novo_plano"
+    },
+    "amount": "10010", // informe apenas se quiser sobrescrever o valor do plano
+    "next_invoice_date": {
+        "day": "05",
+        "month": "01",
+        "year": "2013"
+    }
+}</pre>
+                                <h4>Atributos que podem ser alterados</h4>
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th class="span1">Atributo</th>
+                                        <th class="span2">Formato esperado</th>
+                                        <th class="span4">Descrição</th>
+                                    </tr>
+                                    <tr>
+                                        <td><code>plan</code></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code class="muted">└──</code> <code>code</code></td>
+                                        <td>"plano1"</td>
+                                        <td>identificador do novo plano na sua aplicação. Até 65
+                                            caracteres. <i>Informe caso queira migrar o plano da assinatura (downgrade/upgrade). <strong>Importante:</strong> A próxima cobrança ocorrerá na data
+                                                que já estava pré agendada e será feita no valor do novo plano
+                                                (seguindo o modelo de assinaturas pré-pagas).</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>amount</code></td>
+                                        <td>10010</td>
+                                        <td> valor em centavos de Real. <p><i><strong>Importante:</strong> informe apenas se quiser alterar o valor a ser cobrado na assinatura em centavos.
+                                                    Sobrescreverá o valor do plano contratado. A alteração de valor é útil caso queira definir um valor
+                                                    diferente para a assinatura de cliente específico (acrescentar o
+                                                    valor de frete ao plano ou oferecer um desconto, por exemplo). O valor informado será utilizado a partir da próxima fatura.</i></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>next_invoice_date</code></td>
+                                        <td></td>
+                                        <td>Informe se quiser alterar a data na qual será realizada a próxima cobrança.
+                                            <p><i><strong>Importante:</strong> apenas a data da próxima
+                                                    cobrança será alterada, as demais cobranças seguirão sendo
+                                                    calculadas de acordo com a configuração inicial da assinatura. </i></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code class="muted">├──</code> <code>day</code></td>
+                                        <td>"05"</td>
+                                        <td>dia do mês no formato dd.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code class="muted">├──</code> <code>month</code></td>
+                                        <td>"01"</td>
+                                        <td>mês no formato MM.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code class="muted">└──</code> <code>year</code></td>
+                                        <td>"2013"</td>
+                                        <td>ano no formato yyyy.</td>
+                                    </tr>
+                                </table>
+                                <div class="alert alert-warming alert-block"><h5>Imporante:</h5> o assinante deve ser
+                                    notificado e estar de acordo com qualquer alteração em sua
+                                    assinatura (plano, valor ou data). O não cumprimento dessa
+                                    exigência poderá ocasionar a suspensão da utilização dos serviços
+                                    do Moip Assinaturas.
+                                </div>
+
+                            </section>
+                            
+                            <div id="status_assinatura"></div>
+                            <section>
+                                <h2>Status de uma assinatura</h2>
+                                <h4>1 - "Active"</h4>
+                                <p>A assinatura está ativa, ou seja, o cliente assinante será
+                                    cobrado a cada ciclo.</p>
+                                <h4>2 - "Suspended"</h4>
+                                <p>As cobranças da assinatura estão suspensas, ou seja, o
+                                    cliente assinante não será cobrado a cada ciclo.</p>
+                                <h4>3 - "Expired" <small>ainda não implementado</small></h4>
+                                <p>A assinatura está expirada, ou seja, já atingiu o limite de
+                                    cobranças configuradas no plano contratado e não gerará mais
+                                    cobranças.</p>
+                            </section>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- Faturas
+                    ================================================== -->
+                    <div id="faturas"></div>
+                    <section>
+                        <div class="page-header">
+                            <h1>Faturas de uma assinatura</h1>
+                        </div>
+                        <div>
+                            <p>
+                                As assinaturas criadas geram faturas de acordo com as
+                                configurações do plano contratado. A partir desta API é possível
+                                consultar todas as faturas de uma assinatura e seus detalhes.
+                            </p>
+                            <div>
+                                <p>Com a API de faturas você pode:</p>
+                                <ul>
+                                    <li><a href="#listar_faturas">Listar todas as faturas de uma assinatura </a></li>
+                                    <li><a href="#consultar_fatura">Consultar detalhes de uma fatura </a></li>
+                                    <li><a href="#status_fatura">Status de uma fatura </a></li>
+                                </ul>
+                            </div>
+
+                            <div id="listar_faturas"></div>
+                            <section>
+                                <h2>Listar todas as faturas de uma assinatura</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">GET</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code/invoices" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: GET
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Resposta</h4>
+                                <h5>Sucesso</h5>
+                                <pre class="prettyprint">
+Status: 200 OK</pre>
+                                <pre class="prettyprint linenums">
+//alterado
+{
+    "invoices": [
+        {
+            "id": 13,
+            "amount": 101,
+            "subscription_code": "assinatura7",
+            
+            "occurrence": 1,
+            "status": {
+                "code": 2,
+                "description": "Aguardando confirmação"
+            },
+            "creation_date": {
+                "day": 28,
+                "month": 12,
+                "year": 2012,
+                "hour": 15,
+                "minute": 38,
+                "second": 41
+            }
+        }
+    ]
+}</pre>
+                            </section>
+
+                            <div  id="consultar_fatura"></div>
+                            <section>
+                                <h2>Consultar detalhes de uma fatura</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">GET</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/invoices/:id" />
+                                </div>
+                                <i><small>Você pode obter o ID da cobrança pela requisição "listar
+                                        cobranças", pelo webhook ou ainda pela área logada.</small></i>
+                                <pre class="prettyprint">
+Request Method: GET
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Resposta</h4>
+                                <h5>Sucesso</h5>
+                                <pre class="prettyprint">
+Status: 200 OK</pre>
+                                <pre class="prettyprint">
+//alterado
+{
+    "id": 13,
+    "amount": 101,
+    "subscription_code": "assinatura7",
+    "occurrence": 1,
+    "status": {
+        "code": 2,
+        "description": "Aguardando confirmação"
+    },
+    "items": [
+        {
+            "amount": 100,
+            "type": "Valor da assinatura"
+        },
+        {
+            "amount": 1,
+            "type": "Taxa de contratação"
+        }
+    ],
+    "plan": {
+        "code": "plano1",
+        "name": "Plano 1 real"
+    },
+    "customer": {
+        "code": "cliente1",
+        "fullname": "Fulano Testador"
+    },
+    "creation_date": {
+        "day": 28,
+        "month": 12,
+        "year": 2012,
+        "hour": 15,
+        "minute": 38,
+        "second": 41
+    }
+}</pre>
+                                <h5>Atributos da resposta</h5>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="span1">Atributo</th>
+                                            <th class="span2">Formato esperado</th>
+                                            <th class="span4">Descrição</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>id</code></td>
+                                            <td>31</td>
+                                            <td>Identificador da fatura no Moip Assinaturas.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>amount</code></td>
+                                            <td>1010</td>
+                                            <td>Valor total cobrado do cliente, em centavos.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>subscription_code </code></td>
+                                            <td>"assinatura01"</td>
+                                            <td>Código da assinatura.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>occurence</code></td>
+                                            <td>1</td>
+                                            <td>Ocorrência da fatura na assinatura (ex. 3 para a
+                                                terceira fatura).</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>status</code></td>
+                                            <td></td>
+                                            <td><i>Node</i> de status da fatura. <a
+                                                    href="#status_fatura">Ver valores possíveis</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>code</code></td>
+                                            <td>2</td>
+                                            <td>Código do status</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>description</code></td>
+                                            <td>"Aguardando confirmação"</td>
+                                            <td>Descrição do status.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>items</code></td>
+                                            <td></td>
+                                            <td>Detalhamento dos itens que compõem a fatura.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>type</code></td>
+                                            <td>"Valor da assinatura"</td>
+                                            <td>Descrição do item (ex. "Valor da assinatura", "Taxa de
+                                                contratação", etc.)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>amount</code></td>
+                                            <td>100</td>
+                                            <td>Valor do item, em centavos.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>plan</code></td>
+                                            <td></td>
+                                            <td>Dados do plano referente à fatura.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>code</code></td>
+                                            <td>"plano01"</td>
+                                            <td>Código do plano contratado.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>name</code></td>
+                                            <td>"Plano 1 real"</td>
+                                            <td>Nome do plano contratado</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>customer</code></td>
+                                            <td></td>
+                                            <td><i>Node</i> do cliente referente à fatura.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>code</code></td>
+                                            <td>"cliente1"</td>
+                                            <td>Código do cliente assinante.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>fullname</code></td>
+                                            <td>"Fulano Testador"</td>
+                                            <td>Nome completo do cliente assinante.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>creation_date</code></td>
+                                            <td></td>
+                                            <td>Data e hora da criação da fatura.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>day</code></td>
+                                            <td>"26"</td>
+                                            <td>Dia do mês no formato dd.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>month</code></td>
+                                            <td>"09"</td>
+                                            <td>Mês no formato MM.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>year</code></td>
+                                            <td>"2012"</td>
+                                            <td>Ano no formato yyyy.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>hour</code></td>
+                                            <td>"16"</td>
+                                            <td>Horas no formato HH (24hs).</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>minute</code></td>
+                                            <td>"00"</td>
+                                            <td>Minutos no formato mm.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>second</code></td>
+                                            <td>"10"</td>
+                                            <td>Segundos no formato ss.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+
+                            <div  id="status_fatura"></div>
+                            <section>
+                                <h2>Status de uma fatura</h2>
+                                <p>É importante conhecer e entender os status da fatura e suas
+                                    possíveis transições para gerenciar inadimplência e permissão aos
+                                    serviços contratados em seu sistema.</p>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="span1">Código</th>
+                                            <th class="span2">Descrição</th>
+                                            <th class="span4">O que significa?</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>1</code></td>
+                                            <td>Em aberto</td>
+                                            <td>A fatura foi gerada mas ainda não foi paga pelo
+                                                assinante.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>2</code></td>
+                                            <td>Aguardando confirmação</td>
+                                            <td>A fatura foi paga pelo assinante, mas o pagamento está
+                                                em processo de análise de risco.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>3</code></td>
+                                            <td>Pago</td>
+                                            <td>A fatura foi paga pelo assinante e confirmada.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>4</code></td>
+                                            <td>Não pago</td>
+                                            <td>O assinante tentou pagar a fatura, mas o pagamento foi
+                                                negado pelo banco emissor do cartão de crédito ou a análise de risco
+                                                detectou algum problema. Veja os <a
+                                                    href="http://labs.moip.com.br/referencia/classificacao-de-cancelamento/"
+                                                    target="_blank">motivos</a> possíveis.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h5>Transições de status:</h5>
+                                <img src="img/fluxo_pagamento.jpg">
+                                <p>
+                                    (A) O pagamento está em análise de risco.<br> (B) O banco
+                                    negou o pagamento. Veja os motivos possíveis.<br> (C) O
+                                    pagamento foi autorizado.<br> (D) O pagamento foi cancelado
+                                    por análise de risco.<br> (E) O assinante solicitou a
+                                    reversão do pagamento ou houve reembolso na conta Moip.<br>
+                                    (F) O Moip Assinaturas recuperou o pagamento por meio de
+                                    retentativas.
+                            </section>
+                        </div>
+                    </section>
+
+
+                    <!-- Pagamentos
+                    ================================================== -->
+                    <div id="pagamentos"></div>
+                    <section>
+                        <div class="page-header">
+                            <h1>Pagamentos</h1>                        
+                        </div> 
+                        <div>
+                            <p>Uma fatura, como é conhecida no mercado, é um conjunto descritivo de itens cobrados em um 
+                                pré-determinado intervalo de tempo em uma assinatura.
+                                O pagamento, por sua vez,  é a efetivação da cobrança do valor total de uma fatura.
+                            </p>
+                            <br>
+                            <p>Para entender melhor, veja o diagrama abaixo:</p>
+                            <div><img src="img/fatura_pagamento.png" /></div>
+                            <blockquote>
+                                <small>
+                                    A assinatura do “<strong>Plano Ouro</strong>” gerou uma fatura referente à mensalidade de janeiro de 2013. <br>
+                                    O Moip Assinaturas realizou o pagamento no cartão de crédito <strong>Visa</strong>, cadastrado previamente pelo assinante. 
+                                Como o cartão já estava com o limite de saldo atingido, a administradora  de cartões negou o pagamento. 
+                                O status da fatura foi alterado para “<strong>Não pago</strong>”. <br>
+                                O vendedor foi notificado e solicitou um nova tentativa de pagamento, 
+                                agora com o cartão de crédito <strong>Mastercard</strong>. A administradora de cartões aprovou o pagamento e a análise de risco do 
+                                Moip autorizou. O status da fatura foi alterado para “<strong>Pago</strong>”.
+                                </small>
+                            </blockquote>
+
+                            <div>
+                                <p>Com a API de pagamento você pode:</p>
+                                <ul>
+                                    <li><a href="#listar_pagamentos">Listar todos os pagamentos de uma fatura </a></li>
+                                    <li><a href="#consultar_pagamento">Consultar detalhes de um pagamento </a></li>
+                                    <li><a href="#status_pagamento">Status de um pagamento </a></li>
+                                </ul>
+                            </div>   
+
+                            <div id="listar_pagamentos"></div>
+                            <section>
+                                <h2>Listar todos os pagamentos de uma fatura</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">GET</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/invoices/:id/payments" />
+                                </div>
+                                <i><small>Você pode obter o ID da cobrança pela requisição "listar
+                                        cobranças", pelo webhook ou ainda pela área logada.</small></i>
+                                <pre class="prettyprint">
+Request Method: GET
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Resposta</h4>
+                                <h5>Sucesso</h5>
+                                <pre class="prettyprint">
+Status: 200 OK</pre>
+                                <pre class="prettyprint linenums">
+//novo
+{
+    "payments": [
+        {
+            "id": 6,
+            "moip_id": 7205895,
+            "status": {
+                "code": 6,
+                "description": "Em análise"
+            },
+            "payment_method": {
+                "code": 1,
+                "description": "Cartão de Crédito",
+                "credit_card": {
+                    "brand": "VISA",
+                    "holder_name": "Fulano Testador",
+                    "first_six_digits": "411111",
+                    "last_four_digits": "1111",
+                    "expiration_month": "03",
+                    "expiration_year": "16"
+                }
+            },
+            "creation_date": {
+                "day": 28,
+                "month": 12,
+                "year": 2012,
+                "hour": 15,
+                "minute": 38,
+                "second": 41
+            }
+        }
+    ]
+}</pre>
+                            </section>
+
+                            <div id="consultar_pagamento"></div>
+                            <section>
+                                <h2>Consultar detalhes de um pagamento</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">GET</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/payments/:id" />
+                                </div>
+                                <i><small>Você pode obter o ID do pagamento pela requisição "listar
+                                        pagamentos", pelo webhook ou ainda pela área logada.</small></i>
+                                <pre class="prettyprint">
+Request Method: GET
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <h4>Resposta</h4>
+                                <h5>Sucesso</h5>
+                                <pre class="prettyprint">
+Status: 200 OK</pre>
+                                <pre class="prettyprint linenums">
+//novo
+{
+    "id": 6,
+    "moip_id": 7205895,
+    "status": {
+        "code": 6,
+        "description": "Em análise"
+    },
+    "subscription_code": "assinatura7",
+    "customer_code": "cliente1",
+    "invoice": {
+        "id": 13,
+        "amount": 101
+    },
+    "payment_method": {
+        "code": 1,
+        "description": "Cartão de Crédito",
+        "credit_card": {
+            "brand": "VISA",
+            "holder_name": "Fulano Testador",
+            "first_six_digits": "411111",
+            "last_four_digits": "1111",
+            "expiration_month": "03",
+            "expiration_year": "16"
+        }
+    },
+    "creation_date": {
+        "day": 28,
+        "month": 12,
+        "year": 2012,
+        "hour": 15,
+        "minute": 38,
+        "second": 41
+    }
+}</pre>
+                                <h5>Atributos</h5>
+                                <table class="table table-bordered table-striped table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="span2">Atributo</th>
+                                            <th class="span2">Formato esperado</th>
+                                            <th class="span6">Descrição</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>id</code></td>
+                                            <td>6</td>
+                                            <td>Identificador do pagamento no Moip Assinaturas.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>moip_id</code></td>
+                                            <td>7205895</td>
+                                            <td>Identificador do pagamento no Moip Pagamentos.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>status</code></td>
+                                            <td></td>
+                                            <td>Node de status do pagamento.<br> <a href="#status_pagamento">Ver valores possíveis.</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>code</code></td>
+                                            <td>6</td>
+                                            <td>Código do status.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>description</code></td>
+                                            <td>"Em análise"</td>
+                                            <td>Descrição do status.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>subscription_code</code></td>
+                                            <td>"assinatura7"</td>
+                                            <td>Código da assinatura.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>customer_code</code></td>
+                                            <td>"cliente1"</td>
+                                            <td>Código do cliente pagador.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>invoice</code></td>
+                                            <td></td>
+                                            <td>Node da fatura</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>id</code></td>
+                                            <td>13</td>
+                                            <td>ID da fatura no Moip Assinaturas.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>amount</code></td>
+                                            <td>101</td>
+                                            <td>Valor pago em centavos.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>payment_method</code></td>
+                                            <td></td>
+                                            <td>Node da forma de pagamento.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>code</code></td>
+                                            <td>1</td>
+                                            <td>Código da forma de pagamento.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>description</code></td>
+                                            <td>"Cartão de Crédito"</td>
+                                            <td>Descrição da forma de pagamento.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>credit_card</code></td>
+                                            <td></td>
+                                            <td>Node de dados do cartão de crédito, caso esta seja a
+                                                forma de pagamento escolhida.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">│   ├── </code> <code>brand</code></td>
+                                            <td>"VISA"</td>
+                                            <td>Bandeira do cartão.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">│   ├── </code><code>holder_name</code></td>
+                                            <td>Fulano Testador</td>
+                                            <td>Nome do portador.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">│   ├── </code><code>first_six_digits </code></td>
+                                            <td>"411111"</td>
+                                            <td>Primeiros 6 dígitos. .</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">│   ├── </code><code>last_four_digits</code></td>
+                                            <td>"1111"</td>
+                                            <td>Últimos 4 dígitos.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">│   ├── </code><code>expiration_month </code></td>
+                                            <td>"03"</td>
+                                            <td>Mês de expiração. Formato MM.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└─└──</code><code>expiration_year</code></td>
+                                            <td>"16"</td>
+                                            <td>Ano de expiração. Formato yy.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>creation_date</code></td>
+                                            <td></td>
+                                            <td>Data e hora da criação da cobrança.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>day</code></td>
+                                            <td>"26"</td>
+                                            <td>Dia do mês no formato dd.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>month</code></td>
+                                            <td>"09"</td>
+                                            <td>Mês no formato MM.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>year</code></td>
+                                            <td>"2013"</td>
+                                            <td>Ano no formato YYYY.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>hour</code></td>
+                                            <td>"16"</td>
+                                            <td>Horas no formato HH (24hs).</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>minute</code></td>
+                                            <td>"00"</td>
+                                            <td>Minutos no formato mm.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>second</code></td>
+                                            <td>"10"</td>
+                                            <td>Segundos no formato ss.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+
+                            <div id="status_pagamento"></div>
+                            <section>
+                                <h2>Status de um pagamento</h2>
+                                <p>Os status de pagamento no Assinaturas seguem o padrão Moip.
+                                <table class="table table-bordered table-striped table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="span1">Atributo</th>
+                                            <th class="span2">Formato esperado</th>
+                                            <th class="span6">Descrição</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>1</code></td>
+                                            <td>Autorizado</td>
+                                            <td>O pagamento foi autorizado pelo banco e pela análise
+                                                de risco. O valor será creditado de acordo com o prazo de
+                                                recebimento da sua conta Moip.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>2</code></td>
+                                            <td>Iniciado</td>
+                                            <td>O pagamento foi criado, mas ainda não foi autorizado
+                                                pelo banco.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>3</code></td>
+                                            <td>Boleto impresso</td>
+                                            <td>O assinante optou pelo pagamento com boleto bancário,
+                                                mas o banco ainda não confirmou a liquidação do mesmo.<br><i>Importante:
+                                                    ainda não há pagamento por boleto para o Moip Assinaturas.
+                                                    Esse código não será informado no momento.</i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>4</code></td>
+                                            <td>Concluído</td>
+                                            <td>O pagamento foi concluído e o valor líquido já está
+                                                disponível para saque em sua conta Moip.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>5</code></td>
+                                            <td>Cancelado</td>
+                                            <td>O pagamento foi negado pelo banco ou pela análise de
+                                                risco. Este é um estado final do pagamento.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>6</code></td>
+                                            <td>Em análise</td>
+                                            <td>O pagamento foi autorizado pelo banco e está sendo
+                                                analisado pelo setor de Análise de Risco. Este é um status
+                                                temporário com tempo limite de 48 horas.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>7</code></td>
+                                            <td>Estornado</td>
+                                            <td>O pagamento foi revertido pelo banco por solicitação
+                                                do assinante.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>9</code></td>
+                                            <td>Reembolsado</td>
+                                            <td>O valor foi reembolsado para o assinante por
+                                                solicitação dele ou do vendedor.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+ 
+                        </div>
+                    </section>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- Footer
+        ================================================== -->
+        <footer>
+            <div align="center">
+                <p>Documentação <a href="http://site.moip.com.br/assinaturas" target="_blank">Moip Assinaturas</a>, um produto <a href="https://www.moip.com.br/" target="_blank">Moip Pagamentos S/A</a>.</p>
+                <a href="ajuda.html">Ajuda</a>
+                <strong class="muted"> | </strong>
+                <a href="index.html#changelog">Changelog</a>
+                <strong class="muted"> | </strong>
+                <a href="english_version.html">English version</a>
+
+            </div>
+        </footer>
+
+        <script src="javascript/jquery.js"></script>
+        <script src="javascript/prettify.js"></script>
+        <script src="javascript/main.js"></script>
+        <script src="javascript/bootstrap-dropdown.js"></script>
+        <script src="javascript/bootstrap-scrollspy.js"></script>
+        <!-- Qualaroo for moip.com.br -->
+        <!-- Paste this code right after the <body> tag on every page of your site. -->
+        <script type="text/javascript">var _kiq = _kiq || [];</script>
+        <script type="text/javascript" src="//s3.amazonaws.com/ki.js/23295/4EJ.js" async="true"></script>        
+    </body>
+</html>
