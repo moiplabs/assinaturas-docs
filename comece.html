@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Moip Assinaturas - Documentação online</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Exemplo de utilização do Javascript assinaturas.js">
+        <meta name="author" content="Moip Assinaturas">
+
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/demo.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="css/prettify.css" rel="stylesheet">
+
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <style>
+            section {
+                padding-top: 30px;
+            }          
+        </style>
+    </head>
+
+    <body data-spy="scroll" data-target="#navbar" data-offset="10">
+        <div class="navbar navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand active" href="index.html">Assinaturas Docs</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav" role="navigation">
+                            <li><a href="index.html">Apresentação</a></li>                           
+                            <li class="active"><a href="comece.html">Comece a integrar</a></li>                           
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="api.html">
+                                    Documentação
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="api.html">API</a></li>
+                                    <li><a href="js.html">moip-assinaturas.js</a></li>              
+                                    <li class="divider"></li>
+                                    <li class="nav-header">Adicionais</li>
+                                    <li><a href="webhooks.html">Webhooks</a></li>
+                                    <li><a href="erros_alertas.html">Erros e Alertas</a></li>              
+                                </ul>
+                            </li>   
+                            <li><a href="producao.html">Colocando em produção</a></li>              
+                            <li><a href="ajuda.html">Ajuda</a></li>              
+                            <li><a href="english_version.html">English version</a></li>
+                        </ul>
+                        <a href="http://assinaturas.moip.com.br" class="btn pull-right">Login</a>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <!-- Docs nav
+            ================================================== -->
+            <div class="row">
+                <div class="span3 bs-docs-sidebar" id="navbar">
+                    <ul class="nav nav-list bs-docs-sidenav affix">
+                        <li><a href="#autenticacao"><i class="icon-chevron-right"></i> Autenticação</a></li>
+                        <li><a href="#paginacao"><i class="icon-chevron-right"></i> Paginação</a></li>
+                        <li><a href="#http_status"><i class="icon-chevron-right"></i> HTTP Status</a></li>
+                        <li><a href="#erros_alertas"><i class="icon-chevron-right"></i> Erros e Alertas</a></li>
+                    </ul>
+                </div>
+                <div class="span9" style="margin-top: -40px;">
+
+                    <!-- Autenticação
+                    ================================================== -->
+                    <section id="autenticacao">
+                        <div class="page-header">
+                            <h1>Autenticação</h1>
+                        </div>
+                        <div>
+                            <p>O Moip Assinaturas utiliza as mesmas chaves de autenticação do Moip, no padrão
+                                <i>HTTP Basic Authentication</i><br>
+                                <a href="http://labs.moip.com.br/referencia/autenticacao_api/" target="_blank">Veja mais detalhes sobre a autenticação</a></p>
+                            <pre class="prettyprint linenums">"Authorization": "Basic " + BASE64(MOIP_API_TOKEN:MOIP_API_KEY)</pre>
+                            <p>
+                                <strong>Para acessar as chaves (TOKEN e KEY), siga os passos abaixo: </strong>
+                            <ol>
+                                <li>Acesse o <a href="https://www.moip.com.br" target="_blank">www.moip.com.br</a> e efetue o login;</li>
+                                <li>Clique em <strong>Ferramentas</strong> na barra de opções;</li>
+                                <li>Clique em <strong>API Moip</strong> e depois, em <strong>Chave de Acesso</strong></li>
+                                <li>Seu <strong>TOKEN</strong> será exibido na página, e no link abaixo dele, estará o <strong>KEY</strong>.</li>
+                            </ol>
+                                
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Paginação
+                    ================================================== -->
+                    <section id="paginacao">
+                        <div class="page-header">
+                            <h1>Paginação</h1>
+                        </div>
+                        <div>
+                            <p>Os serviços de consultar planos, clientes, assinaturas e cobranças são paginados de acordo
+                                com o padrão abaixo. Os registros são atualmente ordenados pela data de criação em ordem
+                                decrescente.</p>
+                            <h5>Exemplo</h5>
+                            <div class="input-prepend">
+                                <span class="add-on">GET</span>
+                                <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/plans?limit=10&offset=10">
+                            </div>
+                            <p>Exemplo de consulta com limite (limit) de 10 resultados começando pelo décimo resultado
+                                (offset). Neste exemplo, o retorno será dos registros 11 a 20.</p>
+                            <h5>Parâmetros</h5>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="span2">parâmetro</th>
+                                        <th class="span2">tipo</th>
+                                        <th>descrição</th>
+                                    </tr>
+                                </thead>                            
+                                <tbody>
+                                    <tr>
+                                        <td><code>limit</code></td>
+                                        <td>inteiro</td>
+                                        <td>Quantidade de registros por busca (página). O valor default é 100.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>offset</code></td>
+                                        <td>inteiro</td>
+                                        <td>Registro a partir do qual a busca vai retornar.O valor default é 0.</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Contents
+                    ================================================== -->
+                    <section id="http_status">
+                        <div class="page-header">
+                            <h1>HTTP Status</h1>
+                        </div>
+                        <div>
+                            <p>O Moip Assinaturas utiliza o padrão HTTP Status nas respostas das requisições.
+                                Concentramos as respostas possíveis em poucos códigos:  </p>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="span2">HTTP Status</th>
+                                        <th class="span10">Descrição</th>
+                                    </tr>
+                                </thead>                            
+                                <tbody>
+                                    <tr class="success">
+                                        <td><span class="label label-success">2xx</span></td>
+                                        <td><span class="label label-success">Sucesso</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>200</code></td>
+                                        <td>Requisição feita com êxito.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>201</code></td>
+                                        <td>Recurso criado com êxito.</td>
+                                    </tr>
+                                    <tr class="error">
+                                        <td><span class="label label-important">4xx</span></td>
+                                        <td><span class="label label-important">Erro</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>400</code></td>
+                                        <td>Houve um erro ou uma falha na requisição (ela não foi concluída).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>401</code></td>
+                                        <td>Não autorizado. O token de autenticação não é válido ou ele não está habilitado
+                                            para o Moip Assinaturas.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>404</code></td>
+                                        <td>Recurso não encontrado.</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>                     
+                        </div>
+                    </section>
+
+
+                    <!-- HTML template
+                    ================================================== -->
+                    <section id="erros_alertas">
+                        <div class="page-header">
+                            <h1>Padrão de erros e alertas</h1>
+                        </div>
+                        <div>
+                            <p>Ao receber um HTTP Status 400, você também receberá no body um código e uma mensagem
+                                referente ao motivo do erro ou do alerta na requisição.</p>
+                            <p>Você vai receber um erro se o formato da requisição estiver com algum problema de sintaxe
+                                ou se houver algum erro na validação de um atributo (exemplo: caracteres
+                                inválidos para aquele atributo).</p>
+                            <p>Os alertas auxiliam o desenvolvedor na integração uma vez que informam como
+                                melhorar a integração, aumentar a conversão de pagamentos e prevení-lo de futuros erros.</p>
+                            <h4>Exemplo</h4>
+                            <pre class="prettyprint linenums">{
+    "message": "Erro na requisição",
+    "errors": [
+        {
+            "code": "MA1",
+            "description": "Código já utilizado. Escolha outro código."
+        }
+    ]
+}</pre>
+                            <div class="alert alert-error alert-block"> 
+                                <h4>Tabela de erros e alertas</h4>
+                                <p>Você pode encontrar a tabela completa de erros e alertas na página <a href="erros_alertas.html">Erros e Alertas</a>.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- Footer
+        ================================================== -->
+        <footer>
+            <div align="center">
+                <p>Documentação <a href="http://site.moip.com.br/assinaturas" target="_blank">Moip Assinaturas</a>, um produto <a href="https://www.moip.com.br/" target="_blank">Moip Pagamentos S/A</a>.</p>
+                <a href="ajuda.html">Ajuda</a>
+                <strong class="muted"> | </strong>
+                <a href="index.html#changelog">Changelog</a>
+                <strong class="muted"> | </strong>
+                <a href="english_version.html">English version</a>
+
+            </div>
+        </footer>
+
+        <script src="javascript/jquery.js"></script>
+        <script src="javascript/prettify.js"></script>
+        <script src="javascript/main.js"></script>
+        <script src="javascript/bootstrap-dropdown.js"></script>
+        <script src="javascript/bootstrap-scrollspy.js"></script>
+         <!-- Qualaroo for moip.com.br -->
+        <!-- Paste this code right after the <body> tag on every page of your site. -->
+        <script type="text/javascript">var _kiq = _kiq || [];</script>
+        <script type="text/javascript" src="//s3.amazonaws.com/ki.js/23295/4EJ.js" async="true"></script>       
+    </body>
+</html>
