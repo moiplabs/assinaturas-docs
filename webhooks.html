@@ -77,7 +77,7 @@
                     </ul>
                 </div>
                 <div class="span9" style="margin-top: -40px;">
-                
+
 
                     <!-- Visão Geral
                     ================================================== -->
@@ -387,8 +387,25 @@ Content-Type: application/json</pre>
    }
 }</pre>
                         </div>
-                    </section>
 
+                        <hr>
+                        <div>
+                            <h3>Reenvio de notificação de fatura</h3>
+                            <p>Você pode solicitar o reenvio de uma notificação de 
+                                <code>invoice.created</code> via API. Para isso, basta enviar ao Moip Assinaturas uma requisição conforme mostrado abaixo.</p>
+                            <h4>Requisição</h4>
+                            <div class="input-prepend">
+                                <span class="add-on">POST</span> <input class="span8"
+                                                                        id="prependedInput" type="text"
+                                                                        value="https://sandbox.moip.com.br/assinaturas/v1/invoices/:id/notify" />
+                            </div>
+                            <pre class="prettyprint">
+Request Method: POST
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                        </div>
+                    </section>
 
 
                     <!-- Pagamento
@@ -441,6 +458,24 @@ Content-Type: application/json</pre>
        }
    }
 }</pre>
+                        </div>
+                        <hr />
+                        <div>
+                            <h3>Reenvio de notificação de pagamento</h3>
+                            <p>Você pode reenviar uma notificação de <code>payment.created</code> via API, basta enviar ao Moip 
+                                Assinaturas uma requisição conforme mostrado abaixo.</p>
+                            <h4>Requisição</h4>
+                            <div class="input-prepend">
+                                <span class="add-on">POST</span> <input class="span8"
+                                                                        id="prependedInput" type="text"
+                                                                        value="https://sandbox.moip.com.br/assinaturas/v1/payments/:id/notify" />
+                            </div>
+                            <pre class="prettyprint">
+Request Method: POST
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+
                         </div>
                     </section>
 

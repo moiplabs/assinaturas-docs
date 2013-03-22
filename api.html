@@ -72,6 +72,7 @@
                         <li><a href="#assinaturas"><i class="icon-chevron-right"></i>Assinaturas</a></li>
                         <li><a href="#faturas"><i class="icon-chevron-right"></i>Faturas</a></li>
                         <li><a href="#pagamentos"><i class="icon-chevron-right"></i>Pagamentos</a></li>
+                        <li><a href="#preferencias"><i class="icon-chevron-right"></i>Preferências</a></li>
                     </ul>
                 </div>
                 <div class="span9" style="margin-top: -40px;">
@@ -100,7 +101,7 @@
                                     <li><a href="#alterar_plano">Alterar um plano</a></li>
                                 </ul>
                             </div>
-                            
+
                             <div id="criar_plano"></div>
                             <section>
                                 <h2>Criar um plano</h2>
@@ -200,36 +201,36 @@ Accept: application/json</pre>
                                         </tr>
                                         <tr>
                                             <td><code class="muted">└──</code> <code>length</code></td>
-                                    <td>1</td>
-                                    <td>a duração do intervalo de cobrança, default é 1</td>
-                                    <td><span class="label label-invert">condicional</span></td>
-                                    </tr>
-                                    <tr>
-                                    <tr>
-                                        <td><code>billing_cycles</code></td>
-                                        <td>12</td>
-                                        <td>quantidade de ciclos (faturas) que a assinatura terá até expirar
-                                            (se não informar, não haverá expiração).</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4"><strong>Configurações</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>status</code></td>
-                                        <td><code>ACTIVE</code></td>
-                                        <td>status do plano. Pode ser <code>ACTIVE</code> ou <code>INACTIVE</code>.
-                                            O padrão é <code>ACTIVE</code>.
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>max_qty</code></td>
-                                        <td>12</td>
-                                        <td>quantidade máxima de assinaturas do plano (não há
-                                            limite se não informar)</td>
-                                        <td></td>
-                                    </tr>
+                                            <td>1</td>
+                                            <td>a duração do intervalo de cobrança, default é 1</td>
+                                            <td><span class="label label-invert">condicional</span></td>
+                                        </tr>
+                                        <tr>
+                                        <tr>
+                                            <td><code>billing_cycles</code></td>
+                                            <td>12</td>
+                                            <td>quantidade de ciclos (faturas) que a assinatura terá até expirar
+                                                (se não informar, não haverá expiração).</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><strong>Configurações</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>status</code></td>
+                                            <td><code>ACTIVE</code></td>
+                                            <td>status do plano. Pode ser <code>ACTIVE</code> ou <code>INACTIVE</code>.
+                                                O padrão é <code>ACTIVE</code>.
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>max_qty</code></td>
+                                            <td>12</td>
+                                            <td>quantidade máxima de assinaturas do plano (não há
+                                                limite se não informar)</td>
+                                            <td></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <h4>Resposta</h4>  
@@ -331,7 +332,7 @@ Status: 200 OK</pre>
     "billing_cycles": 1
 }</pre>
                             </section>
-                            
+
                             <div id="ativar_desativar_plano"></div>
                             <section>
                                 <h2>Ativar ou desativar um plano</h2>
@@ -468,9 +469,10 @@ Accept: application/json</pre>
                                     <li><a href="#listar_clientes">Listar todos os clientes </a></li>
                                     <li><a href="#consultar_cliente">Consultar detalhes de um cliente </a></li>
                                     <li><a href="#alterar_cliente">Alterar um cliente </a></li>
+                                    <li><a href="#atualizar_cartao">Atualizar cartão do cliente </a></li>
                                 </ul>
                             </div>
-                            
+
                             <div id="criar_cliente"></div>
                             <section>
                                 <h2>Criar um cliente</h2>
@@ -814,6 +816,36 @@ Accept: application/json</pre>
     }
 }</pre>    
                             </section>
+
+                            <div id="atualizar_cartao"></div>
+                            <section>
+                                <h2>Atualizar cartão do cliente</h2>
+                                <p>Atualize os dados de pagamento de seu cliente.</p>
+                                <blockquote>
+                                    <small>É possível alterar os dados do pagamento via API, Javascript ou pela área logada do Moip Assinaturas.</small>
+                                </blockquote>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">PUT</span> <input class="span8"
+                                                                           id="prependedInput" type="text"
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/customers/:customer_code/billing_infos" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: PUT
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <pre class="prettyprint linenums">
+{
+        "credit_card": {
+            "holder_name": "Novo nome",
+            "number": "5555666677778884",
+            "expiration_month": "04",
+            "expiration_year": "15"
+        }
+ }</pre>    
+                            </section>
+
                         </div>
                     </section>
 
@@ -859,7 +891,7 @@ Authorization: Basic TOKEN:KEY
 Content-Type: application/json
 Accept: application/json</pre>
                                 <h4>Exemplo mínimo</h4>
-                                <p>Criando uma assinatura com um cliente já cadastrad</p>
+                                <p>Criando uma assinatura com um cliente já cadastrado</p>
                                 <pre class="prettyprint linenums">
 {
     "code": "assinatura1",
@@ -873,6 +905,11 @@ Accept: application/json</pre>
 }</pre>
                                 <h4>Exemplo completo</h4>
                                 <p>Criando uma assinatura com dados de um novo cliente</p>
+                                <div class="input-prepend">
+                                    <span class="add-on">POST</span> <input class="span8"
+                                                                            id="prependedInput" type="text"
+                                                                            value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions??new_customer=[true/false]" />
+                                </div>                                
                                 <pre class="prettyprint linenums">
 {
     "code": "assinatura1",
@@ -1025,7 +1062,7 @@ Status: 400 BAD REQUEST</pre>
     ]
 }</pre>
                             </section>
-                            
+
                             <div id="listar_assinaturas"></div>
                             <section>
                                 <h2>Listar todas assinaturas</h2>
@@ -1243,7 +1280,7 @@ Accept: application/json</pre>
                                         <td>ano no formato yyyy.</td>
                                     </tr>
                                 </table>
-                                <div class="alert alert-warming alert-block"><h5>Imporante:</h5> o assinante deve ser
+                                <div class="alert alert-error alert-block"><strong>Importante:</strong> o assinante deve ser
                                     notificado e estar de acordo com qualquer alteração em sua
                                     assinatura (plano, valor ou data). O não cumprimento dessa
                                     exigência poderá ocasionar a suspensão da utilização dos serviços
@@ -1251,7 +1288,7 @@ Accept: application/json</pre>
                                 </div>
 
                             </section>
-                            
+
                             <div id="status_assinatura"></div>
                             <section>
                                 <h2>Status de uma assinatura</h2>
@@ -1574,7 +1611,7 @@ Status: 200 OK</pre>
                                     </tbody>
                                 </table>
                                 <h5>Transições de status:</h5>
-                                <img src="img/fluxo_pagamento.jpg">
+                                <img src="img/fluxo_pagamento.png">
                                 <p>
                                     (A) O pagamento está em análise de risco.<br> (B) O banco
                                     negou o pagamento. Veja os motivos possíveis.<br> (C) O
@@ -1583,7 +1620,9 @@ Status: 200 OK</pre>
                                     reversão do pagamento ou houve reembolso na conta Moip.<br>
                                     (F) O Moip Assinaturas recuperou o pagamento por meio de
                                     retentativas.
+                                </p>
                             </section>
+
                         </div>
                     </section>
 
@@ -1603,15 +1642,16 @@ Status: 200 OK</pre>
                             <br>
                             <p>Para entender melhor, veja o diagrama abaixo:</p>
                             <div><img src="img/fatura_pagamento.png" /></div>
+                            <br>
                             <blockquote>
                                 <small>
                                     A assinatura do “<strong>Plano Ouro</strong>” gerou uma fatura referente à mensalidade de janeiro de 2013. <br>
                                     O Moip Assinaturas realizou o pagamento no cartão de crédito <strong>Visa</strong>, cadastrado previamente pelo assinante. 
-                                Como o cartão já estava com o limite de saldo atingido, a administradora  de cartões negou o pagamento. 
-                                O status da fatura foi alterado para “<strong>Não pago</strong>”. <br>
-                                O vendedor foi notificado e solicitou um nova tentativa de pagamento, 
-                                agora com o cartão de crédito <strong>Mastercard</strong>. A administradora de cartões aprovou o pagamento e a análise de risco do 
-                                Moip autorizou. O status da fatura foi alterado para “<strong>Pago</strong>”.
+                                    Como o cartão já estava com o limite de saldo atingido, a administradora  de cartões negou o pagamento. 
+                                    O status da fatura foi alterado para “<strong>Não pago</strong>”. <br>
+                                    O vendedor foi notificado e solicitou um nova tentativa de pagamento, 
+                                    agora com o cartão de crédito <strong>Mastercard</strong>. A administradora de cartões aprovou o pagamento e a análise de risco do 
+                                    Moip autorizou. O status da fatura foi alterado para “<strong>Pago</strong>”.
                                 </small>
                             </blockquote>
 
@@ -1955,9 +1995,62 @@ Status: 200 OK</pre>
                                     </tbody>
                                 </table>
                             </section>
- 
+
                         </div>
                     </section>
+
+                    <!-- Preferências
+                    ================================================== -->
+                    <div id="preferencias"></div>
+                    <section>
+                        <div class="page-header">
+                            <h1>Preferências</h1>
+                        </div>
+                        <div>
+                            <p>
+                                Você pode alterar algumas das preferências de sua conta também através de uma requisição via API. 
+                                As configurações que podem ser alteradas são: envio de e-mails ao vendedor, envio de e-mails ao assinante e URL de notificação.
+                            </p>
+                            <div>
+                                <p>Com a API de preferências você pode:</p>
+                                <ul>
+                                    <li><a href="#preferencias_notificar">Configurar preferências de notificação </a></li>
+                                </ul>
+                            </div>
+
+
+                            <div  id="preferencias_notificar"></div>
+                            <section>
+                                <h2>Configurar preferências de notificação</h2>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">POST</span> <input class="span8"
+                                                                            id="prependedInput" type="text"
+                                                                            value="https://sandbox.moip.com.br/assinaturas/v1/users/preferences" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: POST
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <pre class="prettyprint">
+{
+    "notification": {
+        "webhook": {
+            "url": "http://exemploldeurl.com.br/assinaturas"
+        },
+        "email": {
+            "merchant": {"enabled": true},
+            "customer": {"enabled" : true}
+        }
+    }
+} </pre>                               
+
+                            </section>
+
+                        </div>
+                    </section>
+
 
 
                 </div>
