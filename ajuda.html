@@ -72,6 +72,7 @@
                         <li><a href="#clientes"><i class="icon-chevron-right"></i> Clientes</a></li>
                         <li><a href="#assinaturas"><i class="icon-chevron-right"></i> Assinaturas</a></li>
                         <li><a href="#pagamentos"><i class="icon-chevron-right"></i> Pagamentos</a></li>
+                        <li><a href="#retentativas"><i class="icon-chevron-right"></i> Retentativas</a></li>
                         <li><a href="#integracao"><i class="icon-chevron-right"></i> Integração</a></li>   
                         <li><a href="#contato"><i class="icon-chevron-right"></i> Entre em contato</a></li>   
                     </ul>
@@ -487,6 +488,124 @@
                         <!-- COLLAPSE -->                             
                     </section>
 
+
+
+                    <!-- Retentativas
+                    ================================================== -->
+                    <div id="retentativas"></div>
+                    <section>
+                        <div class="page-header">
+                            <h1>Retentativas</h1>
+                        </div>
+                        <!-- COLLAPSE -->
+                        <div class="accordion">
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#retentativas_1">
+                                        Posso fazer uma retentativa de cobrar uma assinatura manualmente?
+                                    </a>
+                                </div>
+                                <div id="retentativas_1" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        Sim. O Moip permite que você reprocesse uma transação que tenha sido cancelada, desde que a fatura  e a Assinatura relacionadas com essa transação estejam no status “<strong>Atrasada</strong>”. 
+                                        Além disso você pode configurar <a href="api.html#retentativa_automatica" target="_blank">retentativas automáticas</a> que o Moip processará sem que seja necessária uma solicitação sua.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#retentativas_2">
+                                        Existe algum limite para retentativas de cobrança nas assinaturas atrasadas?
+                                    </a>
+                                </div>
+                                <div id="retentativas_2" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        O Moip Assinaturas limita o número de retentativas diárias a um máximo de 3 tentativas por fatura/dia, 
+                                        independente do tipo de retentativa ser automático ou manual.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#retentativas_3">
+                                        Como faço uma retentativa manual de cobrar uma assinatura atrasada?
+                                    </a>
+                                </div>
+                                <div id="retentativas_3" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        Você pode fazer solicitar uma retentativa manual de duas maneiras, via interface do Moip Assinaturas 
+                                        (<a href="https://assinaturas.moip.com.br" target="_blank">assinaturas.moip.com.br</a>) ou <a href="api.html#retentar_pagamento" target="_blank">via API</a>. Para enviar uma retentativa manual, basta acessar a interface do 
+                                        Moip Assinaturas, entrar na assinatura e na fatura em atraso e clicar no ícone de retentativa. 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#retentativas_4">
+                                        Como funciona a retentativa automática?
+                                    </a>
+                                </div>
+                                <div id="retentativas_4" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        O Moip Assinaturas oferece uma feature de retentativas automáticas, que permite ao lojista configurar até 3 
+                                        cobranças automáticas com um interválo máximo de 28 dias entre a tentativa original de e a última retentativa.<br>
+                                        A configuração permite ao vendedor determinar os intervalos de retantativas entre <code>1</code>, <code>3</code>, <code>5</code> e <code>7</code> dias após a tentativa 
+                                        anterior.<br>
+                                        Após todas as retentativas serem efetuadas, a assinatura é suspensa. 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#retentativas_5">
+                                        Como configuro a retentativa automática?
+                                    </a>
+                                </div>
+                                <div id="retentativas_5" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        Para configurar a rententativa automática acesse o menu configurações, na aba retentativas, selecione suas preferências 
+                                        nas caixas de opções e salve suas preferências. 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#retentativas_6">
+                                        Em quais status posso fazer uma retentativa manual?
+                                    </a>
+                                </div>
+                                <div id="retentativas_6" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        Para efetuar uma retentativa manual, a assinatura e a fatura cobradas devem ter o status atrasada. Lembrando que ambas 
+                                        permanecem com esse status somente enquanto a assinatura estiver no fluxo de retentativas automáticas.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#retentativas_7">
+                                        Por quanto tempo uma assinatura e uma fatura podem ficar com o status atrasado?
+                                    </a>
+                                </div>
+                                <div id="retentativas_7" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        O status “atrasada” na assinatura e na fatura, ficará disponível de acordo com suas configurações de 
+                                        retentativa automática. Caso todas as tentativas de pagamento sejam canceladas, a assinatura será “<strong>suspensa</strong>” 
+                                        e a fatura terá seu status modificado para “<strong>não pago</strong>”. Caso uma das tentativas obtenha sucesso, a assinatura 
+                                        voltará para o status “<strong>ativo</strong>” e a fatura terá o status “<strong>pago</strong>”. 
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- COLLAPSE -->                             
+                    </section>
 
 
                     <!-- Integracao
