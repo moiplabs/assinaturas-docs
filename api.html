@@ -72,6 +72,7 @@
                         <li><a href="#assinaturas"><i class="icon-chevron-right"></i>Assinaturas</a></li>
                         <li><a href="#faturas"><i class="icon-chevron-right"></i>Faturas</a></li>
                         <li><a href="#pagamentos"><i class="icon-chevron-right"></i>Pagamentos</a></li>
+                        <li><a href="#retentativas"><i class="icon-chevron-right"></i>Retentativas</a></li>
                         <li><a href="#preferencias"><i class="icon-chevron-right"></i>Preferências</a></li>
                     </ul>
                 </div>
@@ -236,7 +237,7 @@ Accept: application/json</pre>
                                 <h4>Resposta</h4>  
                                 <h5>Sucesso</h5>
                                 <pre class="prettyprint">Status: 201 CREATED
-URI: https://sandbox.moip.com.br/assinaturas/v1/plans/:code</pre>
+URI: https://sandbox.moip.com.br/assinaturas/v1/plans/{code}</pre>
                                 <pre class="prettyprint linenums">
 {
     "code": "plano01",
@@ -254,9 +255,12 @@ URI: https://sandbox.moip.com.br/assinaturas/v1/plans/:code</pre>
                                 <pre class="prettyprint">Status: 400 BAD REQUEST</pre>
                                 <pre class="prettyprint linenums">
 {
-    message: "Erro na requisição",
-    Errors: [
-    {code: "MA1", description: "Código já utilizado. Informe outro código."}
+    "message": "Erro na requisição",
+    "errors": [
+        {
+            "code": "MA1",
+            "description": "Código já utilizado. Informe outro código."
+        }
     ]
 }</pre>
                             </section>	
@@ -306,7 +310,7 @@ Accept: application/json</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">GET</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans/:code" />                            </div>
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans/{code}" />                            </div>
                                 <pre class="prettyprint">
 Request Method: GET
 Authorization: Basic TOKEN:KEY
@@ -342,14 +346,14 @@ Status: 200 OK</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">PUT</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans:code/activate" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans/{code}/activate" />
                                 </div>
                                 <p>
                                 <h5>Desativar</h5>
                                 <div class="input-prepend">
                                     <span class="add-on">PUT</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans:code/inactivate" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans/{code}/inactivate" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: PUT
@@ -370,7 +374,7 @@ Accept: application/json</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">PUT</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans:code" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/plans/{code}" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: PUT
@@ -667,7 +671,7 @@ Accept: application/json</pre>
                                 <h5>Sucesso</h5>
                                 <pre class="prettyprint">
 Status: 201 CREATED
-URI: https://sandbox.moip.com.br/assinaturas/v1/customers/:code</pre>
+URI: https://sandbox.moip.com.br/assinaturas/v1/customers/{code}</pre>
                                 <pre class="prettyprint linenums">
 {
     "message": "Cliente criado com Sucesso"
@@ -677,12 +681,14 @@ URI: https://sandbox.moip.com.br/assinaturas/v1/customers/:code</pre>
 Status: 400 BAD REQUEST</pre>
                                 <pre class="prettyprint linenums">
 {
-    message: "Erro na requisição",
-    errors: [
-        {code: 1, description: "code existente. Informe outro code"}
+    "message": "Erro na requisição",
+    "errors": [
+        {
+            "code": "MA1",
+            "description": "Erro inesperado"
+        }
     ]
-}
-                                </pre>
+}</pre>
                             </section>
 
                             <div id="listar_clientes"></div>
@@ -728,7 +734,7 @@ Status 200: OK</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">GET</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/customers:code" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/customers/{code}" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: GET
@@ -786,7 +792,7 @@ Status 200: OK</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">PUT</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/customers/:code" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/customers/{code}" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: PUT
@@ -828,7 +834,7 @@ Accept: application/json</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">PUT</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/customers/:customer_code/billing_infos" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/customers/{customer_code}/billing_infos" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: PUT
@@ -844,6 +850,10 @@ Accept: application/json</pre>
             "expiration_year": "15"
         }
  }</pre>    
+                                <div class="alert alert-error alert-block">
+                                    <strong>Atenção</strong>: ao realizar qualquer processo que envolva dados sensíveis de cartão de crédito em seu ambiente, é altamente recomendado que você siga 
+                                    as normas e boas práticas do <a href="https://www.pcisecuritystandards.org/security_standards/" target="_blank">PCI Compliance</a> para garantir a segurança de sua aplicação e dos dados de seus clientes.
+                                </div>
                             </section>
 
                         </div>
@@ -1015,7 +1025,7 @@ Accept: application/json</pre>
                                 <h4>Sucesso</h4>
                                 <pre class="prettyprint">
 Status: 201 CREATED
-URI: https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code</pre>
+URI: https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}</pre>
                                 <pre class="prettyprint linenums">
 {
     "code": "ass_homolog_72",
@@ -1045,10 +1055,12 @@ URI: https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code</pre>
         }
     },
     "message": "Assinatura criada com Sucesso",
-    "Errors": [],
+    "errors": [],
     "alerts": [
-        {code: "MA90", description: "O nome do portador do cartão deve ter no máximo 45
-        caracteres. Os demais caracteres foram ignorados"}
+        {
+            "code": "MA90",
+            "description": "O nome do portador do cartão deve ter no máximo 45 caracteres. Os demais caracteres foram ignorados"
+        }
     ]
 }</pre>
                                 <h4>Erro</h4>
@@ -1056,9 +1068,12 @@ URI: https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code</pre>
 Status: 400 BAD REQUEST</pre>
                                 <pre class="prettyprint linenums">
 {
-    message: "Erro na requisição",
-    Errors: [
-        {code: "MA92", description: "Código da assinatura já utilizado. Escolha outro código"}
+    "message": "Erro na requisição",
+    "errors": [
+        {
+            "code": "MA92",
+            "description": "Código da assinatura já utilizado. Escolha outro código"
+        }
     ]
 }</pre>
                             </section>
@@ -1126,7 +1141,7 @@ Status: 200 OK</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">GET</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: GET
@@ -1185,13 +1200,13 @@ Status: 200 OK</pre>
                                 <h4>Suspender</h4>
                                 <div class="input-prepend">
                                     <span class="add-on">PUT</span>
-                                    <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code/suspend" />
+                                    <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}/suspend" />
                                 </div>
                                 <p>
                                 <h4>Reativar</h4>
                                 <div class="input-prepend">
                                     <span class="add-on">PUT</span> 
-                                    <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code/activate" />
+                                    <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}/activate" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: PUT
@@ -1208,7 +1223,7 @@ Accept: application/json</pre>
                                 <h4>Requisição</h4>
                                 <div class="input-prepend">
                                     <span class="add-on">PUT</span> 
-                                    <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code" />
+                                    <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: PUT
@@ -1302,6 +1317,32 @@ Accept: application/json</pre>
                                 <p>A assinatura está expirada, ou seja, já atingiu o limite de
                                     cobranças configuradas no plano contratado e não gerará mais
                                     cobranças.</p>
+                                <h4>4 - "Overdue"</h4>
+                                <p> A assinatura está com o pagamento de sua fatura atrasada e entrou no fluxo de retentativas. 
+                                    Para saber mais sobre retentativas de pagamentos, <a href="#retentativas">clique aqui</a>.</p>
+
+                                <img src="img/fluxo_assinatura_v2.jpg" class="img-polaroid">
+                                <p>
+                                    <br>
+                                    (A) - Após criada, a Assinatura gerau uma nova fatura;<br>
+                                    (B) - Dentro da fatura, foi criado um novo pagamento;<br>
+                                    (C) - O pagamento foi “Iniciado” no Moip Assinaturas;<br>
+                                    (D) - O pagamento tem o status “Iniciado” ou “Em análise”, o status da fatura é “Aguardando Confirmação”;<br>
+                                    (E) - Enquanto o pagamento e fatura estão no cenário (D), a Assinatura mantém o status “Ativo”.<br>
+                                    (F) -  Quando o pagamento é “Autorizado” o status da fatura torna-se “Paga” e a Assinatura continua “Ativa”;<br>
+                                    (G) - O pagamento que estava “Autorizado”/”Concluído” foi “Estornado” ou “Reembolsado”;<br>
+                                    (H) - O pagamento foi “Cancelado”;<br>
+                                    (I) - O pagamento “Estornado”/”Reebolsado” mudau o status da fatura para “Não Paga”;<br>
+                                    (J) - A terceira retentativa automática de pagamento foi executada, a fatura torna-se “Não paga”;<br>
+                                    (K) - O primeiro pagamento da fatura foi cancelado e ela entrou no fluxo de retentativa automática, a fatura torna-se “Atrasada”;<br>
+                                    (L) - A primeira ou a segunda ou retentativa de pagamento foi cancelada, a fatura continua no fluxo de retentativa automática;<br>
+                                    (M) - A fatura “Paga” mantém a assinatura “Ativa”;<br>
+                                    (N) - A fatura “Não Paga”, suspende a assinatura.<br>
+                                    (O) - Os cenários (K) ou (L) alteraram o status da assinatura para “Atrasada”;<br>
+                                    (P) - Após o prazo determinado no plano a assinatura expirou;<br>
+                                    (Q) - Os cenários (K) e (L) foi executada uma retentativa automática.<br>
+                                </p>                               
+
                             </section>
 
                         </div>
@@ -1338,7 +1379,7 @@ Accept: application/json</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">GET</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/:code/invoices" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}/invoices" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: GET
@@ -1383,7 +1424,7 @@ Status: 200 OK</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">GET</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/invoices/:id" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/invoices/{id}" />
                                 </div>
                                 <i><small>Você pode obter o ID da cobrança pela requisição "listar
                                         cobranças", pelo webhook ou ainda pela área logada.</small></i>
@@ -1608,21 +1649,29 @@ Status: 200 OK</pre>
                                                     target="_blank">motivos</a> possíveis.
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td><code>5</code></td>
+                                            <td>Atrasada</td>
+                                            <td>O pagamento da fatura foi cancelado e serão feitas novas tentativas de 
+                                                cobrança de acordo com a configuração de <a
+                                                    href="#retentativa_automatica">retentativa automática</a>.
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <h5>Transições de status:</h5>
-                                <img src="img/fluxo_pagamento.png">
+                                <img src="img/fluxo_pagamento_v2.jpg" class="img-polaroid">
                                 <p>
-                                    (A) O pagamento está em análise de risco.<br> (B) O banco
-                                    negou o pagamento. Veja os motivos possíveis.<br> (C) O
-                                    pagamento foi autorizado.<br> (D) O pagamento foi cancelado
-                                    por análise de risco.<br> (E) O assinante solicitou a
-                                    reversão do pagamento ou houve reembolso na conta Moip.<br>
-                                    (F) O Moip Assinaturas recuperou o pagamento por meio de
-                                    retentativas.
+                                    <br>
+                                    (A) O pagamento está em análise.<br>
+                                    (B) O pagamento foi autorizado.<br>
+                                    (C) O pagamento foi cancelado, <a href="http://labs.moip.com.br/referencia/classificacao-de-cancelamento/" target="_blank">veja aqui os possíveis motivos</a>.<br>
+                                    (D) O pagamento foi cancelado e entrou no fluxo de retentativas.<br>
+                                    (E) O pagamento teve um reembolso/chargeback.<br>
+                                    (F) O pagamento de retentativa foi cancelado.<br>
+                                    (G) O pagamento de retentativa foi autorizado.<br>
                                 </p>
                             </section>
-
                         </div>
                     </section>
 
@@ -1641,7 +1690,7 @@ Status: 200 OK</pre>
                             </p>
                             <br>
                             <p>Para entender melhor, veja o diagrama abaixo:</p>
-                            <div><img src="img/fatura_pagamento.png" /></div>
+                            <div><img src="img/fatura_pagamento.png"  class="img-polaroid"/></div>
                             <br>
                             <blockquote>
                                 <small>
@@ -1671,10 +1720,12 @@ Status: 200 OK</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">GET</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/invoices/:id/payments" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/invoices/{id}/payments" />
                                 </div>
-                                <i><small>Você pode obter o ID da cobrança pela requisição "listar
-                                        cobranças", pelo webhook ou ainda pela área logada.</small></i>
+                                <p>
+                                    <i><small>Você pode obter o ID da cobrança pela requisição "listar
+                                            cobranças", pelo webhook ou ainda pela área logada.</small></i>
+                                </p>
                                 <pre class="prettyprint">
 Request Method: GET
 Authorization: Basic TOKEN:KEY
@@ -1727,10 +1778,12 @@ Status: 200 OK</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">GET</span> <input class="span8"
                                                                            id="prependedInput" type="text"
-                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/payments/:id" />
+                                                                           value="https://sandbox.moip.com.br/assinaturas/v1/payments/{id}" />
                                 </div>
-                                <i><small>Você pode obter o ID do pagamento pela requisição "listar
-                                        pagamentos", pelo webhook ou ainda pela área logada.</small></i>
+                                <p>
+                                    <i><small>Você pode obter o ID do pagamento pela requisição "listar
+                                            pagamentos", pelo webhook ou ainda pela área logada.</small></i>
+                                </p>
                                 <pre class="prettyprint">
 Request Method: GET
 Authorization: Basic TOKEN:KEY
@@ -1999,6 +2052,107 @@ Status: 200 OK</pre>
                         </div>
                     </section>
 
+                    <!-- Retentativas
+                    ================================================== -->
+                    <div id="retentativas"></div>
+                    <section>
+                        <div class="page-header">
+                            <h1>Retentativas</h1>
+                        </div>
+                        <div>
+                            <p>
+                                O Moip Assinaturas possibilita recuperar pagamentos de suas assinaturas pela interface e pela API. 
+                            </p>
+                            <div>
+                                <p>Com a API de retentativa você pode:</p>
+                                <ul>
+                                    <li><a href="#retentar_pagamento">Retentar um pagamento </a></li>
+                                    <li><a href="#retentativa_automatica">Criar regras de retentativas automáticas </a></li>
+                                </ul>
+                            </div>
+
+
+                            <div  id="retentar_pagamento"></div>
+                            <section>
+                                <h2>Retentar um pagamento</h2>
+                                <p>Após um pagamento ser cancelado é possível fazer uma nova tentativa de cobrança com o mesmo 
+                                    cartão que seu cliente já possui, ou efetuar uma retentativa após atualizar os dados do Cartão com a API de Clientes.</p>
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">POST</span> <input class="span8"
+                                                                            id="prependedInput" type="text"
+                                                                            value="https://api.moip.com.br/assinaturas/v1/invoices/{id}/retry" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: POST
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+
+                                <div class="alert alert-error">
+                                    <strong>Importante:</strong> O limite diário de retentativas é de 3 tentativas/dia por invoice.
+                                </div>
+
+                            </section>
+
+                            <div  id="retentativa_automatica"></div>
+                            <section>
+                                <h2>Criar regras de retentativas automáticas</h2>
+                                <p>Além de tentar reprocessar um pagamento manualmente via interface ou através de uma requisição na API, 
+                                    é possível configurar retentativas automáticas a partir das quais o Moip vai reprocessar seus pagamentos de acordo com suas preferências.</p>
+
+                                <div class="alert alert-error">
+                                    <strong>Importante:</strong> O limite diário de retentativas é de 3 tentativas/dia por invoice, independente se essa é uma tentativa automática (feita pelo Moip Assinaturas) ou manual (feita pelo cliente).
+                                    Caso as retentativas automáticas não sejam configuradas, a assinatura será automaticamente suspensa após o primeiro cancelamento.                                    
+                                </div>
+                                <p>Você  pode determinar até  três tentativas de cobrança de uma fatura em atraso. <a href="#status_fatura">Leia mais sobre faturas em status atrasada.</a></p>
+
+
+                                <h4>Requisição</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">POST</span> <input class="span8"
+                                                                            id="prependedInput" type="text"
+                                                                            value="https://api.moip.com.br/assinaturas/v1/users/preferences/retry" />
+                                </div>
+                                <pre class="prettyprint">
+Request Method: POST
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <pre class="prettyprint">
+{
+    "first_try": 1,
+    "second_try": 3,
+    "third_try": 5
+}</pre>
+                                <p>As datas das retentativas são calculadas com base na tentativa anterior, podendo ser configuradas de acordo com a tabela abaixo:</p>
+
+                                <h5>Parâmetros</h5>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="span2">parâmetro</th>
+                                            <th>valor</th>
+                                        </tr>
+                                    </thead>                            
+                                    <tbody>
+                                        <tr>
+                                            <td><code>first_try</code>, <code>second_try</code>, <code>third_try</code></td>
+                                            <td><code>1</code>, <code>3</code>, <code>5</code>, <code>7</code> dias após a tentativa anterior e <br>  <code>0</code> não executa a retentativa e suspende a assinatura</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p>Assim, o intervalo mínimo de retentativa automática é de 1 dia e o máximo de 28 dias.</p>
+
+                                <div class="alert alert-error">
+                                    <strong>Importante:</strong> Recomendamos que o intervalo total de retentativas seja sempre inferior ao seu plano com a menor periodicidade de cobranças. Por exemplo, se seu plano for quinzenal, 
+                                    configure suas retentativas para um intervalo total de no máximo 14 dias, evitando assim efetuar duas cobranças autorizadas em períodos muito curtos de tempo.
+                                </div>
+
+                            </section>
+
+                        </div>
+                    </section>                    
                     <!-- Preferências
                     ================================================== -->
                     <div id="preferencias"></div>
@@ -2050,8 +2204,6 @@ Accept: application/json</pre>
 
                         </div>
                     </section>
-
-
 
                 </div>
             </div>

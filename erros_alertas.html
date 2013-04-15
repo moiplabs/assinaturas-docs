@@ -80,7 +80,7 @@
 
                     <!-- Tabela de erros e alertas
                     ================================================== -->
-                  
+
                     <section>
                         <div class="page-header">
                             <h1>Tabela de erros e alertas</h1>
@@ -90,8 +90,23 @@
                                 Existem dois tipos de mensagem:</P>
                             <p> <span class="label label-important">erro</span>: impede a requisição de ser atendida e processada.</p>
                             <p><span class="label label-warning">alerta</span>: não invalida a requisição, mas são oportunidades de melhoria na sua integração que podem, inclusive, aumentar a conversão de suas assinaturas.</p>
+
+                            <h4>Exemplo:</h4>
+                            <pre class="prettyprint linenums">
+{
+    "message": "Erro na requisição",
+    "errors": [
+        {
+            "code": "MA1",
+            "description": "Erro inesperado"
+        }
+    ]
+}</pre>
                             <p>Abaixo você encontra a lista completa de erros e alertas previstos na integração com a API do Moip Assinaturas.</p>                        
                         </div>
+
+
+
                     </section>
 
 
@@ -1588,6 +1603,8 @@
         </footer>
 
         <script src="javascript/jquery.js"></script>
+        <script src="javascript/prettify.js"></script>
+        <script src="javascript/main.js"></script>        
         <script src="javascript/bootstrap-dropdown.js"></script>
         <script src="javascript/bootstrap-scrollspy.js"></script>
         <!-- Qualaroo for moip.com.br -->
