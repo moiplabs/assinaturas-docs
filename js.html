@@ -86,9 +86,9 @@
                         <div class="page-header">
                             <h1>JavaScript de Pagamento <small>moip-assinaturas.min.js</small></h1>
                         </div>
-                        <p>O moip-assinaturas.min.js é uma biblioteca JavaScript feita para facilitar a integração 
+                        <p>O <strong>moip-assinaturas.min.js</strong> é uma biblioteca <strong>JavaScript</strong> feita para facilitar a integração 
                             do Moip Assinaturas com o seu site, permitindo o desenvolvimento do seu próprio fluxo 
-                            de contratação e que seu cliente consiga assinar um plano sem sair do seu site, assim 
+                            de contratação sem que seu cliente precise sair do seu ambiente, assim 
                             como funciona o CheckOut Transparente do Moip. Além de possuir uma estrutura e validações 
                             pré-definidas, utilizando essa biblioteca você também reduz o seu escopo para o PCI, 
                             uma vez que os dados de cartão de crédito vão direto do navegador do seu cliente para o Moip.</p>
@@ -116,7 +116,7 @@
                                 <input class="span8" id="prependedInput" type="text" value="https://api.moip.com.br/moip-assinaturas.min.js" />
                             </div>                        
 
-                            <p>Também é necessário a incluir a biblioteca <a href="http://jquery.com">jQuery</a> no <code>&lt;head&gt;</code>. Observação é importante importar o jQuery antes no moip-assinaturas.min.js conforme exemplo abaixo:</p>
+                            <p>Também é necessário incluir a biblioteca <a href="http://jquery.com">jQuery</a> no <code>&lt;head&gt;</code>. É importante importar o jQuery antes no moip-assinaturas.min.js conforme exemplo abaixo:</p>
                             <h5>Exemplo:</h5>
                             <pre class="prettyprint linenums">&lt;script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"&gt;&lt;/script&gt;
 &lt;script src="https://[sandbox ou api].moip.com.br/moip-assinaturas.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre> 
@@ -132,7 +132,7 @@
                             <h1>Identificação <small>Obrigatório para todos os serviços do moip-assinaturas.min.js</small></h1>
                         </div>
                         <div>
-                            <p>Utilizando o moip-assinaturas.min.js é necessário você identificar sua aplicação para se comunicar 
+                            <p>Para utilizar o moip-assinaturas.min.js será necessário que você identifique sua aplicação para se comunicar 
                                 com o Moip. Sua chave pública é seu <strong>Token</strong> Moip.</p>
                             <p><strong>Exemplo:</strong></p>
                             <pre class="prettyprint linenums">var moip = new MoipAssinaturas("SEU_TOKEN");</pre>
@@ -141,9 +141,9 @@
                             <p>O Moip assinaturas utiliza os mesmo token e key disponíveis em sua Conta Moip. Assim, não só estamos unificando as chaves, como estamos mantendo integradas as contas do Moip e do Moip Assinaturas.</p>
                             <p>Para obter seu token e key, siga os procedimentos abaixo:</p>
                             <ul>
-                                <li>Acesse o <a href="https://www.moip.com.br">moip.com.br</a></li>
-                                <li>Clique na opção “Ferramentas” no Menu</li>
-                                <li>Selecione a opção “API Moip” e depois “Chaves de Acesso”.</li>
+                                <li>Acesse o <a href="https://www.moip.com.br">moip.com.br</a>;</li>
+                                <li>Clique na opção “Ferramentas” no Menu;</li>
+                                <li>Selecione a opção “API Moip” e depois “Chaves de Acesso”;</li>
                                 <li>Seu TOKEN será exibido na página seguinte, a KEY estará oculta, mas basta clicar no link e ela será exibida na mesma página.</li>
                             </ul>
                         </div>
@@ -168,21 +168,21 @@
                         <div>
                             <br>
                             <h4>Criando o cliente <small>new Customer()</small></h4>
-                            <p>O assinatura necessita de um cliente, para criar um cliente bastar instanciar o objeto 
+                            <p>A criação de uma assinatura prevê a existência de um cliente, para criá-lo bastar instanciar o objeto 
                                 <code>new Customer()</code> conforme <a href="#build_customer">exemplo</a>. 
-                                O cliente possui suas informações pessoais (nome, e-mail, código do cliente, cpf, 
+                                O cliente possui as informações pessoais do assinante (nome, e-mail, código do cliente, cpf, 
                                 data de nascimento, etc), o endereço <code>new Address()</code>(rua, numero, bairro, etc) 
-                                e o os dados de cobraça <code>new BillingInfo()</code>(cartão de crédito).</p>
+                                e o os dados de cobrança <code>new BillingInfo()</code>(cartão de crédito).</p>
                             <br>
                             <h4>Criando a assinatura <small>new MoipAssinaturas()</small></h4>
-                            <p>O primeiro passo para a utilização do moip-assinaturas.min.js é instanciar o objeto 
-                                <code>new MoipAssinaturas()</code> essa classe javascript é responsável por realiazar a 
-                                integração com o Moip Assinaturas. Em seu construtor ela recebe  apenas o seu token de autorização.</p>
+                            <p>O primeiro passo para a utilização do <strong>moip-assinaturas.min.js</strong> é instanciar o objeto 
+                                <code>new MoipAssinaturas()</code>, essa classe JavaScript é responsável por realizar a 
+                                integração com o Moip Assinaturas. Em seu construtor, ela recebe  apenas o seu token de autorização.</p>
                             <p>O metódo <code>MoipAssinaturas.subscribe</code> é responsavel por criar uma nova assinatura com um novo cliente. 
-                                Ele recebe como parâmetro um objeto <code>new Subscription()</code> onde tem como parâmetros o código da assinatura, 
+                                Ele recebe como parâmetro um objeto <code>new Subscription()</code> contendo como parâmetros o código da assinatura, 
                                 o novo cliente(criado atráves do objeto Customer) e o código do plano.</p>
 
-                            <p>Abaixo há um exemplo de um <code>HTML</code> e seu respectivo javascript para gerar uma assinatura.</p>
+                            <p>Abaixo há um exemplo de um <code>HTML</code> e seu respectivo JavaScript para gerar uma assinatura.</p>
                             <h5>Exemplo</h5>
                             <div>
                                 <h5>Criando a assinatura:</h5>
@@ -204,7 +204,7 @@ moip.subscribe(
         }
         return;
     }
-    alert("Assinatura criado com sucesso")
+    alert("Assinatura criada com sucesso")
 });</pre>
                                 <a href="#" name="build_customer"></a>
                                 <br>
@@ -269,7 +269,7 @@ var build_address = function() {
                             <h1>Criar um cliente com dados de cartão</h1>
                         </div>
                         <div>
-                            <p>Para criar um cliente com dados de cartão, porém não vinculado a nenhuma assinatura, o processo é semehando ao de assinatura. Onde você cria um <code>new Customer()</code>. E instacia o objeto <code>new MoipAssinaturas()</code> porém você vai chamar o método <code>MoipAssinaturas.create_customer()</code>.</p>
+                            <p>Para criar um cliente com dados de cartão sem relacioná-lo a uma assinatura, o processo é semelhante. Você cria um <code>new Customer()</code> e instacia o objeto <code>new MoipAssinaturas()</code>, porém, você deverá chamar o método <code>MoipAssinaturas.create_customer()</code>.</p>
                             <h5>Exemplo</h5>
                             <div>
                                 <pre class="prettyprint linenums">
@@ -300,7 +300,7 @@ moip.create_customer(customer)
                             <h1>Atualizar dados de cartão</h1>
                         </div>
                         <div>
-                            <p>Para atualizar os dados de cartão do um cliente é necessário construir um objeto <code>new Customer()</code> onde obrigatóriamente deve conter o código do cliente que você deseja atualizar os dados de cartão. E também obrigatóriamente deve conter a nova <code>new BillingInfo()</code> com os novos dados de cobrança.</p>
+                            <p>Para atualizar os dados de cartão do um cliente é necessário construir um objeto <code>new Customer()</code> onde obrigatoriamente deve haver o código do cliente cujo dados de cartão você deseja atualizar e, a nova <code>new BillingInfo()</code> com os novos dados de cobrança.</p>
                             <h5>Exemplo</h5>
                             <div>
                                 <h5>Atualizando um Cartão de credito</h5>
@@ -332,13 +332,13 @@ $("#update_billinginfo").click(function(){
                             <h1>Callback</h1>
                         </div>
                         <div>
-                            <p>Personalizando o retorno do Moip Assinaturas</p>
+                            <p>Personalizando o retorno do Moip Assinaturas.</p>
                             <h4>Passando um método de callback</h4>
                             <p>Assim que o Moip Assinaturas concluir a sua requisição o metódo de <strong>callback</strong> 
                                 é executado. Isto é útil para você dar sequência no seu checkout ou mesmo exibir mensagens 
-                                de erros do cliente ao preencher o checkout.</p>
-                            <p>Para que possamos chamar seu metódo de callback é necessário que você passe o bloco de função para o metódo callback.</p>
-                            <h5>Exemplo</h5>                                
+                                de erros para o cliente ao preencher o formulário de pagamento.</p>
+                            <p>Para que possamos chamar seu metódo de callback, é necessário que você passe o bloco de função para o metódo callback.</p>
+                            <h5>Exemplo:</h5>                                
                             <div>
                                 <pre class="prettyprint linenums">
 var moip = new MoipAssinaturas("SEU_TOKEN");
@@ -348,10 +348,10 @@ moip.callback(function(response){
                             </div>
 
                             <h4>Processando a resposta</h4>
-                            <p>O Moip Assinaturas irá chamar seu callback passando como parâmetro um objeto Response(). Ele contém uma lista de possíveis 
-                                erros da integração ou de informações preenchidas pelo seu cliente na integração. O Response também possui uma lista de 
+                            <p>O Moip Assinaturas irá chamar seu callback passando como parâmetro um objeto <code>Response()</code>. Ele contém uma lista de possíveis 
+                                erros da integração ou de informações preenchidas pelo seu cliente no checkout. O Response também possui uma lista de 
                                 alertas que auxiliam você na sua integração.</p>
-                            <h5>Exemplo <small>JSON</small></h5>                           
+                            <h5>Exemplo: <small>JSON</small></h5>                           
                             <pre class="prettyprint linenums">
 {
     "code": "ass_homolog_72",
@@ -385,7 +385,7 @@ moip.callback(function(response){
     "alerts": [
         {
             "code": "MA90",
-            "description": "O nome do portador do cartão deve ter no máximo 45 caracteres. Os demais caracteres foram ignorados"
+            "description": "O nome do portador do cartão deve ter no máximo 45 caracteres. Os demais caracteres serão ignorados"
         }
     ]
 }</pre>
