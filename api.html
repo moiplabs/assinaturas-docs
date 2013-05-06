@@ -1028,40 +1028,34 @@ Status: 201 CREATED
 URI: https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}</pre>
                                 <pre class="prettyprint linenums">
 {
-    "code": "ass_homolog_72",
-    "amount": "100",
-    "next_invoice_date": {
-        "day": "05",
-        "month": "01",
-        "year": "2013"
-    },
-    "status": "ACTIVE",
+    "amount": 100,
+    "message": "Assinatura criada com sucesso",
+    "errors": [],
     "plan": {
         "name": "Plano de homologação",
         "code": "homolog1"
     },
+    "status": "ACTIVE",
+    "invoice": {
+        "amount": 100,
+        "id": 3297,
+        "status": {
+            "description": "Atrasada",
+            "code": 5
+        }
+    },
+    "alerts": [],
+    "next_invoice_date": {
+        "month": 6,
+        "year": 2013,
+        "day": 6
+    },
+    "code": "ass_02",
     "customer": {
         "email": "fulano@homolog.com",
-        "code": "homolog2",
+        "code": "fulano1",
         "fullname": "Fulano Homologador"
-    },
-    "invoice": { //dados da primeira cobrança (se houver)
-    "id": 134,
-    "moip_id": "14000000",
-    "amount": 110,
-    "status": {
-        "description": "Em análise",
-        "code": 2
-        }
-    },
-    "message": "Assinatura criada com Sucesso",
-    "errors": [],
-    "alerts": [
-        {
-            "code": "MA90",
-            "description": "O nome do portador do cartão deve ter no máximo 45 caracteres. Os demais caracteres foram ignorados"
-        }
-    ]
+    }
 }</pre>
                                 <h4>Erro</h4>
                                 <pre class="prettyprint">
