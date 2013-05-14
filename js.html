@@ -295,23 +295,21 @@ moip.create_customer(customer)
                             <h5>Exemplo</h5>
                             <div>
                                 <pre class="prettyprint linenums">
-$("#atualizar").click(function(){
-    var token = "MEU_TOKEN";
-    var moip = new MoipAssinaturas(token);
+var token = "MEU_TOKEN";
+var moip = new MoipAssinaturas(token);
 
-    var customer = new Customer();
-    customer.code = "cliente01"; // Código identificador do seu cliente
-    customer.billing_info = new BillingInfo(); // Especifique um novo cartão para fazer a cobrança
+var customer = new Customer();
+customer.code = "cliente01"; // Código identificador do seu cliente
+customer.billing_info = new BillingInfo(); // Especifique um novo cartão para fazer a cobrança
 
-    moip.update_credit_card(customer).callback(function(response){
-      if (response.has_errors()) {
+moip.update_credit_card(customer).callback(function(response){
+    if (response.has_errors()) {
         for (i = 0; i < response.errors.length; i++) {
-          var erro = response.errors[i].description;
-          $("#erros").append(erro);
+            var erro = response.errors[i].description;
+            $("#erros").append(erro);
         }
-        return;
-    });
-});</pre>
+    return;
+});;</pre>
                             </div>
 
                         </div>
