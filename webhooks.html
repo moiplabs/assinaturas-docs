@@ -278,62 +278,60 @@ Content-Type: application/json</pre>
                             <h4 id="assinatura_criada">Criada <small><code>subscription.created</code></small></h4>
                             <p>A criação da assinatura tem a notificação do objeto completo. Antes da notificação da assinatura, são enviadas as notificações de fatura e pagamento.</p>
                             <pre class="prettyprint linenums pre-scrollable">{
-   "event": "subscription.created", 
-   "date": "28/12/2012 15:38:46",
-   "env": "sandbox",
-   "resource": {
-        "code": "assinatura08",
-        "status": "ACTIVE",
-        "amount": 3990,
+    "event": "subscription.created",
+    "resource": {
+        "amount": 10010,
         "creation_date": {
-            "day": 21,
-            "month": 1,
-            "year": 2013
+            "month": 01,
+            "year": 2013,
+            "day": 01
         },
         "plan": {
             "code": "plano1"
         },
-        "expiration_date": {
-            "day": 21,
-            "month": 1,
-            "year": 2014
-        },
+        "status": "ACTIVE",
         "next_invoice_date": {
-            "day": 21,
-            "month": 2,
+            "month": 02,
             "year": 2013,
+            "day": 01
         },
-    }
+        "code": "assinatura08",
+        "customer": {
+            "code": "assinante01"
+        }
+    },
+    "env": "sandbox",
+    "date": "01/01/2013 01:01:01"
+}
 }</pre>
                             <h4>Atualizada <small><code>subscription.updated</code></small></h4>
                             <p>A atualização de assinatura tem notificação do objeto completo.</p>
                             <pre class="prettyprint linenums pre-scrollable">{
-   "event": "subscription.updated", 
-   "date": "28/12/2012 15:38:46",
-   "env": "sandbox",
-   "resource": {
-        "code": "assinatura08",
-        "status": "ACTIVE",
-        "amount": 4000,
+    "event": "subscription.updated",
+    "resource": {
+        "amount": 15000,
         "creation_date": {
-            "day": 21,
-            "month": 1,
-            "year": 2013
+            "month": 01,
+            "year": 2013,
+            "day": 01
         },
         "plan": {
             "code": "plano1"
         },
-        "expiration_date": {
-            "day": 21,
-            "month": 1,
-            "year": 2014
-        },
+        "status": "ACTIVE",
         "next_invoice_date": {
-            "day": 21,
-            "month": 2,
-            "year": 2013,
+            "month": 02,
+            "year": 2014,
+            "day": 01
         },
-    }
+        "code": "assinatura08",
+        "customer": {
+            "code": "assinante01"
+        }
+    },
+    "env": "sandbox",
+    "date": "02/01/2013 01:01:01"
+}
 }</pre>
                             <h4 id="assinatura_suspensa">Suspensa e Ativa <small><code>subscription.suspended</code> e <code>subscription.enabled</code></small></h4>
                             <p>Para <code>suspended</code> e <code>enabled</code>, é notificado apenas o código de identificação da sua aplicação.</p>
