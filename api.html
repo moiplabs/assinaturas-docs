@@ -880,7 +880,7 @@ Accept: application/json</pre>
                                     <li><a href="#criar_assinatura">Criar Assinaturas</a></li>
                                     <li><a href="#listar_assinaturas">Listar todas assinaturas</a></li>
                                     <li><a href="#consultar_assinatura">Consultar detalhes de uma assinatura</a></li>
-                                    <li><a href="#suspender_reativar_assinatura">Suspender ou reativar a cobrança de uma assinatura</a></li>
+                                    <li><a href="#suspender_reativar_assinatura">Suspender, reativar e cancelar uma Assinatura</a></li>
                                     <li><a href="#alterar_assinatura">Alterar uma assinatura</a></li>
                                     <li><a href="#status_assinatura">Status de uma assinatura </a></li>
                                 </ul>
@@ -1183,12 +1183,11 @@ Status: 200 OK</pre>
 
                             <div id="suspender_reativar_assinatura"></div>
                             <section>
-                                <h2>Suspender ou reativar a cobrança de uma assinatura</h2>
-                                <p>É possível suspender as cobranças de uma assinatura e
-                                    reativá-las quando for preciso. Uma vez suspensa, a assinatura
-                                    não será cobrada no final do intervalo atual. Ao reativá-la, a
-                                    próxima cobrança será feita de acordo com a data de contratação
-                                    da assinatura.</p>
+                                <h2>Suspender, reativar e cancelar uma Assinatura</h2>
+                                <p>É possível suspender, reativar e cancelar uma Assinatura. 
+                                    Caso suspensa, a assinatura não será cobrada no final do intervalo atual, ao reativá-la, a
+                                    próxima cobrança será feita de acordo com a data de contratação da assinatura. 
+                                    Caso cancelada, a assinatura não poderá mais ser reativa ou alterada.</p>
                                 <h4>Requisição</h4>
                                 <p>
                                 <h4>Suspender</h4>
@@ -1196,12 +1195,17 @@ Status: 200 OK</pre>
                                     <span class="add-on">PUT</span>
                                     <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}/suspend" />
                                 </div>
-                                <p>
                                 <h4>Reativar</h4>
                                 <div class="input-prepend">
                                     <span class="add-on">PUT</span> 
                                     <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}/activate" />
                                 </div>
+                                <h4>Cancelar</h4>
+                                <div class="input-prepend">
+                                    <span class="add-on">PUT</span>
+                                    <input class="span8" id="prependedInput" type="text" value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}/cancel" />
+                                </div>
+                                <p>
                                 <pre class="prettyprint">
 Request Method: PUT
 Authorization: Basic TOKEN:KEY
@@ -1314,6 +1318,8 @@ Accept: application/json</pre>
                                 <h4>4 - "Overdue"</h4>
                                 <p> A assinatura está com o pagamento de sua fatura atrasada e entrou no fluxo de retentativas. 
                                     Para saber mais sobre retentativas de pagamentos, <a href="#retentativas">clique aqui</a>.</p>
+                                 <h4>5 - "Canceled"</h4>
+                                <p> A assinatura foi cancelada e não poderá mais ser reativada ou editada de nenhuma maneira. Em outras palavras, o cancelamento é a inativação definitiva de uma assinatura.</p>   
 
                                 <img src="img/fluxo_assinatura_v2.jpg" class="img-polaroid">
                                 <p>
@@ -2132,7 +2138,7 @@ Accept: application/json</pre>
                                     <tbody>
                                         <tr>
                                             <td><code>first_try</code>, <code>second_try</code>, <code>third_try</code></td>
-                                            <td><code>1</code>, <code>3</code>, <code>5</code>, <code>7</code> dias após a tentativa anterior e <br>  <code>0</code> não executa a retentativa e suspende a assinatura</td>
+                                            <td><code>1</code>, <code>3</code>, <code>5</code>, <code>7</code> dias após a tentativa anterior.<br> <code>suspend</code> e <code>cancel</code> deixam de executar a retentativa e alteram o status da Assinatura.</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -2177,22 +2183,22 @@ Accept: application/json</pre>
                                                                             value="https://sandbox.moip.com.br/assinaturas/v1/users/preferences" />
                                 </div>
                                 <pre class="prettyprint">
-Request Method: POST
-Authorization: Basic TOKEN:KEY
-Content-Type: application/json
-Accept: application/json</pre>
+                                    Request Method: POST
+                                    Authorization: Basic TOKEN:KEY
+                                    Content-Type: application/json
+                                    Accept: application/json</pre>
                                 <pre class="prettyprint">
-{
-    "notification": {
-        "webhook": {
-            "url": "http://exemploldeurl.com.br/assinaturas"
-        },
-        "email": {
-            "merchant": {"enabled": true},
-            "customer": {"enabled" : true}
-        }
-    }
-} </pre>                               
+                                    {
+                                        "notification": {
+                                            "webhook": {
+                                                "url": "http://exemploldeurl.com.br/assinaturas"
+                                            },
+                                            "email": {
+                                                "merchant": {"enabled": true},
+                                                "customer": {"enabled" : true}
+                                            }
+                                        }
+                                    } </pre>                               
 
                             </section>
 
