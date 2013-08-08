@@ -127,12 +127,12 @@
                                 <td>O contrato realizado entre um cliente e um vendedor de acordo com o plano escolhido.</td>
                             </tr>
                             <tr>
-                                <td><strong>Fatura</strong> <span class="label label-warning">novo</span></td>
+                                <td><strong>Fatura</strong></td>
                                 <td>Conjunto de itens (débitos e créditos) que compõe a cobrança que será feita de acordo com as regras
                                     configuradas no plano contratado.</td>
                             </tr>
                             <tr>
-                                <td><strong>Pagamento</strong> <span class="label label-warning">novo</span></td>
+                                <td><strong>Pagamento</strong></td>
                                 <td>Pagamento criado automaticamente pelo Moip Assinaturas, a fim de cobrar uma
                                     fatura.</td>
                             </tr>
@@ -141,6 +141,13 @@
                                 <td>Acões e alterações realizadas em algum elemento da sua Conta Moip, como
                                     plano, cliente, assinatura e cobrança. Os eventos podem ser tratados pela
                                     sua Aplicação por meio dos Webhooks configurados.</td>                                        
+                            </tr>
+                            <tr>
+                                <td><strong>Sandbox</strong></td>
+                                <td>Ambiente de testes do Moip Assinaturas. Quando você estiver usando o Sandbox, não serão geradas cobranças reais. Ele servirá para você iniciar sua integração e testar as reações das nossas APIs com a sua aplicação. Após homologação, você poderá ter acesso ao ambiente de Produção e processar pagamento reais.</td>                                        
+                            </tr>
+                            <td><strong>Produção</strong></td>
+                                <td>Ambiente de operação do Moip Assinaturas. Quando você estiver usando o ambiente do Produção, poderá gerar planos, assinaturas e pagamentos com cobranças reais.</td>                                        
                             </tr>
                         </table>
                     </section>
@@ -335,7 +342,7 @@
                                 <li>Clique no botão <strong>Habilitar Acesso</strong> e pronto. Você já pode utilizar o <strong>Moip Assinaturas</strong> e suas APIs de Sandbox.</li>
                             </ol>
                             <br>
-                            <div class="alert alert-danger"><p>Após habilitar sua conta, você terá acesso as <strong>APIs de Sandbox</strong> do <strong>Moip Assinaturas</strong>. Para passar a utilizar as <strong>APIs de Produção</strong>, você terá que passar pelo processo de <strong>homologação</strong> de integração. Para dar início a esse processo, basta clicar no <strong>Botão Produção</strong> na área logada do <strong>Moip Assinaturas</strong>, na página seguinte, você terá acesso ao formulário de homologação.</p>
+                            <div class="alert alert-danger"><p>Após habilitar sua conta, você terá acesso as <strong>APIs de Sandbox</strong> do <strong>Moip Assinaturas</strong>. Para passar a utilizar as <strong>APIs de Produção</strong>, você terá que passar pelo processo de <strong>homologação</strong> de integração. Para dar início a esse processo, basta clicar no <strong>Botão Produção</strong> na área logada do <strong>Moip Assinaturas</strong>, na página seguinte, preencher o formulário de homologação.</p>
                             </div>
                         </div>
                     </section>
