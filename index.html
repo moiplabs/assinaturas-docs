@@ -72,7 +72,6 @@
                         <li><a href="#fluxo_basico"><i class="icon-chevron-right"></i> Fluxo básico</a></li>
                         <li><a href="#apis"><i class="icon-chevron-right"></i> APIs</a></li>
                         <li><a href="#passo_a_passo"><i class="icon-chevron-right"></i>  Passo a passo</a></li>
-                        <li><a href="#roadmap"><i class="icon-chevron-right"></i>  Roadmap</a></li>
                         <li><a href="#changelog"><i class="icon-chevron-right"></i>Changelog</a></li>
                     </ul>
                 </div>
@@ -216,7 +215,13 @@
                         </div>
 
                         <div>
-                            <h4>5. Suspensão de uma assinatura</h4>
+                            <h4>5. Retentativas de cobrança</h4>
+                            <p>O vendedor tem a opção de configurar retentativas de cobranças paras caso onde a Assinatura esteja com status "Atrasada".
+                            As retentativas pode ser automáticas (executadas conforme configurado pelo vendedor), ou manuais, mediante ação do lojista ou do assinante (utilizando a interface ou as APIs de retentativa).</p>
+                            <div>
+                        </div>
+                        <div>
+                            <h4>6. Suspensão de uma assinatura</h4>
                             <p>O cliente pode suspender a assinatura diretamente pela plataforma do
                                 vendedor (utilizando as APIs - recomendado); por uma solicitação (email, telefone etc.) ao vendedor que deve realizá-la pela área logada;
                                 ou por uma solicitação ao Moip. Caso o cliente contate o Moip para realizar esta ação, o
@@ -277,7 +282,7 @@
                                             Via API, é possível criar um cliente junto da assinatura, na interface é necessária a criação prévia do Cliente.</td>
                                     </tr>
                                     <tr>
-                                        <td><strong><a href="api.html#faturas">Faturas</a> </strong><span class="label label-warning">novo</span></td>
+                                        <td><strong><a href="api.html#faturas">Faturas</a></strong></td>
                                         <td>A assinatura vai gerar a primeira fatura no momento da contratação de
                                             um plano. Depois, periodicamente novas faturas serão geradas de acordo
                                             com as configurações do plano contratado. Para consultar as faturas
@@ -285,9 +290,17 @@
                                             faturas.</td>
                                     </tr>
                                     <tr>
-                                        <td><strong><a href="api.html#pagamentos">Pagamentos</a> </strong><span class="label label-warning">novo</span></td>
+                                        <td><strong><a href="api.html#pagamentos">Pagamentos</a></td>
                                         <td>Uma fatura pode ser paga utilizando os meios de pagamento de preferência
                                             do assinante. Para cada fatura, é gerado um pagamento.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong><a href="api.html#retentativas">Retentativas</a></td>
+                                        <td>Você poderá configurar ou executar retentativas de cobranças para casos onde o pagamento de uma fatura tenha sido cancelado. Para isso, nós oferecemos duas APIs de retentativas, uma delas permite que você gere um novo pagamento imediatamente, cobrando a fatura em atraso, a outra permite configurar retentativas automáticas, que serão executadas pelo Moip Assinaturas.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong><a href="api.html#preferencias">Preferências</a></td>
+                                        <td>A API de preferências pode ser utilizada para configurar as preferências de notificação da loja. Com ela você pode determinar por exemplo, se deseja que o Moip Assinaturas notifique a loja e o assinantes por e-mail, sobre novas cobranças e alterações nas assinaturas. Além disso, você também pode utilizar essa API para configurar a URL de notificação para onde enviaremos os Webhooks.</td>
                                     </tr>
                                     <tr>
                                         <td><strong><a href="js.html">moipassinaturas.js</a></strong></td>
@@ -317,40 +330,15 @@
                             <ol>
                                 <li><a href="https://www.moip.com.br/criarcarteira.do">Crie uma conta</a> Moip para vendedores.<br>
                                     - É importante verificar a sua conta para ela não ter limitações.</li>
-                                <li>Envie um email para <a href="mailto:assinaturas@moip.com.br">assinaturas@moip.com.br</a> informando o seu login do Moip.<br>
-                                    - O acesso ao Moip Assinaturas ainda é restrito e controlado, a liberação
-                                    está sujeita a análise.</li>
-                                <li>Quando o acesso for liberado, enviaremos um email com as demais instruções.</li>
+                                <li>Acesse o menu <strong>Ferramentas</strong> e depois clique no link <strong>Moip Assinaturas</strong><br>
+                                    - Se preferir, <a href="https://www.moip.com.br/AdmMainMenuMyData.do?method=assinaturas">clique aqui.</a></li>
+                                <li>Clique no botão <strong>Habilitar Acesso</strong> e pronto. Você já pode utilizar o <strong>Moip Assinaturas</strong> e suas APIs de Sandbox.</li>
                             </ol>
+                            <br>
+                            <div class="alert alert-danger"><p>Após habilitar sua conta, você terá acesso as <strong>APIs de Sandbox</strong> do <strong>Moip Assinaturas</strong>. Para passar a utilizar as <strong>APIs de Produção</strong>, você terá que passar pelo processo de <strong>homologação</strong> de integração. Para dar início a esse processo, basta clicar no <strong>Botão Produção</strong> na área logada do <strong>Moip Assinaturas</strong>, na página seguinte, você terá acesso ao formulário de homologação.</p>
+                            </div>
                         </div>
                     </section>
-
-                    <!-- Roadmap
-                    ================================================== -->
-                    <section id="roadmap">
-                        <div class="page-header">
-                            <h1>Roadmap <small>funcionalidades e ferramentas</small></h1>
-                        </div>
-                        <div>
-                            <h4>Estamos trabalhando em:</h4>
-                            <ul>
-                                <li>Preparativos para lançamento oficial.</li>
-                            </ul>
-                            <h4>Outras funcionalidades planejadas ou previstas:</h4>
-                            <ul>
-                                <li>Split de pagamento</li>
-                                <li>Pagamento com boleto</li>
-                                <li>Trial para planos</li>
-                                <li>Cobrança de itens adicionais para um plano</li>
-                                <li>Pró-rata e agendamento de cobrança</li>
-                            </ul>
-                            <h4>A sua empresa precisa de algum específico?</h4>
-                            <p> As APIs foram desenvolvidas para permitir a implementação de  
-                                praticamente qualquer funcionalidade diretamente do lado do seu sistema.<br>
-                                Caso tenha alguma necessidade específica ou sugestão para o roadmap, por favor envie um email para <a href="mailto:assinaturas@moip.com.br">assinaturas@moip.com.br</a></p>
-                        </div>                        
-                    </section>
-
                     <!-- Changelog
                     ================================================== -->
                     <section id="changelog">
@@ -358,7 +346,17 @@
                             <h1>Changelog</h1>
                         </div>
                         <div>
-                              <strong>12/06/2013</strong>
+                            <strong>08/08/2013</strong>
+                            <ul>
+                                <li>Update no <a href="#fluxo_basico">fluxo básico</a> (documentação).</li>
+                                <li>Update no <a href="#passo_a_passo">passo-a-Passo</a> (documentação).</li>
+                                <li>Update na listagem de <a href="#apis">APIs</a> (documentação).</li>
+                            </ul><br>
+                            <strong>01/08/2013</strong>
+                            <ul>
+                                <li>Lançamento do Moip Assinaturas no mercado. \o/</li>
+                            </ul><br>
+                            <strong>12/06/2013</strong>
                             <ul>
                                 <li>Update no status de assinaturas, inclusão do status <a href="api.html#status_assinatura">Cancelada</a></li>
                                 <li>Update de inclusão expiration date no <a href="webhooks.html#assinatura">Webhooks</a></li>
