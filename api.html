@@ -1311,7 +1311,7 @@ Accept: application/json</pre>
                                 <h4>2 - "Suspended"</h4>
                                 <p>As cobranças da assinatura estão suspensas, ou seja, o
                                     cliente assinante não será cobrado a cada ciclo.</p>
-                                <h4>3 - "Expired" <small>ainda não implementado</small></h4>
+                                <h4>3 - "Expired"</h4>
                                 <p>A assinatura está expirada, ou seja, já atingiu o limite de
                                     cobranças configuradas no plano contratado e não gerará mais
                                     cobranças.</p>
@@ -2081,7 +2081,7 @@ Status: 200 OK</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">POST</span> <input class="span8"
                                                                             id="prependedInput" type="text"
-                                                                            value="https://api.moip.com.br/assinaturas/v1/invoices/{id}/retry" />
+                                                                            value="https://sandbox.moip.com.br/assinaturas/v1/invoices/{id}/retry" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: POST
@@ -2112,14 +2112,14 @@ Accept: application/json</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">POST</span> <input class="span8"
                                                                             id="prependedInput" type="text"
-                                                                            value="https://api.moip.com.br/assinaturas/v1/users/preferences/retry" />
+                                                                            value="https://sandbox.moip.com.br/assinaturas/v1/users/preferences/retry" />
                                 </div>
                                 <pre class="prettyprint">
 Request Method: POST
 Authorization: Basic TOKEN:KEY
 Content-Type: application/json
 Accept: application/json</pre>
-                                <pre class="prettyprint">
+                                <pre class="prettyprint linenums">
 {
     "first_try": 1,
     "second_try": 3,
@@ -2183,24 +2183,25 @@ Accept: application/json</pre>
                                                                             id="prependedInput" type="text"
                                                                             value="https://sandbox.moip.com.br/assinaturas/v1/users/preferences" />
                                 </div>
+                                <div>
                                 <pre class="prettyprint">
-                                    Request Method: POST
-                                    Authorization: Basic TOKEN:KEY
-                                    Content-Type: application/json
-                                    Accept: application/json</pre>
-                                <pre class="prettyprint">
-                                    {
-                                        "notification": {
-                                            "webhook": {
-                                                "url": "http://exemploldeurl.com.br/assinaturas"
-                                            },
-                                            "email": {
-                                                "merchant": {"enabled": true},
-                                                "customer": {"enabled" : true}
-                                            }
-                                        }
-                                    } </pre>                               
-
+Request Method: POST
+Authorization: Basic TOKEN:KEY
+Content-Type: application/json
+Accept: application/json</pre>
+                                <pre class="prettyprint linenums">
+{
+    "notification": {
+        "webhook": {
+            "url": "http://exemploldeurl.com.br/assinaturas"
+        },
+        "email": {
+            "merchant": {"enabled": true},
+            "customer": {"enabled" : true}
+        }
+    }
+} </pre>                               
+</div>
                             </section>
 
                         </div>
