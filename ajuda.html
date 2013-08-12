@@ -178,32 +178,16 @@
                             <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#apresentacao_7">
-                                        O que significa o "Beta" do Moip Assinaturas?
+                                        Qual a diferença entre os ambientes de Sandbox e Produção?
                                     </a>
                                 </div>
                                 <div id="apresentacao_7" class="accordion-body collapse">
                                     <div class="accordion-inner well">
-                                        O Moip Assinaturas estar em "Beta" significa que um limitado número de clientes possui acesso ao produto. 
-                                        Baseado nos feedbacks destes clientes que priorizamos melhorias e novas funcionalidades para a ferramenta. 
-                                        Os clientes do "Beta" possuem acesso à todas as funcionalidades em produção, já podendo gerar assinaturas com cobranças reais para seus clientes.
+                                        O Sandbox é o ambiente de testes do Moip Assinaturas, você o utilizará para iniciar sua integração e se certificar de que a mesma funcionará de acordo com suas necessidades (não é necessário utilizar dados reais nesse ambiente).
+                                        <br>Já o ambiente de Produção, é o ambiente real, onde você criará suas assinaturas verdadeiras e serão executadas cobranças reais. Para acessar seu ambiente de produção, será necessária a solicitação da homologação de sua integração. Para maiores informações sobre a homologação, <a href="producao.html">clique aqui</a>.
                                     </div>
                                 </div>
-                            </div>
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#apresentacao_8">
-                                        Qual é a previsão de sair do beta?
-                                    </a>
-                                </div>
-                                <div id="apresentacao_8" class="accordion-body collapse">
-                                    <div class="accordion-inner well">
-                                        O Moip Assinaturas deve sair do beta e estar disponível para todos em Julho de 2013. 
-                                        Até lá, interessados em utilizar o produto devem se candidatar para o beta.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                            </div>                            
                         <!-- COLLAPSE -->                             
                     </section>
 
@@ -304,7 +288,18 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#clientes_3">
+                                        É possível substituir o cartão de um cliente?
+                                    </a>
+                                </div>
+                                <div id="clientes_3" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        Sim. Caso o cartão de um cliente esteja sem saldo, ou bloqueado, existe a opção de substituí-lo por outro cartão. Você pode fazer isso diretamente na interface do Moip Assinaturas, ou através de nossa <a href="api.html#atualizar_cartao">API</a>.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- COLLAPSE -->                             
                     </section>
@@ -359,7 +354,7 @@
                             <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#assinaturas_4">
-                                        Posso criar uma assinatura com um valor diferente do plano vinculado?
+                                        É possível criar uma assinatura com um valor diferente do plano vinculado?
                                     </a>
                                 </div>
                                 <div id="assinaturas_4" class="accordion-body collapse">
@@ -388,7 +383,71 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#assinaturas_6">
+                                        É possível mudar o valor de uma Assinatura periodicamente?
+                                    </a>
+                                </div>
+                                <div id="assinaturas_6" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        Sim. Você pode alterar o valor a ser cobrado na sua assinatura caso você utilize um modelo de negócios baseado em consumo por exemplo, porém, é importante ter em mente que sua aplicação precisará ter a lógica que enviará as alterações ao Moip Assinaturas com os valores corretos. Além disso, lembramos que o Moip Assinaturas utiliza um modelo pré-pago de cobranças, com isso, sempre é feita a primeira cobrança no momento da criação da assinatura.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#assinaturas_7">
+                                        Posso adiantar a cobrança de uma assinatura?
+                                    </a>
+                                </div>
+                                <div id="assinaturas_7" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        Sim. É possível adiantar ou postergar a data de cobrança de uma assinatura via interface ou <a href="api.html#alterar_assinatura">API</a>. Entretanto, a data das cobranças seguintes terão como base a data da criação da assinatura, e não a data da última cobrança. Assim, supondo que você crie um assinatura mensal no dia 15 de Janeiro, e no segundo mês você adiante o pagamento para o dia 10, no terceiro mês o pagamento será processado no dia 15, conforme data de criação da assinatura. 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#assinaturas_8">
+                                        Quais são os status de uma assinatura e o que eles significam?
+                                    </a>
+                                </div>
+                                <div id="assinaturas_8" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        <ol>
+                                            <li><strong>Active </strong><small>(ativa)</small></li>
+                                                <ul><li>A assinatura está ativa, ou seja, o cliente assinante será cobrado a cada ciclo.</li></ul><br>
+                                            <li><strong>Suspended </strong><small>(suspensa)</small></li>
+                                                <ul><li>As cobranças da assinatura estão suspensas, ou seja, o cliente assinante não será cobrado a cada ciclo.</li></ul><br>
+                                            <li><strong>Expired </strong><small>(expirada)</small></li>
+                                                <ul><li>A assinatura está expirada, ou seja, já atingiu o limite de cobranças configuradas no plano contratado e não gerará mais cobranças.</li></ul><br>
+                                            <li><strong>Overdue </strong><small>(atrasada)</small></li>
+                                                <ul><li>A assinatura está com o pagamento de sua fatura atrasada e entrou no fluxo de retentativas. Para saber mais sobre retentativas de pagamentos, <a href="api.html#retentativas">clique aqui</a>.</li></ul><br>
+                                            <li><strong>Canceled </strong><small>(cancelada)</small></li>
+                                                <ul><li>A assinatura foi cancelada e não poderá mais ser reativada ou editada de nenhuma maneira. Em outras palavras, o cancelamento é a inativação definitiva de uma assinatura.</li></ul>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#assinaturas_9">
+                                        Como funciona o simulador <small>(interface)</small>?
+                                    </a>
+                                </div>
+                                <div id="assinaturas_9" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        <p>No Sandbox do Moip Assinaturas, você pode simular a cobrança de uma assinatura e o status dessas cobrança.
+                                        Basta criar um cliente e no campo <strong>Nome</strong> colocar:</p>
+                                        <p><strong class="label label-inverse">Autorizar</strong> - Para simular pagamentos autorizados.<br></p>
+                                        <p><strong class="label label-inverse">EmAnalise</strong> - Para simular pagamentos que esteja em análise pelo Moip.<br></p>
+                                        <p><strong class="label label-inverse">Cancelar</strong> - Para simular pagamentos cancelados.
+                                        </p>
+                                        <p>Você também pode utilizar o simulador via API, leia o tópico de integração <a href="#integracao">aqui</a>.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- COLLAPSE -->                             
                     </section>
@@ -649,7 +708,7 @@
                             <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#integracao_3">
-                                        Como funciona o simulador do Moip Assinaturas?
+                                        Como funciona o simulador do Moip Assinaturas? <small>(API)</small>
                                     </a>
                                 </div>
                                 <div id="integracao_3" class="accordion-body collapse">
@@ -719,6 +778,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#integracao_8">
+                                        Como solicito a homologação?
+                                    </a>
+                                </div>
+                                <div id="integracao_8" class="accordion-body collapse">
+                                    <div class="accordion-inner well">
+                                        Durante a integração de seu Site com o Sandbox do Moip Assinatuas, certifique-se de que seu processo de compras cumprem os requisitos de necessários contidos no nosso <a href="producao.html#checklist">checklist de homologação</a>. Depois, basta clicar no botão <strong>Produção</strong> na interface do Moip Assinaturas, a página seguinte abrirá o formulário de homologação. Preencha as informações necessárias e clique no botão enviar.
+                                        Nossa equipe de integração receberá sua solicitação e após executar alguns testes de compra em seu Site, te enviará uma resposta.
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                         <!-- COLLAPSE -->                          
@@ -733,7 +805,7 @@
                         </div>
                         <p>Se você tiver alguma dúvida ou sugestão sobre nossas APIs e documentação, 
                             ficaremos muito felizes em ajudá-lo. Por favor, escreva um email para 
-                            <a href="mailto:assinaturas@moip.com.br">assinaturas@moip.com.br</a>.</p>
+                            <a href="mailto:integracao@moip.com.br">integracao@moip.com.br</a>.</p>
                     </section>
 
                 </div>
