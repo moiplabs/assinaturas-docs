@@ -150,7 +150,7 @@ Authorization: <a href="#">Token de notificação</a>
 Content-Type: application/json</pre>
                                 <pre class="prettyprint linenums">{
    "event": "plan.created", //tipo de evento
-   "date": "28/12/2012 15:38:46", //data da notificação
+   "date": "01/01/2013 00:00:00", //data da notificação
    "env": "sandbox", //ambiente a partir do qual foi enviada a notificação.
    "resource": { //objeto notificado (variável de acordo com o evento)
        ...
@@ -174,34 +174,38 @@ Content-Type: application/json</pre>
                             <p>Para planos, o sistema do assinaturas envia 4 tipos de eventos: <code>created</code>, <code>updated</code>, <code>activated</code> e <code>inactivated</code>. Para created e updated será notificado o objeto completo.</p>
                             <h4 id="plano_criado">Criado e Atualizado <small><code>plan.created</code> e <code>plan.updated</code></small></h4>
                             <p>A criação e atualização de plano terá notificação do objeto completo, assim, será possível criar um plano em seu sistema com os mesmos atributos criados no Moip Assinaturas.</p>
-                            <pre class="prettyprint linenums pre-scrollable">{
-   "event": "plan.created", 
-   "date": "28/12/2012 15:38:46",
-   "env": "sandbox",
-   "resource": { 
-        "amount": 1000,
-        "setup_fee": 11,
-        "max_quantity": 0,
+                            <pre class="prettyprint linenums">{
+    "event": "plan.created",
+    "resource": {
+        "amount": 990,
+        "max_qty": 1,
+        "setup_fee": 500,
         "interval": {
             "unit": "MONTH",
             "length": 1
         },
         "status": "ACTIVE",
-        "description": "webhookCracaoDePlano",
-        "name": "webhookCracaoDePlano",
-        "billing_cycles": 0,
-        "code": "plano05"
-   }
+        "description": "Descrição do Plano Especial",
+        "name": "Plano Especial",
+        "billing_cycles": 12,
+        "code": "plano01",
+        "trial": {
+            "enabled": true,
+            "days": 30
+        }
+    },
+    "env": "sandbox",
+    "date": "01/01/2013 00:00:00"
 }</pre>
 
                             <h4 id="plano_habilitar">Habilitado e Desabilitado <small><code>plan.activated</code> e <code>plan.inactivated</code></small></h4>
                             <p>Nestes dois eventos será notificado apenas o código de identificação da sua aplicação.</p>
-                            <pre class="prettyprint linenums pre-scrollable">{
+                            <pre class="prettyprint linenums">{
    "event": "plan.activated", 
-   "date": "28/12/2012 15:38:46",
+   "date": "01/01/2013 00:00:00",
    "env": "sandbox",
    "resource": { 
-        "code": "plano05"
+        "code": "plano01"
    }
 }</pre>
                         </div>
@@ -221,12 +225,12 @@ Content-Type: application/json</pre>
                                 O node <code>billing_info.credit_cards</code> sempre será enviado, mas vai estar vazio caso o cliente não não possuia informações de cartão de crédito ainda.</p>
                             <h4 id="cliente_criado">Criado e Atualizado <small><code>customer.created</code> e <code>customer.updated</code></small></h4>
                             <p>A criação e atualização do cliente tem notificação do objeto completo, assim, é possível criar ou atualizar um cliente em seu sistema com os mesmos atributos criados no Moip Assinaturas.</p>
-                            <pre class="prettyprint linenums pre-scrollable">{
+                            <pre class="prettyprint linenums">{
    "event": "customer.created", 
-   "date": "28/12/2012 15:38:46",
+   "date": "01/01/2013 00:00:00",
    "env": "sandbox",
    "resource": { 
-        "code": "cliente06",
+        "code": "cliente01",
         "fullname": "Nome completo do Cliente",
         "cpf": "11111111111",
         "birthdate_day": 11,
@@ -277,17 +281,17 @@ Content-Type: application/json</pre>
                                 Caso seja apenas uma atualização de uma assinaturas, você deve esperar receber apenas a notificação da assinaturas.</p>
                             <h4 id="assinatura_criada">Criada <small><code>subscription.created</code></small></h4>
                             <p>A criação da assinatura tem a notificação do objeto completo. Antes da notificação da assinatura, são enviadas as notificações de fatura e pagamento.</p>
-                            <pre class="prettyprint linenums pre-scrollable">{
+                            <pre class="prettyprint linenums">{
     "event": "subscription.created",
     "resource": {
-        "amount": 10010,
+        "amount": 990,
         "creation_date": {
             "month": 01,
             "year": 2013,
             "day": 01
         },
         "plan": {
-            "code": "plano1"
+            "code": "plano01"
         },
         "status": "ACTIVE",
         "expiration_date": {
@@ -300,18 +304,18 @@ Content-Type: application/json</pre>
             "year": 2013,
             "day": 01
         },
-        "code": "assinatura08",
+        "code": "assinatura01",
         "customer": {
-            "code": "assinante01"
+            "code": "cliente01"
         }
     },
     "env": "sandbox",
-    "date": "01/01/2013 01:01:01"
+    "date": "01/01/2013 00:00:00"
 }
 }</pre>
                             <h4>Atualizada <small><code>subscription.updated</code></small></h4>
                             <p>A atualização de assinatura tem notificação do objeto completo.</p>
-                            <pre class="prettyprint linenums pre-scrollable">{
+                            <pre class="prettyprint linenums">{
     "event": "subscription.updated",
     "resource": {
         "amount": 15000,
@@ -321,7 +325,7 @@ Content-Type: application/json</pre>
             "day": 01
         },
         "plan": {
-            "code": "plano1"
+            "code": "plano01"
         },
         "status": "ACTIVE",
         "expiration_date": {
@@ -334,23 +338,23 @@ Content-Type: application/json</pre>
             "year": 2013,
             "day": 01
         },
-        "code": "assinatura08",
+        "code": "assinatura01",
         "customer": {
-            "code": "assinante01"
+            "code": "cliente01"
         }
     },
     "env": "sandbox",
-    "date": "02/01/2013 01:01:01"
+    "date": "01/01/2013 00:00:00"
 }
 }</pre>
                             <h4 id="assinatura_suspensa">Suspensa e Ativa <small><code>subscription.suspended</code> e <code>subscription.enabled</code></small></h4>
                             <p>Para <code>suspended</code> e <code>enabled</code>, é notificado apenas o código de identificação da sua aplicação.</p>
                             <pre class="prettyprint linenums">{
    "event": "subscription.suspended", 
-   "date": "28/12/2012 15:38:46",
+   "date": "01/01/2013 00:00:00",
    "env": "sandbox",
    "resource": { 
-        "code": "plano05"
+        "code": "plano01"
    }
 }</pre>
                         </div>
@@ -368,11 +372,11 @@ Content-Type: application/json</pre>
                             <h4 id="fatura_criada">Criada <small><code>invoice.created</code></small></h4>
                             <pre class="prettyprint linenums">{
    "event": "invoice.created",
-   "date": "28/12/2012 15:38:41",
+   "date": "01/01/2013 00:00:00",
    "env": "sandbox",
    "resource": {
        "id": 13, //ID da fatura
-       "subscription_code": "assinatura7",
+       "subscription_code": "assinatura01",
        "amount": 101,
        "occurrence": 1,
        "status": {
@@ -384,7 +388,7 @@ Content-Type: application/json</pre>
                             <h4 id="fatura_atualizada">Atualizada <small><code>invoice.status_updated</code></small></h4>
                             <pre class="prettyprint linenums">{
    "event": "invoice.status_updated",
-   "date": "28/12/2012 15:38:41",
+   "date": "01/01/2013 00:00:00",
    "env": "sandbox",
    "resource": {
        "id": 13, //ID da fatura
@@ -426,15 +430,15 @@ Accept: application/json</pre>
                         <div>
                             <p>Sempre que um pagamento for gerado, o Moip Assinaturas envia o objeto de Pagamento completo. Se o pagamento ter o status atualizado, é enviado apenas o novo status.</p>
                             <h4 id="pagamento_criado">Criado <small><code>payment.created</code></small></h4>
-                            <pre class="prettyprint linenums pre-scrollable">{
+                            <pre class="prettyprint linenums">{
    "event": "payment.created",
-   "date": "28/12/2012 15:38:46",
+   "date": "01/01/2013 00:00:00",
    "env": "sandbox",
    "resource": {
        "id": 6, //ID do pagamento
        "invoice_id": 13,
        "moip_id": 14456223,
-       "subscription_code": "assinatura7",
+       "subscription_code": "assinatura01",
        "amount": 101,
        "status": {
            "code": 2,
@@ -456,7 +460,7 @@ Accept: application/json</pre>
                             <h4 id="pagamento_atualizado">Status atualizado  <small><code>payment.status_updated</code></small></h4>
                             <pre class="prettyprint linenums">{
    "event": "payment.status_updated",
-   "date": "28/12/2012 15:38:41",
+   "date": "01/01/2013 00:00:00",
    "env": "sandbox",
    "resource": {
        "id": 6, //identificador do pagamento
@@ -532,13 +536,13 @@ Accept: application/json</pre>
                                 <span class="add-on">POST</span>
                                 <input class="span8" id="prependedInput" type="text" value="http://sandbox.moip.com.br/assinaturas/v1/subscriptions?new_customer=true">
                             </div>
-                            <pre class="prettyprint linenums pre-scrollable">{
+                            <pre class="prettyprint linenums">{
   "code": "assinatura01",
   "plan": {
-      "code": "plano1"
+      "code": "plano01"
   },
   "customer": {
-      "code": "cliente_teste_14",
+      "code": "cliente01",
       "email": "fulano@teste.com.br",
       "fullname": " Autorizar",  //altere o valor para utilizar o simulador
       "cpf": "22222222222",

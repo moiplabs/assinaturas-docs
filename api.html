@@ -123,13 +123,18 @@ Accept: application/json</pre>
     "name": "Plano Especial",
     "description": "Descrição do Plano Especial",
     "amount": 990, //em centavos
-    "setup_fee": 500, //em centavos
+    "setup_fee": 500, // em centavos
     "max_qty": 1,
+    "status": "ACTIVE",
     "interval": {
         "length": 1,
         "unit": "MONTH"
-        },
-    "billing_cycles": 12
+    },
+    "billing_cycles": 12,
+    "trial": {
+        "days": 30,
+        "enabled": true
+    }
 }</pre>
                                 <h4>Atributos</h4>
                                 <table class="table table-bordered table-striped table-condensed">
@@ -147,7 +152,7 @@ Accept: application/json</pre>
                                         </tr>
                                         <tr>
                                             <td><code>code</code></td>
-                                            <td>"qw123"</td>
+                                            <td>"plano01"</td>
                                             <td>identificador do plano na sua aplicação. Até 65
                                                 caracteres.</td>
                                             <td><span class="label label-important">obrigatório</span></td>
@@ -170,13 +175,13 @@ Accept: application/json</pre>
                                         </tr>
                                         <tr>
                                             <td><code>amount</code></td>
-                                            <td>10010</td>
+                                            <td>990</td>
                                             <td>valor do plano a ser cobrado em centavos de Real.</td>
                                             <td><span class="label label-important">obrigatório</span></td>
                                         </tr>
                                         <tr>
                                             <td><code>setup_fee</code></td>
-                                            <td>1010</td>
+                                            <td>500</td>
                                             <td>taxa de contratação a ser cobrada na assinatura em
                                                 centavos de Real.</td>
                                             <td></td>
@@ -214,8 +219,35 @@ Accept: application/json</pre>
                                                 (se não informar, não haverá expiração).</td>
                                             <td></td>
                                         </tr>
+                                         <tr>
+                                            <td colspan="4"><strong>trial</strong></td>
+                                        </tr>
                                         <tr>
-                                            <td colspan="4"><strong>Configurações</strong></td>
+                                            <td><code>trial</code></td>
+                                            <td></td>
+                                            <td>node do trial, contendo <code>days</code> e <code>enabled</code>
+                                            </td>
+                                            <td class="warning"><span class="label label-invert"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>days</code></td>
+                                            <td>30</td>
+                                            <td>número de dias de trial do plano.
+                                            </td>
+                                            <td class="warning"><span class="label label-invert"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>enabled</code></td>
+                                            <td><code>TRUE</code></td>
+                                            <td>determina se o trial está ou não habilitado. Opções: <code>TRUE</code> ou <code>FALSE</code>,
+                                                default é <code>FALSE</code>.</td>
+                                            <td><span class="label label-invert"></span></td>
+                                        </tr>
+                                        <tr>
+                                        <tr>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><strong>configurações</strong></td>
                                         </tr>
                                         <tr>
                                             <td><code>status</code></td>
@@ -240,16 +272,7 @@ Accept: application/json</pre>
 URI: https://sandbox.moip.com.br/assinaturas/v1/plans/{code}</pre>
                                 <pre class="prettyprint linenums">
 {
-    "code": "plano01",
-    "name": "Plano Especial",
-    "description": "Descrição do Plano Especial",
-    "amount": 990, //em centavos
-    "setup_fee": 500, //em centavos
-    "max_qty": 1,
-    "interval": {
-        "length": 1,
-        "unit": "MONTH"
-        }
+    message: "Plano criado com sucesso"
 }</pre>
                                 <h5>Erro</h5>
                                 <pre class="prettyprint">Status: 400 BAD REQUEST</pre>
@@ -286,18 +309,21 @@ Accept: application/json</pre>
 {
     "plans": [
         {
-            "code": "plano1",
-            "name": "Plano Exemplo",
-            "description": "Descrição exemplo do Plano",
-            "status": "ACTIVE",
-            "amount": 2990,
-            "max_qty": 50,
-            "setup_fee": 1000,
+            "code": "plano01",
+            "name": "Plano Especial",
+            "description": "Descrição do Plano Especial",
+            "amount": 990, // em centavos
+            "setup_fee": 500, // em centavos
+            "max_qty": 1,
             "interval": {
                 "length": 1,
                 "unit": "MONTH"
             },
-            "billing_cycles": 1
+            "billing_cycles": 12,
+            "trial": {
+                "days": 30,
+                "enabled": true
+            }
         }
     ]
 }</pre>
@@ -322,18 +348,21 @@ Accept: application/json</pre>
 Status: 200 OK</pre>
                                 <pre class="prettyprint linenums">
 {
-    "code": "plano1",
-    "name": "Plano Ouro Ilimitado",
-    "description": "Plano com todas as vantagens",
-    "status": "ACTIVE",
-    "amount": 2990,
-    "max_qty": 50,
-    "setup_fee": 1000,
+    "code": "plano01",
+    "name": "Plano Especial",
+    "description": "Descrição do Plano Especial",
+    "amount": 990, // em centavos
+    "setup_fee": 500, // em centavos
+    "max_qty": 1,
     "interval": {
         "length": 1,
         "unit": "MONTH"
     },
-    "billing_cycles": 1
+    "billing_cycles": 12,
+    "trial": {
+        "days": 30,
+        "enabled": true
+    }
 }</pre>
                             </section>
 
@@ -383,15 +412,20 @@ Content-Type: application/json
 Accept: application/json</pre>
                                 <pre class="prettyprint linenums">
 {
-    "code": "plano1",
-    "name": "Nome do Plano",
-    "description": "Descrição do Plano",
-    "amount": 1010,
-    "setup_fee": 10010,
-    "max_qty": "1",
+    "code": "plano01",
+    "name": "Plano Especial",
+    "description": "Descrição do Plano Especial",
+    "amount": 990, //em centavos
+    "setup_fee": 500, // em centavos
+    "max_qty": 1,
     "interval": {
-        "length": "1",
+        "length": 1,
         "unit": "MONTH"
+    },
+    "billing_cycles": 12,
+    "trial": {
+        "days": 30,
+        "enabled": true
     }
 }</pre>
                                 <h5>Atributos que podem ser alterados</h5>
@@ -439,6 +473,18 @@ Accept: application/json</pre>
                                             <td><code>billing_cycles</code></td>
                                             <td><span class="label label-important">Apenas se não
                                                     houver assinaturas</span></td>
+                                        </tr>
+                                         <tr>
+                                            <td><code>trial</code></td>
+                                            <td>sempre</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">├──</code> <code>days</code></td>
+                                            <td>sempre</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code> <code>enabled</code></td>
+                                            <td>sempre</td>
                                         </tr>
                                         <tr>
                                             <td><code>status</code></td>
@@ -497,12 +543,12 @@ Content-Type: application/json
 Accept: application/json</pre>
                                 <pre class="prettyprint linenums">
 {
-    "code": "18",
+    "code": "cliente01",
     "email": "nome@exemplo.com.br",
     "fullname": "Nome Sobrenome",
     "cpf": "22222222222",
     "phone_area_code": "11",
-    "phone_number": "34343434",
+    "phone_number": "934343434",
     "birthdate_day": "26",
     "birthdate_month": "04",
     "birthdate_year": "1980",
@@ -552,7 +598,7 @@ Accept: application/json</pre>
                                         </tr>
                                         <tr>
                                             <td><code>email</code></td>
-                                            <td>"nome@email.com"</td>
+                                            <td>"nome@exemplo.com.br"</td>
                                             <td>email do cliente.</td>
                                             <td><span class="label label-important">obrigatório</span></td>
                                         </tr>
@@ -571,7 +617,7 @@ Accept: application/json</pre>
                                         </tr>
                                         <tr>
                                             <td><code>phone_number</code></td>
-                                            <td>"990903454"</td>
+                                            <td>"934343434"</td>
                                             <td>telefone do titular, 8 ou 9 caracteres sem máscara.</td>
                                             <td><span class="label label-important">obrigatório</span></td>
                                         </tr>
@@ -713,12 +759,12 @@ Status 200: OK</pre>
 {
     "customers": [
         {
-            "code": "cliente1",
+            "code": "cliente01",
             "fullname": "Nome Sobrenome",
             "email": "nome@exemplo.com",
             "cpf": "22222222222",
             "phone_area_code": "11",
-            "phone_number": "990909090",
+            "phone_number": "934343434",
             "birthdate_day": "29",
             "birthdate_month": "04",
             "birthdate_year": "1980"
@@ -747,12 +793,12 @@ Accept: application/json</pre>
 Status 200: OK</pre>
                                 <pre class="prettyprint linenums">
 {
-    "code": "cliente1",
+    "code": "cliente01",
     "fullname": "Nome Sobrenome",
     "email": "nome@exemplo.com",
     "cpf": "22222222222",
     "phone_area_code": "11",
-    "phone_number": "990909090",
+    "phone_number": "934343434",
     "birthdate_day": 29,
     "birthdate_month": 03,
     "birthdate_year": 1980,
@@ -801,11 +847,11 @@ Content-Type: application/json
 Accept: application/json</pre>
                                 <pre class="prettyprint linenums">
 {
-    "code": "cliente1",
+    "code": "cliente01",
     "email": "nome@exemplo.com.br",
     "fullname": "Nome Sobrenome",
     "cpf": "22222222222",
-    "phone_number": "55223366",
+    "phone_number": "934343434",
     "phone_area_code": "11",
     "birthdate_day": "26",
     "birthdate_month": "04",
@@ -904,13 +950,13 @@ Accept: application/json</pre>
                                 <p>Criando uma assinatura com um cliente já cadastrado</p>
                                 <pre class="prettyprint linenums">
 {
-    "code": "assinatura1",
-    "amount": "100",
+    "code": "assinatura01",
+    "amount": "9990", // em centavos
     "plan" : {
-        "code" : "plano1"
+        "code" : "plano01"
     },
     "customer" : {
-    "code" : "cliente1"
+    "code" : "cliente01"
     }
 }</pre>
                                 <h4>Exemplo completo</h4>
@@ -918,21 +964,21 @@ Accept: application/json</pre>
                                 <div class="input-prepend">
                                     <span class="add-on">POST</span> <input class="span8"
                                                                             id="prependedInput" type="text"
-                                                                            value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions??new_customer=[true/false]" />
+                                                                            value="https://sandbox.moip.com.br/assinaturas/v1/subscriptions?new_customer=[true/false]" />
                                 </div>                                
                                 <pre class="prettyprint linenums">
 {
-    "code": "assinatura1",
-    "amount": "100",
+    "code": "assinatura01",
+    "amount": "9990", // em centavos
     "plan": {
-        "code": "plano1"
+        "code": "plano01"
     },
     "customer": {
-        "code": "cliente1",
+        "code": "cliente01",
         "email": "nome@exemplo.com.br",
         "fullname": "Nome Sobrenome",
         "cpf": "22222222222",
-        "phone_number": "55223366",
+        "phone_number": "934343434",
         "phone_area_code": "11",
         "birthdate_day": "26",
         "birthdate_month": "04",
@@ -977,7 +1023,7 @@ Accept: application/json</pre>
                                         </tr>
                                         <tr>
                                             <td><code>amount</code></td>
-                                            <td>"100"</td>
+                                            <td>"9990"</td>
                                             <td>valor da assinatura (sobrescreve o valor do plano
                                                 contratado) <strong>atenção: o cliente deve estar ciente e de acordo em ser cobrado um valor diferente do plano escolhido.</strong></td>
                                             <td></td>
@@ -1028,33 +1074,33 @@ Status: 201 CREATED
 URI: https://sandbox.moip.com.br/assinaturas/v1/subscriptions/{code}</pre>
                                 <pre class="prettyprint linenums">
 {
-    "amount": 100,
+    "amount": 9990, // em centavos
     "message": "Assinatura criada com sucesso",
     "errors": [],
     "plan": {
-        "name": "Plano de homologação",
-        "code": "homolog1"
+        "name": "Plano Especial",
+        "code": "plano01"
     },
-    "status": "ACTIVE",
+    "status": "TRIAL",
     "invoice": {
-        "amount": 100,
-        "id": 3297,
+        "amount": 0, // em centavos
+        "id": 1000,
         "status": {
-            "description": "Atrasada",
-            "code": 5
+            "description": "Pago",
+            "code": 3
         }
     },
     "alerts": [],
     "next_invoice_date": {
-        "month": 6,
+        "month": 01,
         "year": 2013,
-        "day": 6
+        "day": 31
     },
-    "code": "ass_02",
+    "code": "assinatura01",
     "customer": {
-        "email": "fulano@homolog.com",
-        "code": "fulano1",
-        "fullname": "Fulano Homologador"
+        "email": "nome@exemplo.com.br",
+        "code": "cliente01",
+        "fullname": "Nome e Sobrenome"
     }
 }</pre>
                                 <h4>Erro</h4>
@@ -1094,8 +1140,8 @@ Status: 200 OK</pre>
 {
     "subscriptions": [
         {
-            "code": "assinatura1",
-            "amount": "100",
+            "code": "assinatura01",
+            "amount": "9990", // em centavos
             "status": "ACTIVE",
             "creation_date": {
                 "day": "20",
@@ -1116,11 +1162,11 @@ Status: 200 OK</pre>
                 "year": "2013"
             },
             "plan": {
-                "name": "Plano Ouro Ilimitado",
-                "code": "plano1"
+                "name": "Plano Especial",
+                "code": "plano01"
             },
             "customer": {
-            "code": "cliente1",
+            "code": "cliente01",
             "fullname": "Nome e sobrenome"
             }
         }
@@ -1148,8 +1194,8 @@ Accept: application/json</pre>
 Status: 200 OK</pre>
                                 <pre class="prettyprint linenums">
 {
-    "code": "assinatura1",
-    "amount": "100",
+    "code": "assinatura01",
+    "amount": "9990", // em centavos
     "status": "ACTIVE",
     "creation_date": {
         "day": "20",
@@ -1170,13 +1216,13 @@ Status: 200 OK</pre>
         "year": "2013"
     },
     "plan": {
-        "name": "Plano Ouro Ilimitado",
-        "code": "plano1"
+        "name": "Plano Especial",
+        "code": "plano01"
     },
     "customer": {
-        "code": "cliente1",
+        "code": "cliente01",
         "fullname": "Nome e Sobrenome",
-        "email": "assinaturas@moip.com.br"
+        "email": "nome@exemplo.com.br"
     }
 }</pre>
                             </section>
@@ -1233,7 +1279,7 @@ Accept: application/json</pre>
     "plan": {
         "code": "codigo_do_novo_plano"
     },
-    "amount": "10010", // informe apenas se quiser sobrescrever o valor do plano
+    "amount": "9990", // informe apenas se quiser sobrescrever o valor do plano (em centavos)
     "next_invoice_date": {
         "day": "05",
         "month": "01",
@@ -1254,7 +1300,7 @@ Accept: application/json</pre>
                                     </tr>
                                     <tr>
                                         <td><code class="muted">└──</code> <code>code</code></td>
-                                        <td>"plano1"</td>
+                                        <td>"plano01"</td>
                                         <td>identificador do novo plano na sua aplicação. Até 65
                                             caracteres. <i>Informe caso queira migrar o plano da assinatura (downgrade/upgrade). <strong>Importante:</strong> A próxima cobrança ocorrerá na data
                                                 que já estava pré agendada e será feita no valor do novo plano
@@ -1320,6 +1366,9 @@ Accept: application/json</pre>
                                     Para saber mais sobre retentativas de pagamentos, <a href="#retentativas">clique aqui</a>.</p>
                                  <h4>5 - "Canceled"</h4>
                                 <p> A assinatura foi cancelada e não poderá mais ser reativada ou editada de nenhuma maneira. Em outras palavras, o cancelamento é a inativação definitiva de uma assinatura.</p>   
+                                 <h4>6 - "Trial"</h4>
+                                <p> O trial é um período de testes de uma assinatura, ele pode ter uma taxa de inscrição ou ser gratuito.
+                                Para configurar as preferências do seu trial, você deve utilizar a <a href="#planos">API de Planos</a> ou utilizar a interface do <a href="https://assinaturas.moip.com.br">Moip Assinaturas</a>.</p><br>
 
                                 <img src="img/fluxo_assinatura_v2.jpg" class="img-polaroid">
                                 <p>
@@ -1391,12 +1440,11 @@ Accept: application/json</pre>
                                 <pre class="prettyprint">
 Status: 200 OK</pre>
                                 <pre class="prettyprint linenums">
-//alterado
 {
     "invoices": [
         {
             "id": 13,
-            "amount": 101,
+            "amount": 9990, // em centavos
             "subscription_code": "assinatura7",
             
             "occurrence": 1,
@@ -1438,10 +1486,9 @@ Accept: application/json</pre>
                                 <pre class="prettyprint">
 Status: 200 OK</pre>
                                 <pre class="prettyprint">
-//alterado
 {
     "id": 13,
-    "amount": 101,
+    "amount": 9990, // em centavos
     "subscription_code": "assinatura7",
     "occurrence": 1,
     "status": {
@@ -1450,21 +1497,21 @@ Status: 200 OK</pre>
     },
     "items": [
         {
-            "amount": 100,
+            "amount": 9990, // em centavos
             "type": "Valor da assinatura"
         },
         {
-            "amount": 1,
+            "amount": 500, // em centavos
             "type": "Taxa de contratação"
         }
     ],
     "plan": {
-        "code": "plano1",
-        "name": "Plano 1 real"
+        "code": "plano01",
+        "name": "Plano Especial"
     },
     "customer": {
-        "code": "cliente1",
-        "fullname": "Fulano Testador"
+        "code": "cliente01",
+        "fullname": "Nome Sobrenome"
     },
     "creation_date": {
         "day": 28,
@@ -1531,12 +1578,12 @@ Status: 200 OK</pre>
                                             <td><code class="muted">├──</code> <code>type</code></td>
                                             <td>"Valor da assinatura"</td>
                                             <td>Descrição do item (ex. "Valor da assinatura", "Taxa de
-                                                contratação", etc.)</td>
+                                                contratação", "Período de Trial", etc.)</td>
                                         </tr>
                                         <tr>
                                             <td><code class="muted">└──</code> <code>amount</code></td>
-                                            <td>100</td>
-                                            <td>Valor do item, em centavos.</td>
+                                            <td>9990</td>
+                                            <td>Valor do item, em centavos. Em assinaturas com período de Trial gratuito o valor da primeira fatura é ser 0.</td>
                                         </tr>
                                         <tr>
                                             <td><code>plan</code></td>
@@ -1560,7 +1607,7 @@ Status: 200 OK</pre>
                                         </tr>
                                         <tr>
                                             <td><code class="muted">├──</code> <code>code</code></td>
-                                            <td>"cliente1"</td>
+                                            <td>"cliente01"</td>
                                             <td>Código do cliente assinante.</td>
                                         </tr>
                                         <tr>
@@ -1736,7 +1783,6 @@ Accept: application/json</pre>
                                 <pre class="prettyprint">
 Status: 200 OK</pre>
                                 <pre class="prettyprint linenums">
-//novo
 {
     "payments": [
         {
@@ -1794,7 +1840,6 @@ Accept: application/json</pre>
                                 <pre class="prettyprint">
 Status: 200 OK</pre>
                                 <pre class="prettyprint linenums">
-//novo
 {
     "id": 6,
     "moip_id": 7205895,
@@ -1803,10 +1848,10 @@ Status: 200 OK</pre>
         "description": "Em análise"
     },
     "subscription_code": "assinatura7",
-    "customer_code": "cliente1",
+    "customer_code": "cliente01",
     "invoice": {
         "id": 13,
-        "amount": 101
+        "amount": 9990  // em centavos
     },
     "payment_method": {
         "code": 1,
@@ -1871,7 +1916,7 @@ Status: 200 OK</pre>
                                         </tr>
                                         <tr>
                                             <td><code class="muted">└──</code> <code>customer_code</code></td>
-                                            <td>"cliente1"</td>
+                                            <td>"cliente01"</td>
                                             <td>Código do cliente pagador.</td>
                                         </tr>
                                         <tr>
@@ -2099,7 +2144,7 @@ Accept: application/json</pre>
                             <section>
                                 <h2>Criar regras de retentativas automáticas</h2>
                                 <p>Além de tentar reprocessar um pagamento manualmente via interface ou através de uma requisição na API, 
-                                    é possível configurar retentativas automáticas a partir das quais o Moip vai reprocessar seus pagamentos de acordo com suas preferências.</p>
+                                    é possível configurar retentativas automáticas a partir das quais o Moip vai reprocessar seus pagamentos de acordo com suas preferências. <br>Essas retentativas são aplicadas a todas as cobranças recorrentes, porém, não ocorrem na primeira ocorrência de cobrança (primeira fatura gerada).</p>
 
                                 <div class="alert alert-error">
                                     <strong>Importante:</strong> O limite diário de retentativas é de 3 tentativas/dia por invoice, independente se essa é uma tentativa automática (feita pelo Moip Assinaturas) ou manual (feita pelo cliente).
@@ -2143,7 +2188,7 @@ Accept: application/json</pre>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <p>Assim, o intervalo mínimo de retentativa automática é de 1 dia e o máximo de 28 dias.</p>
+                                <p>Assim, o intervalo mínimo de retentativa automática é de 1 dia e o máximo de 22 dias.</p>
 
                                 <div class="alert alert-error">
                                     <strong>Importante:</strong> Recomendamos que o intervalo total de retentativas seja sempre inferior ao seu plano com a menor periodicidade de cobranças. Por exemplo, se seu plano for quinzenal, 
