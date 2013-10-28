@@ -126,6 +126,7 @@
                                         <ul>
                                             <li><a href="#assinatura_criada">criada ou atualizada</a></li>
                                             <li><a href="#assinatura_suspensa">suspensa ou ativa</a></li>
+                                            <li><a href="#assinatura_cancelada">assinatura cancelada</a></li>
                                         </ul>
                                     </li>
                                     <li><strong>Fatura:</strong>
@@ -276,7 +277,7 @@ Content-Type: application/json</pre>
                             <h1>Assinatura</h1>
                         </div>
                         <div>
-                            <p>O Moip Assinaturas envia quatro tipos de eventos: <code>created</code>, <code>updated</code>, <code>suspended</code> e <code>activated</code>.</p> 
+                            <p>O Moip Assinaturas envia cinco tipos de eventos: <code>created</code>, <code>updated</code>, <code>suspended</code>, <code>activated</code> e <code>canceled</code>.</p> 
                             <p>No processo de criação de uma assinatura, o sistema do Moip cria um pagamento <span class="label label-inverse">payment</span>, uma fatura <span class="label label-inverse">invoice</span> e por fim, a própria assinatura <span class="label label-inverse">subscription</span>. A sua aplicação deve receber webhook para cada um desses eventos nesta ordem.
                                 Caso seja apenas uma atualização de uma assinaturas, você deve esperar receber apenas a notificação da assinaturas.</p>
                             <h4 id="assinatura_criada">Criada <small><code>subscription.created</code></small></h4>
@@ -350,12 +351,23 @@ Content-Type: application/json</pre>
                             <h4 id="assinatura_suspensa">Suspensa e Ativa <small><code>subscription.suspended</code> e <code>subscription.enabled</code></small></h4>
                             <p>Para <code>suspended</code> e <code>enabled</code>, é notificado apenas o código de identificação da sua aplicação.</p>
                             <pre class="prettyprint linenums">{
-   "event": "subscription.suspended", 
-   "date": "01/01/2013 00:00:00",
-   "env": "sandbox",
-   "resource": { 
-        "code": "plano01"
-   }
+    "event": "subscription.suspended",
+    "resource": {
+        "code": "assinatura01"
+    },
+    "env": "prod",
+    "date": "01/01/2013 00:00:00"
+}</pre>
+
+                            <h4 id="assinatura_cancelada">Cancelada <small><code>subscription.canceled</code></small></h4>
+                            <p>Esse webhook notifica o cancelamento de uma assinatura.</p>
+                            <pre class="prettyprint linenums">{
+    "event": "subscription.canceled",
+    "resource": {
+        "code": "assinatura01"
+    },
+    "env": "sandbox",
+    "date": "01/01/2013 00:00:00"
 }</pre>
                         </div>
                     </section>
