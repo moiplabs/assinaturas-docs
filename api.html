@@ -133,7 +133,8 @@ Accept: application/json</pre>
     "billing_cycles": 12,
     "trial": {
         "days": 30,
-        "enabled": true
+        "enabled": true,
+        "hold_setup_fee": true
     }
 }</pre>
                                 <h4>Atributos</h4>
@@ -237,12 +238,18 @@ Accept: application/json</pre>
                                             <td class="warning"><span class="label label-invert"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><code class="muted">└──</code> <code>enabled</code></td>
+                                            <td><code class="muted">├──</code> <code>enabled</code></td>
                                             <td><code>TRUE</code></td>
                                             <td>determina se o trial está ou não habilitado. Opções: <code>TRUE</code> ou <code>FALSE</code>,
                                                 default é <code>FALSE</code>.</td>
                                             <td><span class="label label-invert"></span></td>
                                         </tr>
+                                        <tr>
+                                            <td><code class="muted">└──</code><code>hold_setup_fee</code></td>
+                                            <td><code>TRUE</code></td>
+                                            <td>determina se o setup_fee será cobrado antes ou após o período de trial. Opções: <code>TRUE</code> (após) ou <code>FALSE</code> (antes). Default é <code>TRUE</code>.</td>
+                                            <td><span class="label label-invert"></span></td>
+                                        </tr>                                        
                                         <tr>
                                         <tr>
                                         </tr>
@@ -322,7 +329,8 @@ Accept: application/json</pre>
             "billing_cycles": 12,
             "trial": {
                 "days": 30,
-                "enabled": true
+                "enabled": true,
+                "hold_setup_fee": true
             }
         }
     ]
@@ -361,7 +369,8 @@ Status: 200 OK</pre>
     "billing_cycles": 12,
     "trial": {
         "days": 30,
-        "enabled": true
+        "enabled": true,
+        "hold_setup_fee": true
     }
 }</pre>
                             </section>
@@ -425,7 +434,8 @@ Accept: application/json</pre>
     "billing_cycles": 12,
     "trial": {
         "days": 30,
-        "enabled": true
+        "enabled": true,
+        "hold_setup_fee": true
     }
 }</pre>
                                 <h5>Atributos que podem ser alterados</h5>
